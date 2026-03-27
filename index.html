@@ -315,9 +315,9 @@ code{font-family:'JetBrains Mono',monospace}
     </div>
     <div class="topbar-actions">
       <div id="topbar-sync"></div>
+      <button id="btn-manual-sync" class="btn btn-outline" style="display:none;" onclick="Sync.manualSync()"><i class="fas fa-rotate"></i> Synchroniser</button>
       <div class="topbar-search"><i class="fas fa-search"></i><input type="text" id="global-search" placeholder="Recherche globale…" oninput="GlobalSearch.run(this.value)" autocomplete="off"></div>
       <select class="form-control" id="filter-period" style="width:170px;margin:0;padding:.5rem .75rem" onchange="App.refreshAll()"></select>
-      <button class="btn btn-primary" onclick="Deals.openNew()"><i class="fas fa-plus"></i> Nouvelle affaire</button>
     </div>
   </header>
 
@@ -388,10 +388,7 @@ code{font-family:'JetBrains Mono',monospace}
         <div class="report-card" onclick="Reports.printDashboard()"><div class="report-icon" style="background:var(--primary-bg);color:var(--primary)"><i class="fas fa-chart-pie"></i></div><div class="report-info"><h4>Rapport Activité Commerciale</h4><p>KPI, pipeline, affaires — version imprimable</p></div></div>
         <div class="report-card" onclick="Reports.exportDevisCSV()"><div class="report-icon" style="background:#ecfdf5;color:#16a34a"><i class="fas fa-file-csv"></i></div><div class="report-info"><h4>Export Devis (CSV)</h4><p>Liste complète des devis en tableur</p></div></div>
         <div class="report-card" onclick="Reports.exportDealsCSV()"><div class="report-icon" style="background:#fffbeb;color:var(--warning)"><i class="fas fa-table"></i></div><div class="report-info"><h4>Export Affaires (CSV)</h4><p>Toutes les affaires avec étapes et montants</p></div></div>
-        <div class="report-card" onclick="App.exportJSON()"><div class="report-icon" style="background:var(--info-light);color:var(--info)"><i class="fas fa-database"></i></div><div class="report-info"><h4>Sauvegarde complète (JSON)</h4><p>Export de toutes les données CRM</p></div></div>
-        <div class="report-card" onclick="App.importJSON()"><div class="report-icon" style="background:#fff7ed;color:#c2410c"><i class="fas fa-upload"></i></div><div class="report-info"><h4>Restaurer une sauvegarde</h4><p>Importer un fichier JSON de sauvegarde</p></div></div>
       </div>
-      <input type="file" id="import-file" accept=".json" style="display:none" onchange="App.doImport(this)">
     </section>
 
     <section id="view-admin" class="view">
@@ -441,14 +438,11 @@ code{font-family:'JetBrains Mono',monospace}
       <div id="tab-sync" class="admin-panel" style="display:none">
         <div class="card">
           <div class="card-header"><h3><i class="fas fa-cloud" style="color:var(--primary);margin-right:.4rem"></i> Configuration JSONBin.io</h3></div>
-          <p style="font-size:.85rem;color:var(--text-secondary);margin-bottom:1rem">Synchronise les données en temps réel entre tous les postes connectés.</p>
-          <div class="form-group"><label>X-Master-Key</label><input type="password" class="form-control" id="jb-key" placeholder="$2a$10$…"></div>
-          <div class="form-group"><label>BIN ID</label>
-            <div style="display:flex;gap:.5rem"><input type="text" class="form-control" id="jb-bin" placeholder="ID du Bin existant"><button class="btn btn-outline" onclick="Sync.createBin()" style="white-space:nowrap"><i class="fas fa-magic"></i> Créer le Bin</button></div>
-          </div>
+          <p style="font-size:.85rem;color:var(--text-secondary);margin-bottom:1rem;font-weight:500">Renseignez vos clés API JSONBin pour activer la synchronisation manuelle du cloud.</p>
+          <div class="form-group"><label>X-Master-Key</label><input type="password" class="form-control" id="jb-key" placeholder="Votre clé secrète JSONBin"></div>
+          <div class="form-group"><label>BIN ID</label><input type="text" class="form-control" id="jb-bin" placeholder="L'identifiant de votre BIN"></div>
           <div style="display:flex;gap:.5rem;margin-top:1rem">
-            <button class="btn btn-primary" onclick="Sync.connect()"><i class="fas fa-plug"></i> Connecter</button>
-            <button class="btn btn-outline" onclick="Sync.disconnect()"><i class="fas fa-unlink"></i> Déconnecter</button>
+            <button class="btn btn-primary" onclick="Admin.saveSync()"><i class="fas fa-save"></i> Enregistrer la configuration</button>
           </div>
         </div>
       </div>
@@ -458,16 +452,16 @@ code{font-family:'JetBrains Mono',monospace}
 
 <div class="modal-overlay" id="m-deal">
   <div class="modal-box">
-    <div class="modal-header"><h3 id="m-deal-t">Nouvelle affaire</h3><button class="btn btn-ghost btn-icon" onclick="Modal.close('m-deal')"><i class="fas fa-xmark"></i></button></div>
+    <div class="modal-header"><h3 id="m-deal-t">Modifier l'affaire</h3><button class="btn btn-ghost btn-icon" onclick="Modal.close('m-deal')"><i class="fas fa-xmark"></i></button></div>
     <div class="modal-body">
       <input type="hidden" id="d-id">
-      <div class="form-group"><label>Nom de l'affaire *</label><input type="text" class="form-control" id="d-name" placeholder="Ex: Mariage Dupont – Juin 2026"></div>
+      <div class="form-group"><label>Nom de l'affaire *</label><input type="text" class="form-control" id="d-name"></div>
       <div class="form-row">
-        <div class="form-group"><label>Client *</label><select class="form-control" id="d-ct"></select></div>
+        <div class="form-group"><label>Client *</label><select class="form-control" id="d-ct" disabled></select></div>
         <div class="form-group"><label>Interlocuteur</label><input type="text" class="form-control" id="d-inter"></div>
       </div>
       <div class="form-row">
-        <div class="form-group"><label>Montant estimé *</label><input type="number" class="form-control" id="d-amt" placeholder="0"></div>
+        <div class="form-group"><label>Montant estimé *</label><input type="number" class="form-control" id="d-amt" disabled></div>
         <div class="form-group"><label>Étape</label><select class="form-control" id="d-stg"></select></div>
       </div>
       <div class="form-row">
@@ -475,6 +469,7 @@ code{font-family:'JetBrains Mono',monospace}
         <div class="form-group"><label>Date de clôture estimée</label><input type="date" class="form-control" id="d-date"></div>
       </div>
       <div class="form-group"><label>Notes / Contexte</label><textarea class="form-control" id="d-notes" style="min-height:60px"></textarea></div>
+      <p class="form-hint" style="color:var(--warning)"><i class="fas fa-info-circle"></i> Le client et le montant sont gérés directement via le devis associé.</p>
     </div>
     <div class="modal-footer">
       <button class="btn btn-danger btn-sm" id="d-del-btn" style="margin-right:auto;display:none" onclick="Deals.del()"><i class="fas fa-trash"></i> Supprimer</button>
@@ -544,10 +539,10 @@ code{font-family:'JetBrains Mono',monospace}
 
 <script>
 /* ══════════════════════════════════════════════════════════
-   CRM TERA EVENTS v6 — MODULE COMPLET
+   CRM TERA EVENTS v6 — MODULE ALLÉGÉ (SYNC MANUELLE & PIPELINE AUTO)
    ══════════════════════════════════════════════════════════ */
 
-const DB = 'crm_tera_v6', JB_KEY = 'tera_jb_cfg';
+const DB = 'crm_tera_v6';
 
 const DSTG = {
   1:{name:'Prospection', prob:10,  color:'#94a3b8'},
@@ -735,7 +730,7 @@ function escHTML(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt
 /* ── DATA ── */
 function ds(){
   return{
-    settings:{company:'NATERALIA SARL',currency:'FCFA',target:50000000,commRate:5},
+    settings:{company:'NATERALIA SARL',currency:'FCFA',target:50000000,commRate:5,jbKey:'',jbBin:''},
     emitter:{entete_adresse:'Centre Commercial TERA - 7ème tranche, 2 Plateaux',entete_ville:'Cocody, Abidjan',entete_idu:'CI-2023-0051435 K',entete_rccm:'CI-ABJ-03-2023-B12-02911',entete_cc:'230 241 4X',entete_capital:'1 000 000 F CFA',entete_tel:'+225 0566 221 010',entete_email:'reservations@tera.events',emetteur_nom:'NATERALIA SARL'},
     users:[
       {id:1,name:'Administrateur',login:'superadmin',role:'Admin',active:true,pass:hp('Admin2026Secure'),commRate:0},
@@ -751,6 +746,8 @@ let S = (() => {
   if(!data.devis) data.devis = [];
   if(!data.emitter) data.emitter = ds().emitter;
   if(!data.settings.commRate) data.settings.commRate = 5;
+  if(data.settings.jbKey===undefined) data.settings.jbKey = '';
+  if(data.settings.jbBin===undefined) data.settings.jbBin = '';
   data.settings.company = 'NATERALIA SARL';
   data.emitter.emetteur_nom = 'NATERALIA SARL';
   data.users.forEach(u=>{if(u.commRate===undefined)u.commRate=5;});
@@ -763,7 +760,7 @@ let S = (() => {
 
 let CU = null;
 function sL(){try{localStorage.setItem(DB,JSON.stringify(S))}catch(e){Toast.s('Stockage local plein','error')}}
-function save(){sL();Sync.push()}
+function save(){sL();}
 
 /* ── AUTH ── */
 const Auth = {
@@ -776,6 +773,12 @@ const Auth = {
       CU=usr;$('login-screen').style.display='none';
       $('sb-uname').textContent=usr.name;$('sb-urole').textContent=usr.role;$('sb-avatar').textContent=usr.name.charAt(0).toUpperCase();
       if(usr.role==='Commercial') $('admin-nav').style.display='none';
+      
+      // Afficher le bouton Sync seulement pour les admins autorisés
+      if(usr.login === 'superadmin' || usr.login === 'eric') {
+         $('btn-manual-sync').style.display = 'inline-flex';
+      }
+
       App.init();
     } else {
       e.style.display='block';
@@ -808,35 +811,47 @@ const Modal = {
 };
 
 const Sync = {
-  on:false,_timer:null,
+  cfg(){ return { k: S.settings.jbKey, b: S.settings.jbBin }; },
   ui(s){
-    const b=$('sb-sync'),t=$('sb-sync-text'),tb=$('topbar-sync');
-    if(s==='online'){b.className='sync-badge online';t.textContent='En ligne';if(tb)tb.innerHTML='<span class="sync-badge online" style="font-size:.7rem"><span class="sync-dot"></span>Sync live</span>'}
-    else if(s==='syncing'){b.className='sync-badge syncing';t.textContent='Sync…';if(tb)tb.innerHTML='<span class="sync-badge syncing" style="font-size:.7rem"><span class="sync-dot"></span>Sync…</span>'}
-    else{b.className='sync-badge offline';t.textContent='Hors ligne';if(tb)tb.innerHTML=''}
+    const b=$('sb-sync'),t=$('sb-sync-text');
+    if(s==='online'){b.className='sync-badge online';t.textContent='En ligne';}
+    else if(s==='syncing'){b.className='sync-badge syncing';t.textContent='Sync…';}
+    else{b.className='sync-badge offline';t.textContent='Hors ligne';}
   },
-  cfg(){try{return JSON.parse(localStorage.getItem(JB_KEY))}catch(e){return null}},
-  saveCfg(c){localStorage.setItem(JB_KEY,JSON.stringify(c))},
-  connect(){
-    const k=$('jb-key').value.trim(), b=$('jb-bin').value.trim();
-    if(!k||!b){Toast.s('Clés manquantes','error');return}
-    this.saveCfg({k,b});this.ui('syncing');
-    this._r().then(r=>{
-      if(r){S=r;sL();App.refreshAll();}else{this._w();}
-      this.on=true;this.ui('online');Toast.s('Synchronisation activée');
-      clearInterval(this._timer);this._timer=setInterval(()=>this._poll(),30000);
-    }).catch(()=>{Toast.s('Erreur de connexion JSONBin','error');this.ui('offline')});
-  },
-  disconnect(){clearInterval(this._timer);this.on=false;this.ui('offline');Toast.s('Sync désactivée','info')},
-  async _r(){const c=this.cfg();if(!c)return null;const r=await fetch(`https://api.jsonbin.io/v3/b/${c.b}/latest`,{headers:{'X-Master-Key':c.k,'X-Bin-Meta':false}});return r.status===200?(await r.json()).record:null},
-  async _w(){const c=this.cfg();if(!c)return;await fetch(`https://api.jsonbin.io/v3/b/${c.b}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':c.k},body:JSON.stringify(S)})},
-  async _poll(){if(!this.on)return;try{const r=await this._r();if(r&&JSON.stringify(r)!==JSON.stringify(S)){S=r;sL();App.refreshAll();Toast.s('Données synchronisées','info')}}catch(e){}},
-  push(){if(this.on){this.ui('syncing');this._w().then(()=>this.ui('online')).catch(()=>this.ui('online'))}},
-  async createBin(){
-    const k=$('jb-key').value.trim();if(!k){Toast.s('Entrez la Master Key d\'abord','error');return}
-    try{const r=await fetch('https://api.jsonbin.io/v3/b',{method:'POST',headers:{'Content-Type':'application/json','X-Master-Key':k,'X-Bin-Name':'TERA-CRM'},body:JSON.stringify(S)});const j=await r.json();$('jb-bin').value=j.metadata.id;Toast.s('Bin créé ! Vous pouvez maintenant vous connecter.')}catch(e){Toast.s('Erreur création Bin','error')}
-  },
-  auto(){const c=this.cfg();if(c&&c.k&&c.b){if($('jb-key'))$('jb-key').value=c.k;if($('jb-bin'))$('jb-bin').value=c.b;this.connect()}}
+  async _r(){const c=this.cfg();if(!c.k||!c.b)return null;const r=await fetch(`https://api.jsonbin.io/v3/b/${c.b}/latest`,{headers:{'X-Master-Key':c.k,'X-Bin-Meta':false}});return r.status===200?(await r.json()).record:null},
+  async _w(){const c=this.cfg();if(!c.k||!c.b)return;await fetch(`https://api.jsonbin.io/v3/b/${c.b}`,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':c.k},body:JSON.stringify(S)})},
+  
+  async manualSync() {
+    const c = this.cfg();
+    if(!c.k || !c.b) { Toast.s('Clés JSONBin manquantes (Admin > Sync)', 'error'); return; }
+    
+    this.ui('syncing');
+    try {
+        const remote = await this._r();
+        if(remote) {
+            // Fusion simple : on garde les données locales si elles existent, sinon on ajoute les distantes
+            const mergeArr = (loc, rem) => {
+                const map = new Map();
+                rem.forEach(i => map.set(i.id, i));
+                loc.forEach(i => map.set(i.id, i));
+                return Array.from(map.values());
+            };
+            S.contacts = mergeArr(S.contacts, remote.contacts || []);
+            S.deals = mergeArr(S.deals, remote.deals || []);
+            S.devis = mergeArr(S.devis, remote.devis || []);
+            S.users = mergeArr(S.users, remote.users || []);
+            sL();
+            App.refreshAll();
+        }
+        await this._w();
+        Toast.s('Synchronisation réussie', 'success');
+        this.ui('online');
+        setTimeout(() => this.ui(''), 3000); 
+    } catch (e) {
+        Toast.s('Erreur de synchronisation JSONBin', 'error');
+        this.ui('offline');
+    }
+  }
 };
 
 let chartPipe=null, chartMonth=null;
@@ -868,7 +883,6 @@ const App = {
       }
     });
     this.refreshAll();
-    Sync.auto();
   },
   buildPF(){
     const s=$('filter-period');s.innerHTML='';
@@ -903,24 +917,6 @@ const App = {
     Admin.render();
     Users.render();
     if($('view-devis').classList.contains('active')) Quotes.renderList();
-  },
-  exportJSON(){
-    const b=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
-    const u=URL.createObjectURL(b),a=document.createElement('a');
-    a.href=u;a.download='CRM_TERA_'+new Date().toISOString().split('T')[0]+'.json';
-    a.click();URL.revokeObjectURL(u);Toast.s('Sauvegarde téléchargée');
-  },
-  importJSON(){$('import-file').click()},
-  doImport(input){
-    const f=input.files[0];if(!f)return;
-    const r=new FileReader();
-    r.onload=e=>{
-      Modal.confirm('Restaurer la sauvegarde','Ceci remplacera TOUTES les données actuelles. Continuer ?',()=>{
-        try{S=JSON.parse(e.target.result);save();App.refreshAll();Toast.s('Sauvegarde restaurée avec succès');}
-        catch(err){Toast.s('Fichier JSON invalide','error')}
-      },true);
-    };
-    r.readAsText(f);input.value='';
   }
 };
 
@@ -1081,16 +1077,6 @@ const Pipeline = {
 };
 
 const Deals = {
-  openNew(){
-    $('d-id').value='';$('m-deal-t').textContent='Nouvelle affaire';
-    $('d-name').value='';$('d-amt').value='';$('d-notes').value='';$('d-inter').value='';
-    $('d-date').value=new Date().toISOString().split('T')[0];
-    $('d-del-btn').style.display='none';
-    $('d-ct').innerHTML='<option value="">— Choisir —</option>'+S.contacts.map(c=>`<option value="${c.id}">${escHTML(c.name)}</option>`).join('');
-    $('d-usr').innerHTML=S.users.filter(u=>u.active!==false).map(u=>`<option value="${u.id}"${u.id==CU?.id?' selected':''}>${escHTML(u.name)}</option>`).join('');
-    $('d-stg').innerHTML=Object.entries(DSTG).map(([k,v])=>`<option value="${k}">${v.name}</option>`).join('');
-    Modal.open('m-deal');
-  },
   edit(id){
     const d=S.deals.find(x=>x.id==id);if(!d)return;
     $('d-id').value=d.id;$('m-deal-t').textContent='Modifier l\'affaire';
@@ -1107,17 +1093,14 @@ const Deals = {
     if(!name){Toast.s('Le nom est obligatoire','error');return}
     const id=$('d-id').value;
     const data={
-      name, amount:parseFloat($('d-amt').value)||0,
-      contactId:$('d-ct').value, userId:$('d-usr').value,
+      name,
+      userId:$('d-usr').value,
       stage:parseInt($('d-stg').value), closeDate:$('d-date').value,
       notes:$('d-notes').value, inter:$('d-inter').value
     };
     if(id){
       Object.assign(S.deals.find(x=>x.id==id),data);
       Toast.s('Affaire mise à jour');
-    } else {
-      data.id=Date.now();data.ref='AF-'+Math.floor(Math.random()*9000+1000);
-      S.deals.push(data);Toast.s('Affaire créée');
     }
     save();Modal.close('m-deal');App.refreshAll();
   },
@@ -1337,6 +1320,8 @@ const Admin = {
     $('cfg-e-rccm').value=e.entete_rccm||'';
     $('cfg-e-cc').value=e.entete_cc||'';
     $('cfg-e-capital').value=e.entete_capital||'';
+    $('jb-key').value=S.settings.jbKey||'';
+    $('jb-bin').value=S.settings.jbBin||'';
   },
   saveSettings(){
     S.settings.company=$('cfg-co').value.trim();
@@ -1354,6 +1339,11 @@ const Admin = {
     S.emitter.entete_cc=$('cfg-e-cc').value;
     S.emitter.entete_capital=$('cfg-e-capital').value;
     save();Toast.s('En-tête PDF enregistré');
+  },
+  saveSync(){
+    S.settings.jbKey=$('jb-key').value.trim();
+    S.settings.jbBin=$('jb-bin').value.trim();
+    save();Toast.s('Configuration Sync enregistrée');
   }
 };
 
@@ -1523,23 +1513,27 @@ const Quotes = {
     copy.id=UID();copy.ref='DEV-'+Date.now().toString().slice(-6);
     copy.createdAt=new Date().toISOString();copy.updatedAt=new Date().toISOString();
     copy.status='brouillon';copy.statusHistory=[{status:'brouillon',date:new Date().toISOString(),note:'Copie de '+d.ref}];
+    // On retire l'ID de l'affaire pour qu'elle en crée une nouvelle à l'enregistrement
     delete copy.dealId;
     S.devis.unshift(copy);save();this.renderList();Toast.s('Devis dupliqué : '+copy.ref);
   },
 
   del(id){
-    Modal.confirm('Supprimer ce devis', 'Cette action est irréversible et supprimera l\'affaire associée.', () => {
-      const d = S.devis.find(x => x.id === id);
-      if (d && d.dealId) {
-        // Supprime l'affaire associée pour mettre à jour les compteurs
+    const d = S.devis.find(x=>x.id===id);
+    if(!d) return;
+    Modal.confirm('Supprimer ce devis','Cette action est irréversible et supprimera également l\'affaire liée au devis.',()=>{
+      // 1. Supprimer l'affaire liée si elle existe
+      if(d.dealId) {
         S.deals = S.deals.filter(x => x.id !== d.dealId);
       }
-      S.devis = S.devis.filter(x => x.id !== id);
+      // 2. Supprimer le devis
+      S.devis = S.devis.filter(x=>x.id!==id);
+      
       save();
       this.renderList();
-      App.refreshAll(); // Rafraîchit tout (y compris le dashboard et le pipeline)
-      Toast.s('Devis et affaire supprimés', 'error');
-    }, true);
+      App.refreshAll(); // Rafraîchit les KPI et le Pipeline instantanément
+      Toast.s('Devis et affaire liée supprimés','error');
+    },true);
   },
 
   lineTotal(l){
@@ -1775,12 +1769,14 @@ const Quotes = {
     const dealName = (qEdit.event.type ? qEdit.event.type + ' - ' : 'Devis ') + contactName;
 
     // Détermination de l'étape du pipeline en fonction du statut du devis
-    let newStage = 3; // Proposition (par défaut pour Brouillon)
-    if (qEdit.status === 'envoye') newStage = 4; // Négociation
-    if (qEdit.status === 'accepte') newStage = 5; // Gagné
-    if (qEdit.status === 'refuse') newStage = 6; // Perdu
+    let dealStage = 3; // Proposition par défaut
+    if (qEdit.status === 'brouillon') dealStage = 2; // Qualification
+    else if (qEdit.status === 'envoye') dealStage = 3; // Proposition
+    else if (qEdit.status === 'accepte') dealStage = 5; // Gagné
+    else if (qEdit.status === 'refuse') dealStage = 6; // Perdu
 
     if (!qEdit.dealId) {
+      // Nouveau devis : Création de la nouvelle affaire
       const newDeal = {
         id: Date.now() + 1,
         ref: 'AF-' + qEdit.ref.replace('DEV-', ''),
@@ -1788,19 +1784,26 @@ const Quotes = {
         amount: total,
         contactId: contact.id,
         userId: CU?.id || 1,
-        stage: newStage,
+        stage: dealStage,
         closeDate: qEdit.event.date || new Date().toISOString().split('T')[0],
         notes: 'Créée automatiquement depuis le devis ' + qEdit.ref
       };
       S.deals.push(newDeal);
-      qEdit.dealId = newDeal.id; // On lie l'affaire au devis
+      qEdit.dealId = newDeal.id; // Liaison
     } else {
+      // Devis existant : Mise à jour de l'affaire liée
       let existingDeal = S.deals.find(d => d.id === qEdit.dealId);
       if (existingDeal) {
         existingDeal.amount = total;
         existingDeal.name = dealName;
-        existingDeal.stage = newStage; // Mise à jour de l'étape
+        existingDeal.stage = dealStage; // Mise à jour de l'étape (Pipeline Sync)
+        
         if (qEdit.event.date) existingDeal.closeDate = qEdit.event.date;
+        
+        // Si accepté ou refusé, on date la clôture à aujourd'hui si la date de l'event n'est pas remplie
+        if (dealStage === 5 || dealStage === 6) {
+           existingDeal.closeDate = new Date().toISOString().split('T')[0];
+        }
       }
     }
 
@@ -1812,7 +1815,7 @@ const Quotes = {
     save();
     Toast.s('Devis, Contact et Affaire enregistrés avec succès ✓');
     this.renderList();
-    App.refreshAll(); // Met à jour tous les tableaux, le Kanban et le dashboard
+    App.refreshAll(); // Rafraîchit les vues pour que le pipeline et les stats s'actualisent
   },
 
   generatePDF(id,temp=false){
