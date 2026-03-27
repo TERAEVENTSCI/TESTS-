@@ -1523,6 +1523,8 @@ const Quotes = {
     copy.id=UID();copy.ref='DEV-'+Date.now().toString().slice(-6);
     copy.createdAt=new Date().toISOString();copy.updatedAt=new Date().toISOString();
     copy.status='brouillon';copy.statusHistory=[{status:'brouillon',date:new Date().toISOString(),note:'Copie de '+d.ref}];
+    // On retire l'ID de l'affaire pour qu'elle en crée une nouvelle
+    delete copy.dealId;
     S.devis.unshift(copy);save();this.renderList();Toast.s('Devis dupliqué : '+copy.ref);
   },
 
@@ -1733,9 +1735,73 @@ const Quotes = {
   save(){
     if(!qEdit.client.nom.trim()){Toast.s('Le nom du client est obligatoire','error');return}
     qEdit.updatedAt=new Date().toISOString();
+
+    // --- 1. GESTION DU CONTACT ---
+    let contactName = (qEdit.client.nom + ' ' + (qEdit.client.prenom || '')).trim();
+    let contact = S.contacts.find(c =>
+      (c.name || '').toLowerCase() === contactName.toLowerCase() ||
+      (c.email && c.email.toLowerCase() === (qEdit.client.email || '').toLowerCase())
+    );
+
+    if (!contact) {
+      // Création d'un nouveau contact si inexistant
+      contact = {
+        id: Date.now(),
+        name: contactName,
+        type: 'Prospect',
+        tel: qEdit.client.tel || '',
+        email: qEdit.client.email || '',
+        contact: qEdit.client.prenom || '',
+        city: qEdit.client.ville || '',
+        userId: CU?.id || 1, // Assigné à l'utilisateur actuel
+        notes: 'Contact généré automatiquement depuis le devis ' + qEdit.ref
+      };
+      S.contacts.push(contact);
+    } else {
+      // Mise à jour du contact existant avec les nouvelles infos du devis
+      if (qEdit.client.tel && !contact.tel) contact.tel = qEdit.client.tel;
+      if (qEdit.client.email && !contact.email) contact.email = qEdit.client.email;
+      if (qEdit.client.ville && !contact.city) contact.city = qEdit.client.ville;
+    }
+
+    // --- 2. GESTION DE L'AFFAIRE (PIPELINE) ---
+    const {total} = this.calcTotals(qEdit);
+    const dealName = (qEdit.event.type ? qEdit.event.type + ' - ' : 'Devis ') + contactName;
+
+    if (!qEdit.dealId) {
+      // C'est un nouveau devis : Création d'une nouvelle affaire
+      const newDeal = {
+        id: Date.now() + 1,
+        ref: 'AF-' + qEdit.ref.replace('DEV-', ''),
+        name: dealName,
+        amount: total,
+        contactId: contact.id,
+        userId: CU?.id || 1,
+        stage: 3, // Étape 3 par défaut : "Proposition"
+        closeDate: qEdit.event.date || new Date().toISOString().split('T')[0],
+        notes: 'Créée automatiquement depuis le devis ' + qEdit.ref
+      };
+      S.deals.push(newDeal);
+      qEdit.dealId = newDeal.id; // On lie l'affaire au devis
+    } else {
+      // Le devis existe déjà : Mise à jour du montant et des infos de l'affaire liée
+      let existingDeal = S.deals.find(d => d.id === qEdit.dealId);
+      if (existingDeal) {
+        existingDeal.amount = total;
+        existingDeal.name = dealName;
+        if (qEdit.event.date) existingDeal.closeDate = qEdit.event.date;
+      }
+    }
+
+    // --- 3. SAUVEGARDE DU DEVIS ---
     const idx=S.devis.findIndex(x=>x.id===qEdit.id);
-    if(idx>=0)S.devis[idx]=qEdit;else S.devis.unshift(qEdit);
-    save();Toast.s('Devis enregistré avec succès ✓');this.renderList();
+    if(idx>=0) S.devis[idx]=qEdit;
+    else S.devis.unshift(qEdit);
+
+    save();
+    Toast.s('Devis, Contact et Affaire enregistrés avec succès ✓');
+    this.renderList();
+    App.refreshAll(); // On rafraîchit tous les tableaux (dashboard, pipeline, contacts)
   },
 
   generatePDF(id,temp=false){
