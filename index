@@ -165,6 +165,9 @@ select.form-control{appearance:none;background-image:url("data:image/svg+xml,%3C
   background-repeat:no-repeat;background-position:right .75rem center;padding-right:2rem}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 textarea.form-control{resize:vertical;min-height:80px}
+.new-contact-hint{font-size:.75rem;color:var(--primary);background:var(--primary-bg);border:1px solid rgba(37,99,235,0.2);
+  border-radius:var(--radius);padding:.5rem .75rem;margin-top:.4rem;display:none}
+.new-contact-hint i{margin-right:.3rem}
 
 /* ═══ MODAL ═══ */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,0.6);backdrop-filter:blur(4px);z-index:9999;
@@ -420,7 +423,7 @@ textarea.form-control{resize:vertical;min-height:80px}
       <div class="commission-summary" id="comm-summary"></div>
       <div class="card" id="comm-card">
         <div class="card-header">
-          <h3><i class="fas fa-coins" style="color:var(--warning);margin-right:.4rem"></i> Détail des commissions</h3>
+          <h3><i class="fas fa-coins" style="color:var(--warning);margin-right:.4rem"></i> Détail des commissions par commercial</h3>
           <div class="card-actions">
             <button class="btn btn-outline btn-sm" onclick="Reports.exportCommissions()"><i class="fas fa-file-pdf"></i> Export PDF</button>
           </div>
@@ -428,7 +431,7 @@ textarea.form-control{resize:vertical;min-height:80px}
         <div class="table-wrap">
           <table id="tbl-commissions">
             <thead>
-              <tr><th>Commercial</th><th>CA réalisé</th><th>Objectif</th><th>Atteinte</th><th>Taux</th><th>Commission</th><th>Bonus</th><th>Total</th><th>Statut</th><th>Actions</th></tr>
+              <tr><th>Commercial</th><th>CA réalisé</th><th>Objectif individuel</th><th>Atteinte</th><th>Taux comm.</th><th>Commission</th><th>Bonus</th><th>Total dû</th><th>Statut</th><th>Actions</th></tr>
             </thead>
             <tbody></tbody>
           </table>
@@ -449,7 +452,7 @@ textarea.form-control{resize:vertical;min-height:80px}
         </div>
         <div class="report-card" onclick="Reports.exportCommissions()">
           <div class="report-icon" style="background:var(--warning-light);color:var(--warning)"><i class="fas fa-coins"></i></div>
-          <div class="report-info"><h4>Rapport de commissions</h4><p>Détail par commercial : CA, taux, commissions, bonus</p></div>
+          <div class="report-info"><h4>Rapport de commissions</h4><p>Détail par commercial : CA, objectif individuel, taux, commissions, bonus</p></div>
         </div>
         <div class="report-card" onclick="Reports.exportPerformance()">
           <div class="report-icon" style="background:var(--success-light);color:var(--success)"><i class="fas fa-ranking-star"></i></div>
@@ -490,9 +493,10 @@ textarea.form-control{resize:vertical;min-height:80px}
               </select>
             </div>
             <div class="form-row">
-              <div class="form-group"><label>Objectif CA mensuel</label><input type="number" class="form-control" id="cfg-target"></div>
-              <div class="form-group"><label>Objectif CA annuel</label><input type="number" class="form-control" id="cfg-annual-target"></div>
+              <div class="form-group"><label>Objectif CA mensuel (global)</label><input type="number" class="form-control" id="cfg-target"></div>
+              <div class="form-group"><label>Objectif CA annuel (global)</label><input type="number" class="form-control" id="cfg-annual-target"></div>
             </div>
+            <p style="font-size:.75rem;color:var(--text-muted);margin-bottom:.75rem"><i class="fas fa-info-circle"></i> Les objectifs individuels par commercial se définissent dans l'onglet <strong>Équipe commerciale</strong>.</p>
             <button class="btn btn-primary" onclick="Admin.saveSettings()"><i class="fas fa-check"></i> Enregistrer</button>
           </div>
           <div class="card">
@@ -511,7 +515,7 @@ textarea.form-control{resize:vertical;min-height:80px}
           </div>
           <div class="table-wrap">
             <table id="tbl-users">
-              <thead><tr><th>Nom complet</th><th>Identifiant</th><th>Rôle</th><th>Taux comm.</th><th>Statut</th><th>Actions</th></tr></thead>
+              <thead><tr><th>Nom complet</th><th>Identifiant</th><th>Rôle</th><th>Objectif individuel</th><th>Taux comm.</th><th>Statut</th><th>Actions</th></tr></thead>
               <tbody></tbody>
             </table>
           </div>
@@ -523,8 +527,8 @@ textarea.form-control{resize:vertical;min-height:80px}
           <div class="card-header"><h3>Règles de calcul des commissions</h3></div>
           <div class="form-group"><label>Mode de calcul</label>
             <select class="form-control" id="cfg-comm-mode">
-              <option value="flat">Taux fixe par commercial</option>
-              <option value="tiered">Paliers progressifs</option>
+              <option value="flat">Taux fixe par commercial (défini sur la fiche utilisateur)</option>
+              <option value="tiered">Paliers progressifs (global)</option>
             </select>
           </div>
           <div id="cfg-tiers-section" style="display:none">
@@ -584,7 +588,17 @@ textarea.form-control{resize:vertical;min-height:80px}
       <input type="hidden" id="deal-id">
       <div class="form-group"><label>Nom de l'affaire *</label><input type="text" class="form-control" id="deal-name" placeholder="Ex: Audit RH 2026"></div>
       <div class="form-row">
-        <div class="form-group"><label>Client associé *</label><select class="form-control" id="deal-contact"></select></div>
+        <div class="form-group">
+          <label>Client associé *</label>
+          <select class="form-control" id="deal-contact" onchange="Deals.onContactChange()"></select>
+          <!-- Zone de création automatique d'un nouveau contact -->
+          <div class="new-contact-hint" id="new-contact-hint">
+            <i class="fas fa-magic"></i> Un nouveau contact sera créé automatiquement dans la base avec ce nom.
+          </div>
+          <input type="text" class="form-control" id="deal-new-contact-name"
+            placeholder="Saisissez le nom du nouveau client..." style="display:none;margin-top:.5rem"
+            oninput="Deals.onNewContactNameInput()">
+        </div>
         <div class="form-group"><label>Interlocuteur décisionnaire</label><input type="text" class="form-control" id="deal-interlocuteur" placeholder="Nom et fonction"></div>
       </div>
       <div class="form-row">
@@ -679,9 +693,25 @@ textarea.form-control{resize:vertical;min-height:80px}
             <option value="Lecture seule">Lecture seule</option>
           </select>
         </div>
-        <div class="form-group"><label>Taux de commission (%)</label><input type="number" class="form-control" id="user-rate" value="5" step="0.5" min="0" max="100"></div>
+        <div class="form-group"><label>Équipe / Zone</label><input type="text" class="form-control" id="user-team" placeholder="Ex: Zone Nord, Équipe A"></div>
       </div>
-      <div class="form-group"><label>Équipe / Zone</label><input type="text" class="form-control" id="user-team" placeholder="Ex: Zone Nord, Équipe A"></div>
+      <!-- ═══ OBJECTIF & COMMISSION INDIVIDUELS ═══ -->
+      <div style="background:var(--primary-bg);border:1px solid rgba(37,99,235,0.15);border-radius:var(--radius);padding:1rem;margin-bottom:1rem">
+        <p style="font-size:.75rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.4px;margin-bottom:.75rem">
+          <i class="fas fa-target"></i> Objectif & Commission individuels
+        </p>
+        <div class="form-row">
+          <div class="form-group" style="margin-bottom:0">
+            <label>Objectif mensuel individuel</label>
+            <input type="number" class="form-control" id="user-target" placeholder="Ex: 2000000" min="0">
+            <span style="font-size:.7rem;color:var(--text-muted)">Laisser vide = objectif global ÷ équipe</span>
+          </div>
+          <div class="form-group" style="margin-bottom:0">
+            <label>Taux de commission (%)</label>
+            <input type="number" class="form-control" id="user-rate" value="5" step="0.5" min="0" max="100">
+          </div>
+        </div>
+      </div>
     </div>
     <div class="modal-footer">
       <button class="btn btn-outline" onclick="Modal.close('modal-user')">Annuler</button>
@@ -720,16 +750,15 @@ const DEFAULT_STAGES = {
 };
 
 function hashPassword(p){
-  /* Simple SHA-256 via SubtleCrypto fallback to basic hash */
   let h=0;for(let i=0;i<p.length;i++){h=((h<<5)-h)+p.charCodeAt(i);h|=0}return 'h_'+Math.abs(h).toString(36);
 }
 
 function defaultState(){
   return {
-    settings:{company:'Mon Entreprise',currency:'FCFA',target:50000000,annualTarget:600000000,
+    settings:{company:'Mon Entreprise',currency:'FCFA',target:7000000,annualTarget:84000000,
       commMode:'flat',commTrigger:'signed',bonusRate:2,tiers:[{min:0,max:10000000,rate:5},{min:10000000,max:Infinity,rate:7}]},
     stages:JSON.parse(JSON.stringify(DEFAULT_STAGES)),
-    users:[{id:1,name:'Administrateur',login:'admin',role:'Super Admin',rate:5,team:'Direction',active:true,pass:hashPassword('Admin@2026')}],
+    users:[{id:1,name:'Administrateur',login:'admin',role:'Super Admin',rate:5,target:0,team:'Direction',active:true,pass:hashPassword('Admin@2026')}],
     contacts:[],
     deals:[],
     audit:[],
@@ -762,6 +791,15 @@ function getStageName(s){return(S.stages[s]||{name:'?'}).name}
 function getStageColor(s){return(S.stages[s]||{color:'#ccc'}).color}
 function getStageProb(s){return(S.stages[s]||{prob:0}).prob}
 
+/* ─── Calcul de l'objectif individuel d'un utilisateur ─── */
+function getUserTarget(u){
+  /* Priorité 1 : objectif défini explicitement sur la fiche utilisateur */
+  if(u.target && u.target > 0) return u.target;
+  /* Priorité 2 : fallback = objectif global divisé par le nombre de commerciaux actifs */
+  const actifs = S.users.filter(x => x.active !== false && x.role !== 'Lecture seule');
+  return S.settings.target / (actifs.length || 1);
+}
+
 /* ═══════════════════════════════════════════════
    AUTH
    ═══════════════════════════════════════════════ */
@@ -780,7 +818,6 @@ const Auth = {
       document.getElementById('sidebar-urole').textContent=user.role;
       document.getElementById('sidebar-avatar').textContent=user.name.charAt(0).toUpperCase();
       addAudit('Connexion','Utilisateur: '+user.name);save();
-      // Role-based nav
       if(user.role==='Commercial'){document.querySelector('[data-view="admin"]').parentElement.style.display='none';}
       if(user.role==='Lecture seule'){
         document.querySelector('[data-view="admin"]').parentElement.style.display='none';
@@ -863,7 +900,6 @@ function buildPeriodFilter(){
     if(i===0)opt.selected=true;
     sel.appendChild(opt);
   }
-  // Ajouter options trimestrielles
   const optAll=document.createElement('option');
   optAll.value='ALL';optAll.textContent='— Toutes les périodes —';
   sel.appendChild(optAll);
@@ -877,7 +913,7 @@ function filterByPeriod(items){
 }
 
 /* ═══════════════════════════════════════════════
-   DEALS
+   DEALS  —  avec création automatique de contact
    ═══════════════════════════════════════════════ */
 const Deals = {
   openNew(){
@@ -893,9 +929,13 @@ const Deals = {
     document.getElementById('deal-notes').value='';
     document.getElementById('deal-stage').value='1';
     document.getElementById('deal-loss-group').style.display='none';
+    document.getElementById('deal-new-contact-name').value='';
+    document.getElementById('deal-new-contact-name').style.display='none';
+    document.getElementById('new-contact-hint').style.display='none';
     this._populateSelects();
     Modal.open('modal-deal');
   },
+
   edit(id){
     const d=S.deals.find(x=>x.id===id);if(!d)return;
     document.getElementById('deal-id').value=d.id;
@@ -911,22 +951,46 @@ const Deals = {
     document.getElementById('deal-loss-reason').value=d.lossReason||'';
     document.getElementById('deal-notes').value=d.notes||'';
     document.getElementById('deal-loss-group').style.display=d.stage==6?'block':'none';
+    document.getElementById('deal-new-contact-name').style.display='none';
+    document.getElementById('new-contact-hint').style.display='none';
     this._populateSelects();
     document.getElementById('deal-contact').value=d.contactId||'';
     document.getElementById('deal-user').value=d.userId||'';
     Modal.open('modal-deal');
   },
+
   _populateSelects(){
     const cs=document.getElementById('deal-contact');
-    cs.innerHTML='<option value="">— Choisir —</option>'+S.contacts.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+    cs.innerHTML='<option value="">— Choisir un contact existant —</option>'
+      + S.contacts.map(c=>`<option value="${c.id}">${c.name}</option>`).join('')
+      + '<option value="__new__">➕ Nouveau client (créer automatiquement)</option>';
     const us=document.getElementById('deal-user');
     us.innerHTML=S.users.filter(u=>u.active!==false).map(u=>`<option value="${u.id}">${u.name}</option>`).join('');
     if(currentUser)us.value=currentUser.id;
     const ss=document.getElementById('deal-stage');
     ss.innerHTML=Object.entries(S.stages).map(([k,v])=>`<option value="${k}">${k}. ${v.name} (${v.prob}%)</option>`).join('');
-    // Show/hide loss reason
     ss.onchange=()=>{document.getElementById('deal-loss-group').style.display=ss.value==='6'?'block':'none'};
   },
+
+  /* Affiche / masque le champ de création automatique */
+  onContactChange(){
+    const val = document.getElementById('deal-contact').value;
+    const nameInput = document.getElementById('deal-new-contact-name');
+    const hint = document.getElementById('new-contact-hint');
+    if(val === '__new__'){
+      nameInput.style.display = 'block';
+      nameInput.focus();
+    } else {
+      nameInput.style.display = 'none';
+      hint.style.display = 'none';
+    }
+  },
+
+  onNewContactNameInput(){
+    const val = document.getElementById('deal-new-contact-name').value.trim();
+    document.getElementById('new-contact-hint').style.display = val ? 'block' : 'none';
+  },
+
   save(){
     const id=document.getElementById('deal-id').value;
     const name=document.getElementById('deal-name').value.trim();
@@ -935,9 +999,42 @@ const Deals = {
     if(!amount||amount<=0){Toast.show('Le montant est obligatoire','error');return}
     const stage=parseInt(document.getElementById('deal-stage').value);
     if(stage===6 && !document.getElementById('deal-loss-reason').value.trim()){Toast.show('Le motif de perte est obligatoire','error');return}
+
+    /* ─── Gestion contact : création automatique si "__new__" ─── */
+    let contactId = parseInt(document.getElementById('deal-contact').value) || null;
+    const contactSelectVal = document.getElementById('deal-contact').value;
+    if(contactSelectVal === '__new__'){
+      const newName = document.getElementById('deal-new-contact-name').value.trim();
+      if(!newName){Toast.show('Veuillez saisir le nom du nouveau client','error');return}
+      // Vérifier si un contact avec ce nom existe déjà (évite les doublons)
+      const existing = S.contacts.find(c => c.name.toLowerCase() === newName.toLowerCase());
+      if(existing){
+        contactId = existing.id;
+        Toast.show('Contact existant retrouvé : '+existing.name,'info');
+      } else {
+        const newContact = {
+          id: Date.now(),
+          name: newName,
+          type: 'Prospect',
+          sector: '',
+          person: document.getElementById('deal-interlocuteur').value.trim() || '',
+          phone: '',
+          email: '',
+          address: '',
+          userId: parseInt(document.getElementById('deal-user').value) || currentUser?.id || null,
+          notes: 'Créé automatiquement lors de l\'affaire : '+name,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        };
+        S.contacts.push(newContact);
+        contactId = newContact.id;
+        addAudit('Création contact automatique', newName+' (via affaire '+name+')');
+        Toast.show('✅ Contact "'+newName+'" créé automatiquement dans la base');
+      }
+    }
+
     const data={
-      name, amount, stage,
-      contactId:parseInt(document.getElementById('deal-contact').value)||null,
+      name, amount, stage, contactId,
       interlocuteur:document.getElementById('deal-interlocuteur').value.trim(),
       userId:parseInt(document.getElementById('deal-user').value)||currentUser?.id||1,
       source:document.getElementById('deal-source').value,
@@ -947,6 +1044,7 @@ const Deals = {
       lossReason:document.getElementById('deal-loss-reason').value.trim(),
       notes:document.getElementById('deal-notes').value.trim()
     };
+
     if(id){
       const idx=S.deals.findIndex(d=>d.id==id);
       S.deals[idx]={...S.deals[idx],...data,updatedAt:new Date().toISOString()};
@@ -963,6 +1061,7 @@ const Deals = {
     }
     save(); Modal.close('modal-deal'); App.refreshAll();
   },
+
   delete(id){
     const d=S.deals.find(x=>x.id===id);
     if(!d||!confirm('Supprimer définitivement l\'affaire '+d.ref+' ?'))return;
@@ -970,6 +1069,7 @@ const Deals = {
     addAudit('Suppression affaire', d.ref+' – '+d.name);
     save(); App.refreshAll(); Toast.show('Affaire supprimée');
   },
+
   changeStage(id,newStage){
     const d=S.deals.find(x=>x.id===id);if(!d)return;
     d.stage=parseInt(newStage);d.updatedAt=new Date().toISOString();
@@ -1095,7 +1195,7 @@ const Contacts = {
 };
 
 /* ═══════════════════════════════════════════════
-   USERS
+   USERS  —  avec objectif individuel
    ═══════════════════════════════════════════════ */
 const Users = {
   openNew(){
@@ -1104,6 +1204,7 @@ const Users = {
     ['user-name','user-login','user-pass','user-team'].forEach(x=>document.getElementById(x).value='');
     document.getElementById('user-role').value='Commercial';
     document.getElementById('user-rate').value=5;
+    document.getElementById('user-target').value='';
     Modal.open('modal-user');
   },
   edit(id){
@@ -1114,7 +1215,8 @@ const Users = {
     document.getElementById('user-login').value=u.login;
     document.getElementById('user-pass').value='';
     document.getElementById('user-role').value=u.role;
-    document.getElementById('user-rate').value=u.rate;
+    document.getElementById('user-rate').value=u.rate||0;
+    document.getElementById('user-target').value=u.target||'';
     document.getElementById('user-team').value=u.team||'';
     Modal.open('modal-user');
   },
@@ -1124,9 +1226,11 @@ const Users = {
     const login=document.getElementById('user-login').value.trim();
     if(!name||!login){Toast.show('Nom et identifiant obligatoires','error');return}
     const pass=document.getElementById('user-pass').value;
+    const targetVal = document.getElementById('user-target').value;
     const data={
       name, login, role:document.getElementById('user-role').value,
       rate:parseFloat(document.getElementById('user-rate').value)||0,
+      target:targetVal ? parseFloat(targetVal) : 0,
       team:document.getElementById('user-team').value.trim(), active:true
     };
     if(id){
@@ -1138,7 +1242,8 @@ const Users = {
       if(!pass){Toast.show('Le mot de passe est obligatoire pour un nouvel utilisateur','error');return}
       data.id=Date.now(); data.pass=hashPassword(pass);
       S.users.push(data);
-      addAudit('Création utilisateur', name); Toast.show('Utilisateur créé');
+      addAudit('Création utilisateur', name+' | Objectif: '+(data.target?fmtCur(data.target):'global')+'  Taux: '+data.rate+'%');
+      Toast.show('Utilisateur créé');
     }
     save(); Modal.close('modal-user'); App.refreshAll();
   },
@@ -1161,7 +1266,8 @@ const Users = {
       <td><strong>${u.name}</strong></td>
       <td><code style="font-size:.78rem;background:var(--bg);padding:.2rem .5rem;border-radius:4px">${u.login}</code></td>
       <td>${u.role}</td>
-      <td>${u.rate}%</td>
+      <td><strong style="color:var(--primary)">${u.target && u.target>0 ? fmtCur(u.target) : '<span style="color:var(--text-muted);font-style:italic;font-weight:400">Global ÷ équipe</span>'}</strong></td>
+      <td><strong>${u.rate||0}%</strong></td>
       <td><span class="badge ${u.active!==false?'badge-client':'badge-inactif'}">${u.active!==false?'Actif':'Inactif'}</span></td>
       <td>
         <button class="btn btn-ghost btn-icon btn-sm" onclick="Users.edit(${u.id})" title="Modifier"><i class="fas fa-pen" style="color:var(--primary)"></i></button>
@@ -1179,7 +1285,6 @@ const Pipeline = {
   render(){
     const search=(document.getElementById('pipeline-search').value||'').toLowerCase();
     const userFilter=document.getElementById('pipeline-user-filter').value;
-    // Populate user filter
     const uf=document.getElementById('pipeline-user-filter');
     const curVal=uf.value;
     uf.innerHTML='<option value="">Tous les commerciaux</option>'+S.users.filter(u=>u.active!==false).map(u=>`<option value="${u.id}">${u.name}</option>`).join('');
@@ -1221,52 +1326,80 @@ const Pipeline = {
 };
 
 /* ═══════════════════════════════════════════════
-   COMMISSIONS
+   COMMISSIONS  —  calcul par objectif individuel
    ═══════════════════════════════════════════════ */
 const Commissions = {
   calculate(){
     const period=getPeriod();
     const commercials=S.users.filter(u=>u.role!=='Lecture seule'&&u.active!==false);
-    const targetPerUser=S.settings.target/(commercials.length||1);
     let totalComm=0, totalCA=0, totalBonus=0;
+
     const rows=commercials.map(u=>{
-      const wonDeals=S.deals.filter(d=>d.stage===5 && d.userId===u.id && (period==='ALL'||d.date.startsWith(period)));
+      /* Objectif individuel de l'utilisateur */
+      const targetUser = getUserTarget(u);
+
+      /* Affaires gagnées pour cet utilisateur sur la période */
+      const wonDeals=S.deals.filter(d=>d.stage===5 && d.userId===u.id && (period==='ALL'||(d.date||'').startsWith(period)));
       const ca=wonDeals.reduce((a,b)=>a+b.amount,0);
-      const atteinte=targetPerUser>0?Math.round((ca/targetPerUser)*100):0;
-      let rate=u.rate||0;
-      if(S.settings.commMode==='tiered'&&S.settings.tiers){
+
+      /* Taux d'atteinte de l'objectif individuel */
+      const atteinte=targetUser>0?Math.round((ca/targetUser)*100):0;
+
+      /* Taux de commission : individuel (fiche user) ou paliers */
+      let rate = u.rate || 0;
+      if(S.settings.commMode==='tiered' && S.settings.tiers){
         const tier=S.settings.tiers.find(t=>ca>=t.min&&ca<(t.max===Infinity?Number.MAX_SAFE_INTEGER:t.max));
-        if(tier)rate=tier.rate;
+        if(tier) rate=tier.rate;
       }
+
+      /* Commission de base */
       const commission=Math.round(ca*rate/100);
-      const bonus=atteinte>100?Math.round((ca-targetPerUser)*(S.settings.bonusRate||0)/100):0;
+
+      /* Bonus dépassement objectif */
+      const bonus=atteinte>100 ? Math.round((ca-targetUser)*(S.settings.bonusRate||0)/100) : 0;
+
       const total=commission+bonus;
       totalComm+=total; totalCA+=ca; totalBonus+=bonus;
+
       const commKey=period+'_'+u.id;
       const status=(S.commissions||{})[commKey]||'Attente';
-      return {user:u, ca, atteinte, rate, commission, bonus, total, status, commKey};
+      return {user:u, ca, targetUser, atteinte, rate, commission, bonus, total, status, commKey};
     });
+
     return {rows, totalComm, totalCA, totalBonus};
   },
+
   render(){
     const {rows, totalComm, totalCA, totalBonus}=this.calculate();
-    // Summary
     document.getElementById('comm-summary').innerHTML=`
       <div class="cs-card"><div class="cs-label">CA total gagné</div><div class="cs-value" style="color:var(--success)">${fmtCur(totalCA)}</div></div>
       <div class="cs-card"><div class="cs-label">Commissions totales</div><div class="cs-value" style="color:var(--primary)">${fmtCur(totalComm)}</div></div>
       <div class="cs-card"><div class="cs-label">Bonus distribués</div><div class="cs-value" style="color:var(--warning)">${fmtCur(totalBonus)}</div></div>`;
-    // Table
+
     const statusBadge={'Attente':'badge-attente','Validée':'badge-validee','Payée':'badge-payee'};
     const tbody=document.querySelector('#tbl-commissions tbody');
     tbody.innerHTML=rows.map(r=>`<tr>
-      <td><strong>${r.user.name}</strong></td>
-      <td>${fmtCur(r.ca)}</td>
-      <td>${fmtCur(Math.round(S.settings.target/(S.users.filter(u=>u.active!==false&&u.role!=='Lecture seule').length||1)))}</td>
-      <td><div class="progress" style="width:100px;display:inline-block;vertical-align:middle"><div class="progress-bar" style="width:${Math.min(100,r.atteinte)}%;background:${r.atteinte>=100?'var(--success)':r.atteinte>=50?'var(--primary)':'var(--danger)'}"></div></div> <strong>${r.atteinte}%</strong></td>
-      <td>${r.rate}%</td>
+      <td>
+        <strong>${r.user.name}</strong>
+        <div style="font-size:.7rem;color:var(--text-muted)">${r.user.role}</div>
+      </td>
+      <td><strong style="color:var(--success)">${fmtCur(r.ca)}</strong></td>
+      <td>
+        <strong>${fmtCur(r.targetUser)}</strong>
+        ${r.user.target&&r.user.target>0
+          ? '<div style="font-size:.68rem;color:var(--primary)"><i class="fas fa-user" style="font-size:.6rem"></i> individuel</div>'
+          : '<div style="font-size:.68rem;color:var(--text-muted)"><i class="fas fa-users" style="font-size:.6rem"></i> global ÷ équipe</div>'}
+      </td>
+      <td>
+        <div style="display:flex;align-items:center;gap:.5rem">
+          <div class="progress" style="width:80px"><div class="progress-bar" style="width:${Math.min(100,r.atteinte)}%;background:${r.atteinte>=100?'var(--success)':r.atteinte>=50?'var(--primary)':'var(--danger)'}"></div></div>
+          <strong style="color:${r.atteinte>=100?'var(--success)':r.atteinte>=50?'var(--primary)':'var(--danger)'}">${r.atteinte}%</strong>
+        </div>
+      </td>
+      <td><strong>${r.rate}%</strong></td>
       <td>${fmtCur(r.commission)}</td>
-      <td>${r.bonus>0?fmtCur(r.bonus):'—'}</td>
-      <td><strong>${fmtCur(r.total)}</strong></td>
+      <td>${r.bonus>0?`<strong style="color:var(--warning)">${fmtCur(r.bonus)}</strong>`:'—'}</td>
+      <td><strong style="color:var(--primary)">${fmtCur(r.total)}</strong></td>
       <td><span class="badge ${statusBadge[r.status]||'badge-attente'}">${r.status}</span></td>
       <td>
         ${currentUser?.role==='Super Admin'||currentUser?.role==='Manager'?`
@@ -1278,6 +1411,7 @@ const Commissions = {
       </td>
     </tr>`).join('');
   },
+
   setStatus(key, status){
     if(!S.commissions)S.commissions={};
     S.commissions[key]=status;
@@ -1303,7 +1437,6 @@ const Dashboard = {
     const target=S.settings.target||1;
     const targetPct=Math.round(realized/target*100);
 
-    // KPIs
     document.getElementById('kpi-grid').innerHTML=`
       <div class="kpi-card">
         <div class="kpi-icon" style="background:var(--success-light);color:var(--success)"><i class="fas fa-trophy"></i></div>
@@ -1331,7 +1464,7 @@ const Dashboard = {
       </div>
       <div class="kpi-card">
         <div class="kpi-icon" style="background:var(--danger-light);color:var(--danger)"><i class="fas fa-bullseye"></i></div>
-        <div class="kpi-label">Objectif</div>
+        <div class="kpi-label">Objectif global</div>
         <div class="kpi-value">${targetPct}%</div>
         <div class="progress" style="margin-top:.5rem"><div class="progress-bar" style="width:${Math.min(100,targetPct)}%;background:${targetPct>=100?'var(--success)':targetPct>=50?'var(--primary)':'var(--danger)'}"></div></div>
         <div class="kpi-sub">Objectif : ${fmtCur(target)}</div>
@@ -1343,7 +1476,6 @@ const Dashboard = {
         <div class="kpi-sub">${deals.filter(d=>d.stage===6).length} affaire(s)</div>
       </div>`;
 
-    // Dashboard table (active deals)
     const showDeals=deals.filter(d=>d.stage<6).sort((a,b)=>b.amount-a.amount);
     const tbody=document.querySelector('#tbl-dashboard tbody');
     if(!showDeals.length){
@@ -1367,12 +1499,9 @@ const Dashboard = {
           </td>
         </tr>`}).join('');
     }
-
-    // Charts
     this.renderCharts(deals);
   },
   renderCharts(deals){
-    // Pipeline chart
     const pipeData=Object.entries(S.stages).map(([k,v])=>({
       label:v.name, count:deals.filter(d=>d.stage==k).length,
       total:deals.filter(d=>d.stage==k).reduce((a,b)=>a+b.amount,0), color:v.color
@@ -1383,16 +1512,15 @@ const Dashboard = {
         {label:'Montant ('+S.settings.currency+')',data:pipeData.map(p=>p.total),backgroundColor:pipeData.map(p=>p.color+'44'),borderColor:pipeData.map(p=>p.color),borderWidth:2,borderRadius:6}
       ]}, options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>fmt(v)},grid:{color:'#f1f5f9'}},x:{grid:{display:false}}}}
     });
-    // Monthly chart (last 6 months)
     const now=new Date();
     const months=[];
     for(let i=5;i>=0;i--){
       const d=new Date(now.getFullYear(),now.getMonth()-i,1);
       const key=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
       const label=d.toLocaleString('fr-FR',{month:'short'});
-      const won=S.deals.filter(dd=>dd.stage===5&&(dd.date||'').startsWith(key)).reduce((a,b)=>a+b.amount,0);
+      const wonAmt=S.deals.filter(dd=>dd.stage===5&&(dd.date||'').startsWith(key)).reduce((a,b)=>a+b.amount,0);
       const pipe=S.deals.filter(dd=>dd.stage<5&&dd.stage>0&&(dd.date||'').startsWith(key)).reduce((a,b)=>a+b.amount,0);
-      months.push({label,won,pipe});
+      months.push({label,won:wonAmt,pipe});
     }
     if(chartMonthly)chartMonthly.destroy();
     chartMonthly=new Chart(document.getElementById('chart-monthly'),{
@@ -1420,24 +1548,19 @@ const Admin = {
       document.getElementById('cfg-tiers-section').style.display=document.getElementById('cfg-comm-mode').value==='tiered'?'block':'none';
     };
     document.getElementById('cfg-tiers-section').style.display=S.settings.commMode==='tiered'?'block':'none';
-    // Stages
     document.getElementById('cfg-stages-list').innerHTML=Object.entries(S.stages).map(([k,v])=>`
       <div style="display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem;padding:.5rem;background:var(--bg);border-radius:var(--radius)">
         <span style="width:12px;height:12px;border-radius:50%;background:${v.color};flex-shrink:0"></span>
         <strong style="font-size:.82rem;flex:1">${k}. ${v.name}</strong>
         <span style="font-size:.75rem;color:var(--text-muted)">${v.prob}%</span>
       </div>`).join('');
-    // Tiers
     this.renderTiers();
-    // Users
     Users.render();
-    // Audit log
     const auditTbody=document.querySelector('#tbl-audit tbody');
     auditTbody.innerHTML=(S.audit||[]).slice(0,50).map(a=>`<tr>
       <td style="font-size:.78rem;white-space:nowrap">${new Date(a.date).toLocaleString('fr-FR')}</td>
       <td>${a.user}</td><td>${a.action}</td><td style="font-size:.78rem;color:var(--text-secondary)">${a.details||'—'}</td>
     </tr>`).join('');
-    // Sidebar branding
     document.getElementById('sidebar-company').textContent=S.settings.company;
     document.getElementById('sidebar-logo-circle').textContent=(S.settings.company||'C').charAt(0).toUpperCase();
   },
@@ -1515,11 +1638,37 @@ const Reports = {
     div.style.cssText='padding:1.5rem;font-family:Plus Jakarta Sans,sans-serif;font-size:12px;color:#1e293b';
     const {rows,totalComm,totalCA}=Commissions.calculate();
     div.innerHTML=this._generateHeader()+`
-      <h3 style="margin-bottom:1rem">Rapport de Commissions</h3>
+      <h3 style="margin-bottom:1rem">Rapport de Commissions — Objectifs individuels</h3>
       <table style="width:100%;border-collapse:collapse;font-size:10px">
-        <thead><tr style="background:#0f172a;color:white"><th style="padding:6px;text-align:left">Commercial</th><th style="padding:6px;text-align:left">CA Réalisé</th><th style="padding:6px;text-align:left">Atteinte</th><th style="padding:6px;text-align:left">Taux</th><th style="padding:6px;text-align:left">Commission</th><th style="padding:6px;text-align:left">Bonus</th><th style="padding:6px;text-align:left">Total</th><th style="padding:6px;text-align:left">Statut</th></tr></thead>
-        <tbody>${rows.map((r,i)=>`<tr style="background:${i%2?'#f8fafc':'white'}"><td style="padding:5px;font-weight:700">${r.user.name}</td><td style="padding:5px">${fmtCur(r.ca)}</td><td style="padding:5px">${r.atteinte}%</td><td style="padding:5px">${r.rate}%</td><td style="padding:5px">${fmtCur(r.commission)}</td><td style="padding:5px">${r.bonus>0?fmtCur(r.bonus):'—'}</td><td style="padding:5px;font-weight:700">${fmtCur(r.total)}</td><td style="padding:5px">${r.status}</td></tr>`).join('')}
-        <tr style="background:#0f172a;color:white;font-weight:700"><td style="padding:6px">TOTAL</td><td style="padding:6px">${fmtCur(totalCA)}</td><td style="padding:6px" colspan="4"></td><td style="padding:6px">${fmtCur(totalComm)}</td><td style="padding:6px"></td></tr></tbody>
+        <thead><tr style="background:#0f172a;color:white">
+          <th style="padding:6px;text-align:left">Commercial</th>
+          <th style="padding:6px;text-align:left">CA Réalisé</th>
+          <th style="padding:6px;text-align:left">Objectif individuel</th>
+          <th style="padding:6px;text-align:left">Atteinte</th>
+          <th style="padding:6px;text-align:left">Taux comm.</th>
+          <th style="padding:6px;text-align:left">Commission</th>
+          <th style="padding:6px;text-align:left">Bonus</th>
+          <th style="padding:6px;text-align:left">Total</th>
+          <th style="padding:6px;text-align:left">Statut</th>
+        </tr></thead>
+        <tbody>${rows.map((r,i)=>`<tr style="background:${i%2?'#f8fafc':'white'}">
+          <td style="padding:5px;font-weight:700">${r.user.name}</td>
+          <td style="padding:5px">${fmtCur(r.ca)}</td>
+          <td style="padding:5px">${fmtCur(r.targetUser)}</td>
+          <td style="padding:5px">${r.atteinte}%</td>
+          <td style="padding:5px">${r.rate}%</td>
+          <td style="padding:5px">${fmtCur(r.commission)}</td>
+          <td style="padding:5px">${r.bonus>0?fmtCur(r.bonus):'—'}</td>
+          <td style="padding:5px;font-weight:700">${fmtCur(r.total)}</td>
+          <td style="padding:5px">${r.status}</td>
+        </tr>`).join('')}
+        <tr style="background:#0f172a;color:white;font-weight:700">
+          <td style="padding:6px">TOTAL</td>
+          <td style="padding:6px">${fmtCur(totalCA)}</td>
+          <td style="padding:6px" colspan="5"></td>
+          <td style="padding:6px">${fmtCur(totalComm)}</td>
+          <td style="padding:6px"></td>
+        </tr></tbody>
       </table>`;
     this._exportPDF(div, 'Rapport_Commissions_'+S.settings.company);
   },
@@ -1553,13 +1702,33 @@ const Reports = {
       const ca=won.reduce((a,b)=>a+b.amount,0);
       const closed=deals.filter(d=>d.stage>=5).length;
       const conv=closed>0?Math.round(won.length/closed*100):0;
-      return {name:u.name, deals:deals.length, won:won.length, ca, conv};
+      const targetUser=getUserTarget(u);
+      const atteinte=targetUser>0?Math.round(ca/targetUser*100):0;
+      return {name:u.name, deals:deals.length, won:won.length, ca, conv, targetUser, atteinte, rate:u.rate||0};
     }).sort((a,b)=>b.ca-a.ca);
     div.innerHTML=this._generateHeader()+`
-      <h3 style="margin-bottom:1rem">Performance Individuelle</h3>
+      <h3 style="margin-bottom:1rem">Performance Individuelle — Objectifs individuels</h3>
       <table style="width:100%;border-collapse:collapse;font-size:10px">
-        <thead><tr style="background:#0f172a;color:white"><th style="padding:6px;text-align:left">Rang</th><th style="padding:6px;text-align:left">Commercial</th><th style="padding:6px;text-align:left">Affaires</th><th style="padding:6px;text-align:left">Gagnées</th><th style="padding:6px;text-align:left">CA Réalisé</th><th style="padding:6px;text-align:left">Conversion</th></tr></thead>
-        <tbody>${perf.map((p,i)=>`<tr style="background:${i%2?'#f8fafc':'white'}"><td style="padding:5px;font-weight:700">${i+1}</td><td style="padding:5px">${p.name}</td><td style="padding:5px">${p.deals}</td><td style="padding:5px">${p.won}</td><td style="padding:5px;font-weight:700">${fmtCur(p.ca)}</td><td style="padding:5px">${p.conv}%</td></tr>`).join('')}</tbody>
+        <thead><tr style="background:#0f172a;color:white">
+          <th style="padding:6px;text-align:left">Rang</th>
+          <th style="padding:6px;text-align:left">Commercial</th>
+          <th style="padding:6px;text-align:left">Objectif</th>
+          <th style="padding:6px;text-align:left">CA Réalisé</th>
+          <th style="padding:6px;text-align:left">Atteinte</th>
+          <th style="padding:6px;text-align:left">Taux comm.</th>
+          <th style="padding:6px;text-align:left">Gagnées</th>
+          <th style="padding:6px;text-align:left">Conversion</th>
+        </tr></thead>
+        <tbody>${perf.map((p,i)=>`<tr style="background:${i%2?'#f8fafc':'white'}">
+          <td style="padding:5px;font-weight:700">${i+1}</td>
+          <td style="padding:5px">${p.name}</td>
+          <td style="padding:5px">${fmtCur(p.targetUser)}</td>
+          <td style="padding:5px;font-weight:700">${fmtCur(p.ca)}</td>
+          <td style="padding:5px">${p.atteinte}%</td>
+          <td style="padding:5px">${p.rate}%</td>
+          <td style="padding:5px">${p.won}</td>
+          <td style="padding:5px">${p.conv}%</td>
+        </tr>`).join('')}</tbody>
       </table>`;
     this._exportPDF(div, 'Performance_'+S.settings.company);
   },
