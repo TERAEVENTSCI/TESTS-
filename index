@@ -1,1801 +1,445 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CRM Direction Commerciale</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>TERA EVENTS — Nos Nouvelles Formules</title>
+<!--[if mso]>
+<noscript>
+<xml>
+<o:OfficeDocumentSettings>
+<o:PixelsPerInch>96</o:PixelsPerInch>
+</o:OfficeDocumentSettings>
+</xml>
+</noscript>
+<![endif]-->
 <style>
-:root {
-  --sidebar-w: 260px;
-  --topbar-h: 60px;
-  --primary: #2563eb;
-  --primary-light: #3b82f6;
-  --primary-bg: rgba(37,99,235,0.08);
-  --accent: #0ea5e9;
-  --bg: #f1f5f9;
-  --bg-card: #ffffff;
-  --sidebar-bg: #0c1222;
-  --sidebar-hover: #162033;
-  --sidebar-active: #1e3a5f;
-  --text: #0f172a;
-  --text-secondary: #64748b;
-  --text-muted: #94a3b8;
-  --border: #e2e8f0;
-  --border-light: #f1f5f9;
-  --success: #059669;
-  --success-light: #d1fae5;
-  --warning: #d97706;
-  --warning-light: #fef3c7;
-  --danger: #dc2626;
-  --danger-light: #fee2e2;
-  --info: #7c3aed;
-  --info-light: #ede9fe;
-  --radius: 10px;
-  --radius-lg: 14px;
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
-  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
-  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.05);
-  --transition: 0.2s cubic-bezier(0.4,0,0.2,1);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);height:100vh;overflow:hidden;display:flex}
-::-webkit-scrollbar{width:5px;height:5px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:9px}
+  /* RESET */
+  body, table, td, p, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+  table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse; }
+  img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; display: block; }
+  body { margin: 0; padding: 0; background-color: #EDE8E0; }
 
-/* ═══ LOGIN ═══ */
-#login-screen{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,#0c1222 0%,#162033 40%,#1e3a5f 100%);overflow:hidden}
-#login-screen::before{content:'';position:absolute;width:500px;height:500px;border-radius:50%;
-  background:radial-gradient(circle,rgba(37,99,235,0.12),transparent 70%);top:-120px;right:-80px}
-#login-screen::after{content:'';position:absolute;width:400px;height:400px;border-radius:50%;
-  background:radial-gradient(circle,rgba(14,165,233,0.08),transparent 70%);bottom:-100px;left:-60px}
-.login-box{position:relative;z-index:1;background:rgba(255,255,255,0.97);border-radius:20px;padding:3rem 2.5rem;
-  width:420px;box-shadow:0 25px 50px rgba(0,0,0,0.25);animation:slideUp .5s ease}
-@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-.login-box h2{font-size:1.5rem;font-weight:800;margin-bottom:.25rem;color:var(--text)}
-.login-box .sub{color:var(--text-secondary);font-size:.85rem;margin-bottom:2rem}
-.login-box label{font-size:.78rem;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:.4rem}
-.login-box input{width:100%;padding:.8rem 1rem;border:1.5px solid var(--border);border-radius:var(--radius);
-  font-size:.9rem;margin-bottom:1.25rem;transition:var(--transition);font-family:inherit}
-.login-box input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-bg)}
-.login-error{color:var(--danger);font-size:.8rem;margin-bottom:1rem;display:none;padding:.6rem;background:var(--danger-light);border-radius:var(--radius)}
+  /* WEB FONTS — fallback gracieux si bloquées */
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&family=Dancing+Script:wght@600&display=swap');
 
-/* ═══ SIDEBAR ═══ */
-.sidebar{width:var(--sidebar-w);background:var(--sidebar-bg);display:flex;flex-direction:column;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.06)}
-.sidebar-brand{padding:1.25rem 1.5rem;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:.75rem}
-.sidebar-brand .logo-circle{width:36px;height:36px;border-radius:10px;background:var(--primary);display:flex;align-items:center;
-  justify-content:center;font-weight:800;color:#fff;font-size:.9rem;flex-shrink:0}
-.sidebar-brand .brand-text{font-weight:700;color:#fff;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sidebar-brand .brand-sub{font-size:.65rem;color:var(--text-muted);font-weight:400}
-.nav-section{padding:.75rem 1.5rem .35rem;font-size:.65rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.8px}
-.nav-links{list-style:none;flex-grow:1;overflow-y:auto;padding:.25rem 0}
-.nav-links li a{display:flex;align-items:center;gap:.75rem;padding:.7rem 1.5rem;color:#94a3b8;text-decoration:none;
-  font-size:.85rem;font-weight:500;cursor:pointer;transition:var(--transition);border-left:3px solid transparent;margin:1px 0}
-.nav-links li a:hover{background:var(--sidebar-hover);color:#e2e8f0}
-.nav-links li a.active{background:var(--sidebar-active);color:#fff;border-left-color:var(--primary)}
-.nav-links li a i{width:18px;text-align:center;font-size:.85rem}
-.sidebar-footer{padding:1rem 1.5rem;border-top:1px solid rgba(255,255,255,0.06)}
-.user-pill{display:flex;align-items:center;gap:.6rem;padding:.6rem;border-radius:var(--radius);cursor:pointer;transition:var(--transition)}
-.user-pill:hover{background:var(--sidebar-hover)}
-.user-avatar{width:32px;height:32px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;
-  color:#fff;font-weight:700;font-size:.75rem;flex-shrink:0}
-.user-pill .uname{color:#e2e8f0;font-size:.8rem;font-weight:600}
-.user-pill .urole{color:var(--text-muted);font-size:.65rem}
+  .body-wrapper { background-color: #EDE8E0; width: 100%; }
+  .email-container { max-width: 600px; margin: 0 auto; }
 
-/* ═══ MAIN ═══ */
-.main{flex-grow:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
-.topbar{height:var(--topbar-h);background:var(--bg-card);border-bottom:1px solid var(--border);display:flex;align-items:center;
-  padding:0 2rem;justify-content:space-between;flex-shrink:0}
-.topbar h1{font-size:1.1rem;font-weight:700}
-.topbar-actions{display:flex;gap:.75rem;align-items:center}
-.container{padding:1.75rem 2rem;overflow-y:auto;flex-grow:1}
-
-/* ═══ VIEWS ═══ */
-.view{display:none;animation:fadeIn .25s ease}
-.view.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-
-/* ═══ CARDS ═══ */
-.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1.25rem;box-shadow:var(--shadow-sm)}
-.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem}
-.card-header h3{font-size:1rem;font-weight:700}
-.card-header .card-actions{display:flex;gap:.5rem}
-
-/* ═══ KPI GRID ═══ */
-.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:1.5rem}
-.kpi-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;box-shadow:var(--shadow-sm);
-  position:relative;overflow:hidden;transition:var(--transition)}
-.kpi-card:hover{box-shadow:var(--shadow-md);transform:translateY(-1px)}
-.kpi-card .kpi-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:.75rem;font-size:1rem}
-.kpi-card .kpi-label{font-size:.72rem;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.35rem}
-.kpi-card .kpi-value{font-size:1.6rem;font-weight:800;line-height:1.2}
-.kpi-card .kpi-sub{font-size:.75rem;color:var(--text-muted);margin-top:.25rem}
-.kpi-card .kpi-trend{position:absolute;top:1.25rem;right:1.5rem;font-size:.75rem;font-weight:600;display:flex;align-items:center;gap:.2rem}
-
-/* ═══ TABLES ═══ */
-.table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse}
-thead th{text-align:left;padding:.7rem 1rem;font-size:.7rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;
-  letter-spacing:.5px;background:var(--bg);border-bottom:2px solid var(--border)}
-tbody td{padding:.75rem 1rem;font-size:.84rem;border-bottom:1px solid var(--border-light);vertical-align:middle}
-tbody tr{transition:var(--transition)}
-tbody tr:hover{background:rgba(37,99,235,0.03)}
-
-/* ═══ BADGES ═══ */
-.badge{display:inline-flex;align-items:center;padding:.2rem .65rem;border-radius:99px;font-size:.7rem;font-weight:700;gap:.3rem}
-.badge-prospect{background:#dbeafe;color:#1e40af}
-.badge-client{background:var(--success-light);color:#065f46}
-.badge-inactif{background:#f1f5f9;color:#475569}
-.badge-partenaire{background:var(--info-light);color:#5b21b6}
-.badge-attente{background:var(--warning-light);color:#92400e}
-.badge-validee{background:var(--success-light);color:#065f46}
-.badge-payee{background:#dbeafe;color:#1e40af}
-
-.stage-badge{display:inline-flex;align-items:center;padding:.25rem .7rem;border-radius:6px;font-size:.72rem;font-weight:700}
-
-/* ═══ BUTTONS ═══ */
-.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1.1rem;border-radius:var(--radius);border:none;
-  font-weight:600;cursor:pointer;transition:var(--transition);font-size:.82rem;font-family:inherit}
-.btn:hover{transform:translateY(-1px)}
-.btn-primary{background:var(--primary);color:#fff;box-shadow:0 1px 3px rgba(37,99,235,0.3)}
-.btn-primary:hover{background:var(--primary-light)}
-.btn-success{background:var(--success);color:#fff}
-.btn-danger{background:var(--danger);color:#fff}
-.btn-outline{border:1.5px solid var(--border);background:var(--bg-card);color:var(--text)}
-.btn-outline:hover{border-color:var(--primary);color:var(--primary);background:var(--primary-bg)}
-.btn-ghost{background:transparent;color:var(--text-secondary);padding:.4rem .6rem}
-.btn-ghost:hover{background:var(--bg);color:var(--text)}
-.btn-sm{padding:.35rem .7rem;font-size:.75rem}
-.btn-icon{width:32px;height:32px;padding:0;justify-content:center;border-radius:8px}
-.btn-lg{padding:.75rem 1.5rem;font-size:.9rem}
-
-/* ═══ FORMS ═══ */
-.form-group{margin-bottom:1.1rem}
-.form-group label{display:block;font-size:.78rem;font-weight:600;color:var(--text-secondary);margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.3px}
-.form-control{width:100%;padding:.7rem .9rem;border:1.5px solid var(--border);border-radius:var(--radius);
-  font-size:.85rem;font-family:inherit;transition:var(--transition);background:#fff}
-.form-control:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-bg)}
-select.form-control{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right .75rem center;padding-right:2rem}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-textarea.form-control{resize:vertical;min-height:80px}
-.new-contact-hint{font-size:.75rem;color:var(--primary);background:var(--primary-bg);border:1px solid rgba(37,99,235,0.2);
-  border-radius:var(--radius);padding:.5rem .75rem;margin-top:.4rem;display:none}
-.new-contact-hint i{margin-right:.3rem}
-
-/* ═══ MODAL ═══ */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,0.6);backdrop-filter:blur(4px);z-index:9999;
-  align-items:center;justify-content:center;animation:fadeIn .15s ease}
-.modal-overlay.open{display:flex}
-.modal-box{background:#fff;border-radius:var(--radius-lg);width:540px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);animation:slideUp .25s ease}
-.modal-header{padding:1.5rem 1.75rem 0;display:flex;justify-content:space-between;align-items:center}
-.modal-header h3{font-size:1.05rem;font-weight:700}
-.modal-body{padding:1.25rem 1.75rem}
-.modal-footer{padding:0 1.75rem 1.5rem;display:flex;gap:.5rem;justify-content:flex-end}
-
-/* ═══ PIPELINE KANBAN ═══ */
-.kanban{display:flex;gap:.75rem;overflow-x:auto;padding-bottom:1rem;min-height:calc(100vh - 200px)}
-.kanban-col{min-width:280px;max-width:300px;background:var(--bg);border-radius:var(--radius-lg);display:flex;flex-direction:column}
-.kanban-col-header{padding:1rem;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid transparent}
-.kanban-col-header h4{font-size:.82rem;font-weight:700;display:flex;align-items:center;gap:.5rem}
-.kanban-col-header .col-count{background:rgba(0,0,0,0.06);padding:.15rem .5rem;border-radius:99px;font-size:.7rem;font-weight:700}
-.kanban-col-header .col-total{font-size:.72rem;color:var(--text-muted);font-weight:600}
-.kanban-col-body{padding:.5rem;flex-grow:1;overflow-y:auto}
-.kanban-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:.9rem 1rem;margin-bottom:.5rem;
-  cursor:pointer;transition:var(--transition);box-shadow:var(--shadow-sm)}
-.kanban-card:hover{box-shadow:var(--shadow-md);border-color:var(--primary)}
-.kanban-card .kc-ref{font-size:.68rem;color:var(--text-muted);font-weight:600}
-.kanban-card .kc-name{font-weight:700;font-size:.85rem;margin:.3rem 0}
-.kanban-card .kc-client{font-size:.78rem;color:var(--text-secondary)}
-.kanban-card .kc-amount{font-size:.9rem;font-weight:800;color:var(--primary);margin-top:.5rem}
-.kanban-card .kc-footer{display:flex;justify-content:space-between;align-items:center;margin-top:.6rem;padding-top:.5rem;border-top:1px solid var(--border-light)}
-.kanban-card .kc-footer .kc-user{font-size:.7rem;color:var(--text-muted);display:flex;align-items:center;gap:.3rem}
-.kanban-card .kc-actions{display:flex;gap:.25rem}
-
-/* ═══ CHARTS ═══ */
-.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
-.chart-container{position:relative;height:280px}
-@media(max-width:1200px){.chart-grid{grid-template-columns:1fr}}
-
-/* ═══ COMMISSIONS ═══ */
-.commission-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem}
-.commission-summary .cs-card{text-align:center;padding:1.25rem;background:var(--bg);border-radius:var(--radius);border:1px solid var(--border)}
-.cs-card .cs-value{font-size:1.4rem;font-weight:800;margin:.25rem 0}
-.cs-card .cs-label{font-size:.72rem;color:var(--text-secondary);text-transform:uppercase;font-weight:600}
-
-/* ═══ REPORTS ═══ */
-.report-card{border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;display:flex;align-items:center;gap:1.25rem;
-  cursor:pointer;transition:var(--transition);background:var(--bg-card);margin-bottom:.75rem}
-.report-card:hover{border-color:var(--primary);box-shadow:var(--shadow-md)}
-.report-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
-.report-info h4{font-weight:700;font-size:.9rem;margin-bottom:.2rem}
-.report-info p{font-size:.78rem;color:var(--text-secondary)}
-
-/* ═══ ADMIN ═══ */
-.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
-.admin-tabs{display:flex;gap:.25rem;margin-bottom:1.5rem;background:var(--bg);padding:.25rem;border-radius:var(--radius);border:1px solid var(--border)}
-.admin-tab{padding:.55rem 1.25rem;border-radius:8px;font-size:.82rem;font-weight:600;cursor:pointer;transition:var(--transition);border:none;background:transparent;color:var(--text-secondary);font-family:inherit}
-.admin-tab.active{background:#fff;color:var(--text);box-shadow:var(--shadow-sm)}
-
-/* ═══ SEARCH ═══ */
-.search-box{position:relative}
-.search-box input{padding-left:2.2rem}
-.search-box i{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:.8rem}
-
-/* ═══ EMPTY STATE ═══ */
-.empty-state{text-align:center;padding:3rem 1rem;color:var(--text-muted)}
-.empty-state i{font-size:2.5rem;margin-bottom:1rem;opacity:.3}
-.empty-state h4{font-weight:700;margin-bottom:.3rem;color:var(--text-secondary)}
-.empty-state p{font-size:.85rem}
-
-/* ═══ FILTERS BAR ═══ */
-.filters-bar{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;margin-bottom:1.25rem}
-.filters-bar .form-control{width:auto;margin:0}
-
-/* ═══ PROGRESS BAR ═══ */
-.progress{height:8px;background:var(--border);border-radius:99px;overflow:hidden}
-.progress-bar{height:100%;border-radius:99px;transition:width .5s ease}
-
-/* ═══ TOAST ═══ */
-.toast-container{position:fixed;bottom:1.5rem;right:1.5rem;z-index:99999;display:flex;flex-direction:column;gap:.5rem}
-.toast{padding:.75rem 1.25rem;border-radius:var(--radius);font-size:.84rem;font-weight:600;box-shadow:var(--shadow-lg);
-  animation:slideUp .3s ease;display:flex;align-items:center;gap:.5rem;color:#fff;min-width:280px}
-.toast-success{background:var(--success)}
-.toast-error{background:var(--danger)}
-.toast-info{background:var(--primary)}
-
-/* ═══ PRINT ═══ */
-@media print{.sidebar,.topbar,.btn,.no-print{display:none!important}.main{width:100%}.container{padding:0}}
-
-/* ═══ RESPONSIVE ═══ */
-@media(max-width:900px){
-  .sidebar{position:fixed;left:-260px;z-index:9998;transition:.3s ease;height:100vh}
-  .sidebar.open{left:0}
-  .admin-grid{grid-template-columns:1fr}
-  .form-row{grid-template-columns:1fr}
-  .commission-summary{grid-template-columns:1fr}
-}
+  /* MOBILE */
+  @media only screen and (max-width: 620px) {
+    .email-container { width: 100% !important; }
+    .mob-full { width: 100% !important; display: block !important; }
+    .mob-pad  { padding: 24px 20px !important; }
+    .mob-hide { display: none !important; }
+    .mob-font-hero { font-size: 28px !important; line-height: 36px !important; }
+    .mob-font-title { font-size: 24px !important; }
+    .mob-stack { display: block !important; width: 100% !important; }
+    .mob-card  { width: 100% !important; display: block !important; margin-bottom: 12px !important; }
+    .mob-nav-pill { padding: 6px 10px !important; font-size: 8px !important; }
+    .mob-center { text-align: center !important; }
+  }
 </style>
 </head>
 <body>
+<div class="body-wrapper">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+<tr><td align="center" style="padding: 20px 10px;">
+<table class="email-container" role="presentation" width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;">
 
-<!-- ═══════════════ LOGIN ═══════════════ -->
-<div id="login-screen">
-  <div class="login-box">
-    <div style="text-align:center;margin-bottom:.5rem">
-      <div style="width:50px;height:50px;border-radius:14px;background:var(--primary);display:inline-flex;align-items:center;justify-content:center;margin-bottom:.75rem">
-        <i class="fas fa-chart-line" style="color:#fff;font-size:1.3rem"></i>
-      </div>
-    </div>
-    <h2 style="text-align:center">CRM Commercial</h2>
-    <p class="sub" style="text-align:center">Connectez-vous pour accéder au tableau de bord</p>
-    <div id="login-error" class="login-error"><i class="fas fa-exclamation-circle"></i> Identifiants incorrects. Veuillez réessayer.</div>
-    <div class="form-group">
-      <label>Identifiant</label>
-      <input type="text" id="login-user" class="form-control" placeholder="Votre identifiant" autofocus>
-    </div>
-    <div class="form-group">
-      <label>Mot de passe</label>
-      <input type="password" id="login-pass" class="form-control" placeholder="••••••••" onkeydown="if(event.key==='Enter')Auth.login()">
-    </div>
-    <button class="btn btn-primary btn-lg" style="width:100%" onclick="Auth.login()">
-      <i class="fas fa-arrow-right-to-bracket"></i> Se connecter
-    </button>
-    <p style="text-align:center;font-size:.72rem;color:var(--text-muted);margin-top:1.25rem">
-      Accès par défaut : <strong>admin</strong> / <strong>Admin@2026</strong>
-    </p>
-  </div>
-</div>
 
-<!-- ═══════════════ SIDEBAR ═══════════════ -->
-<nav class="sidebar" id="sidebar">
-  <div class="sidebar-brand">
-    <div class="logo-circle" id="sidebar-logo-circle">C</div>
-    <div>
-      <div class="brand-text" id="sidebar-company">CRM</div>
-      <div class="brand-sub">Direction Commerciale</div>
-    </div>
-  </div>
-  <div class="nav-section">Navigation</div>
-  <ul class="nav-links" id="nav-links">
-    <li><a data-view="dashboard" class="active"><i class="fas fa-chart-pie"></i> Tableau de bord</a></li>
-    <li><a data-view="pipeline"><i class="fas fa-layer-group"></i> Pipeline</a></li>
-    <li><a data-view="contacts"><i class="fas fa-building"></i> Contacts</a></li>
-    <li><a data-view="commissions"><i class="fas fa-coins"></i> Commissions</a></li>
-    <li><a data-view="reports"><i class="fas fa-file-chart-column"></i> Rapports</a></li>
-  </ul>
-  <div class="nav-section">Système</div>
-  <ul class="nav-links">
-    <li><a data-view="admin"><i class="fas fa-gear"></i> Administration</a></li>
-  </ul>
-  <div class="sidebar-footer">
-    <div class="user-pill" onclick="Auth.logout()">
-      <div class="user-avatar" id="sidebar-avatar">A</div>
-      <div>
-        <div class="uname" id="sidebar-uname">Admin</div>
-        <div class="urole" id="sidebar-urole">Super Admin</div>
-      </div>
-      <i class="fas fa-right-from-bracket" style="margin-left:auto;color:#64748b;font-size:.8rem"></i>
-    </div>
-  </div>
-</nav>
-
-<!-- ═══════════════ MAIN ═══════════════ -->
-<main class="main">
-  <header class="topbar">
-    <div style="display:flex;align-items:center;gap:.75rem">
-      <button class="btn btn-ghost btn-icon" onclick="document.getElementById('sidebar').classList.toggle('open')" style="display:none" id="menu-toggle">
-        <i class="fas fa-bars"></i>
-      </button>
-      <h1 id="page-title">Tableau de bord</h1>
-    </div>
-    <div class="topbar-actions">
-      <select class="form-control" id="filter-period" style="width:170px;margin:0;padding:.5rem .75rem" onchange="App.refreshAll()">
-      </select>
-      <button class="btn btn-primary" onclick="Deals.openNew()"><i class="fas fa-plus"></i> Nouvelle affaire</button>
-    </div>
-  </header>
-
-  <div class="container" id="main-container">
-
-    <!-- ═══ DASHBOARD ═══ -->
-    <section id="view-dashboard" class="view active">
-      <div class="kpi-grid" id="kpi-grid"></div>
-      <div class="chart-grid">
-        <div class="card">
-          <div class="card-header"><h3>Pipeline par étape</h3></div>
-          <div class="chart-container"><canvas id="chart-pipeline"></canvas></div>
-        </div>
-        <div class="card">
-          <div class="card-header"><h3>Performance mensuelle</h3></div>
-          <div class="chart-container"><canvas id="chart-monthly"></canvas></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-          <h3><i class="fas fa-briefcase" style="color:var(--primary);margin-right:.4rem"></i> Affaires en cours</h3>
-          <div class="card-actions">
-            <button class="btn btn-outline btn-sm" onclick="Reports.exportDashboard()"><i class="fas fa-file-pdf"></i> Export PDF</button>
-          </div>
-        </div>
-        <div class="table-wrap">
-          <table id="tbl-dashboard">
-            <thead>
-              <tr><th>Réf.</th><th>Affaire</th><th>Client</th><th>Interlocuteur</th><th>Montant</th><th>Étape</th><th>Commercial</th><th>Date devis</th><th>Actions</th></tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ PIPELINE ═══ -->
-    <section id="view-pipeline" class="view">
-      <div class="filters-bar no-print">
-        <div class="search-box">
-          <i class="fas fa-search"></i>
-          <input class="form-control" placeholder="Rechercher une affaire..." id="pipeline-search" oninput="Pipeline.render()" style="width:260px">
-        </div>
-        <select class="form-control" id="pipeline-user-filter" onchange="Pipeline.render()" style="width:200px;margin:0"></select>
-      </div>
-      <div class="kanban" id="kanban"></div>
-    </section>
-
-    <!-- ═══ CONTACTS ═══ -->
-    <section id="view-contacts" class="view">
-      <div class="card">
-        <div class="card-header">
-          <h3><i class="fas fa-building" style="color:var(--primary);margin-right:.4rem"></i> Base Clients & Prospects</h3>
-          <div class="card-actions">
-            <div class="search-box" style="margin-right:.5rem">
-              <i class="fas fa-search"></i>
-              <input class="form-control" placeholder="Rechercher..." id="contact-search" oninput="Contacts.render()" style="width:220px">
-            </div>
-            <select class="form-control" id="contact-type-filter" onchange="Contacts.render()" style="width:160px;margin:0">
-              <option value="">Tous les types</option>
-              <option value="Prospect">Prospects</option>
-              <option value="Client actif">Clients actifs</option>
-              <option value="Client inactif">Clients inactifs</option>
-              <option value="Partenaire">Partenaires</option>
-            </select>
-            <button class="btn btn-primary" onclick="Contacts.openNew()"><i class="fas fa-plus"></i> Contact</button>
-          </div>
-        </div>
-        <div class="table-wrap">
-          <table id="tbl-contacts">
-            <thead>
-              <tr><th>Raison sociale</th><th>Type</th><th>Secteur</th><th>Interlocuteur</th><th>Téléphone</th><th>Email</th><th>Commercial</th><th>Actions</th></tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ COMMISSIONS ═══ -->
-    <section id="view-commissions" class="view">
-      <div class="commission-summary" id="comm-summary"></div>
-      <div class="card" id="comm-card">
-        <div class="card-header">
-          <h3><i class="fas fa-coins" style="color:var(--warning);margin-right:.4rem"></i> Détail des commissions par commercial</h3>
-          <div class="card-actions">
-            <button class="btn btn-outline btn-sm" onclick="Reports.exportCommissions()"><i class="fas fa-file-pdf"></i> Export PDF</button>
-          </div>
-        </div>
-        <div class="table-wrap">
-          <table id="tbl-commissions">
-            <thead>
-              <tr><th>Commercial</th><th>CA réalisé</th><th>Objectif individuel</th><th>Atteinte</th><th>Taux comm.</th><th>Commission</th><th>Bonus</th><th>Total dû</th><th>Statut</th><th>Actions</th></tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ REPORTS ═══ -->
-    <section id="view-reports" class="view">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-        <div class="report-card" onclick="Reports.exportDashboard()">
-          <div class="report-icon" style="background:var(--primary-bg);color:var(--primary)"><i class="fas fa-chart-pie"></i></div>
-          <div class="report-info"><h4>Rapport d'activité commerciale</h4><p>Synthèse KPI, affaires actives, pipeline pondéré</p></div>
-        </div>
-        <div class="report-card" onclick="Reports.exportPipeline()">
-          <div class="report-icon" style="background:var(--info-light);color:var(--info)"><i class="fas fa-layer-group"></i></div>
-          <div class="report-info"><h4>Rapport Pipeline détaillé</h4><p>Toutes les affaires par étape avec montants et probabilités</p></div>
-        </div>
-        <div class="report-card" onclick="Reports.exportCommissions()">
-          <div class="report-icon" style="background:var(--warning-light);color:var(--warning)"><i class="fas fa-coins"></i></div>
-          <div class="report-info"><h4>Rapport de commissions</h4><p>Détail par commercial : CA, objectif individuel, taux, commissions, bonus</p></div>
-        </div>
-        <div class="report-card" onclick="Reports.exportPerformance()">
-          <div class="report-icon" style="background:var(--success-light);color:var(--success)"><i class="fas fa-ranking-star"></i></div>
-          <div class="report-info"><h4>Performance individuelle</h4><p>Classement des commerciaux par CA et taux de conversion</p></div>
-        </div>
-        <div class="report-card" onclick="Reports.exportForecast()">
-          <div class="report-icon" style="background:var(--danger-light);color:var(--danger)"><i class="fas fa-chart-line"></i></div>
-          <div class="report-info"><h4>Prévisionnel (Forecast)</h4><p>Projection du CA basée sur le pipeline pondéré</p></div>
-        </div>
-        <div class="report-card" onclick="App.exportJSON()">
-          <div class="report-icon" style="background:#f0fdf4;color:#16a34a"><i class="fas fa-database"></i></div>
-          <div class="report-info"><h4>Sauvegarde complète (JSON)</h4><p>Export de toutes les données pour archivage</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ ADMIN ═══ -->
-    <section id="view-admin" class="view">
-      <div class="admin-tabs" id="admin-tabs">
-        <button class="admin-tab active" data-tab="admin-settings">Entreprise</button>
-        <button class="admin-tab" data-tab="admin-users">Équipe commerciale</button>
-        <button class="admin-tab" data-tab="admin-comm-rules">Règles de commission</button>
-        <button class="admin-tab" data-tab="admin-data">Données</button>
-      </div>
-
-      <div id="admin-settings" class="admin-panel">
-        <div class="admin-grid">
-          <div class="card">
-            <div class="card-header"><h3>Paramètres généraux</h3></div>
-            <div class="form-group"><label>Nom de l'entreprise</label><input type="text" class="form-control" id="cfg-company"></div>
-            <div class="form-group"><label>Devise</label>
-              <select class="form-control" id="cfg-currency">
-                <option value="FCFA">FCFA (Franc CFA)</option>
-                <option value="EUR">EUR (Euro)</option>
-                <option value="USD">USD (Dollar US)</option>
-                <option value="GBP">GBP (Livre Sterling)</option>
-                <option value="MAD">MAD (Dirham)</option>
-              </select>
-            </div>
-            <div class="form-row">
-              <div class="form-group"><label>Objectif CA mensuel (global)</label><input type="number" class="form-control" id="cfg-target"></div>
-              <div class="form-group"><label>Objectif CA annuel (global)</label><input type="number" class="form-control" id="cfg-annual-target"></div>
-            </div>
-            <p style="font-size:.75rem;color:var(--text-muted);margin-bottom:.75rem"><i class="fas fa-info-circle"></i> Les objectifs individuels par commercial se définissent dans l'onglet <strong>Équipe commerciale</strong>.</p>
-            <button class="btn btn-primary" onclick="Admin.saveSettings()"><i class="fas fa-check"></i> Enregistrer</button>
-          </div>
-          <div class="card">
-            <div class="card-header"><h3>Étapes du pipeline</h3></div>
-            <div id="cfg-stages-list"></div>
-            <p style="font-size:.75rem;color:var(--text-muted);margin-top:.75rem"><i class="fas fa-info-circle"></i> Les étapes et probabilités sont configurables depuis ce panneau.</p>
-          </div>
-        </div>
-      </div>
-
-      <div id="admin-users" class="admin-panel" style="display:none">
-        <div class="card">
-          <div class="card-header">
-            <h3>Gestion de l'équipe</h3>
-            <button class="btn btn-primary" onclick="Users.openNew()"><i class="fas fa-user-plus"></i> Utilisateur</button>
-          </div>
-          <div class="table-wrap">
-            <table id="tbl-users">
-              <thead><tr><th>Nom complet</th><th>Identifiant</th><th>Rôle</th><th>Objectif individuel</th><th>Taux comm.</th><th>Statut</th><th>Actions</th></tr></thead>
-              <tbody></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <div id="admin-comm-rules" class="admin-panel" style="display:none">
-        <div class="card">
-          <div class="card-header"><h3>Règles de calcul des commissions</h3></div>
-          <div class="form-group"><label>Mode de calcul</label>
-            <select class="form-control" id="cfg-comm-mode">
-              <option value="flat">Taux fixe par commercial (défini sur la fiche utilisateur)</option>
-              <option value="tiered">Paliers progressifs (global)</option>
-            </select>
-          </div>
-          <div id="cfg-tiers-section" style="display:none">
-            <div class="card-header"><h3>Paliers de commission</h3><button class="btn btn-outline btn-sm" onclick="Admin.addTier()"><i class="fas fa-plus"></i> Palier</button></div>
-            <div id="cfg-tiers-list"></div>
-          </div>
-          <div class="form-group" style="margin-top:1rem"><label>Condition de déclenchement</label>
-            <select class="form-control" id="cfg-comm-trigger">
-              <option value="signed">Devis signé (Clos-Gagné)</option>
-              <option value="paid">Paiement client reçu</option>
-            </select>
-          </div>
-          <div class="form-group"><label>Bonus dépassement objectif (%)</label><input type="number" class="form-control" id="cfg-bonus-rate" value="2"></div>
-          <button class="btn btn-primary" onclick="Admin.saveCommRules()"><i class="fas fa-check"></i> Enregistrer</button>
-        </div>
-      </div>
-
-      <div id="admin-data" class="admin-panel" style="display:none">
-        <div class="admin-grid">
-          <div class="card">
-            <div class="card-header"><h3>Sauvegarde</h3></div>
-            <p style="font-size:.85rem;color:var(--text-secondary);margin-bottom:1rem">Exportez une copie complète de vos données au format JSON.</p>
-            <button class="btn btn-primary" onclick="App.exportJSON()"><i class="fas fa-download"></i> Télécharger la sauvegarde</button>
-          </div>
-          <div class="card">
-            <div class="card-header"><h3>Restauration</h3></div>
-            <p style="font-size:.85rem;color:var(--text-secondary);margin-bottom:1rem">Importez un fichier JSON de sauvegarde. Les données actuelles seront remplacées.</p>
-            <input type="file" id="import-file" accept=".json" style="display:none" onchange="App.importJSON(event)">
-            <button class="btn btn-outline" onclick="document.getElementById('import-file').click()"><i class="fas fa-upload"></i> Importer un fichier JSON</button>
-          </div>
-        </div>
-        <div class="card" style="margin-top:1.25rem">
-          <div class="card-header"><h3><i class="fas fa-clock-rotate-left" style="color:var(--info);margin-right:.4rem"></i> Journal d'audit (dernières actions)</h3></div>
-          <div class="table-wrap">
-            <table id="tbl-audit">
-              <thead><tr><th>Date/Heure</th><th>Utilisateur</th><th>Action</th><th>Détails</th></tr></thead>
-              <tbody></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </div>
-</main>
-
-<!-- ═══════════════ MODALS ═══════════════ -->
-
-<!-- DEAL MODAL -->
-<div class="modal-overlay" id="modal-deal">
-  <div class="modal-box">
-    <div class="modal-header">
-      <h3 id="deal-modal-title">Nouvelle affaire</h3>
-      <button class="btn btn-ghost btn-icon" onclick="Modal.close('modal-deal')"><i class="fas fa-xmark"></i></button>
-    </div>
-    <div class="modal-body">
-      <input type="hidden" id="deal-id">
-      <div class="form-group"><label>Nom de l'affaire *</label><input type="text" class="form-control" id="deal-name" placeholder="Ex: Audit RH 2026"></div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Client associé *</label>
-          <select class="form-control" id="deal-contact" onchange="Deals.onContactChange()"></select>
-          <!-- Zone de création automatique d'un nouveau contact -->
-          <div class="new-contact-hint" id="new-contact-hint">
-            <i class="fas fa-magic"></i> Un nouveau contact sera créé automatiquement dans la base avec ce nom.
-          </div>
-          <input type="text" class="form-control" id="deal-new-contact-name"
-            placeholder="Saisissez le nom du nouveau client..." style="display:none;margin-top:.5rem"
-            oninput="Deals.onNewContactNameInput()">
-        </div>
-        <div class="form-group"><label>Interlocuteur décisionnaire</label><input type="text" class="form-control" id="deal-interlocuteur" placeholder="Nom et fonction"></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label>Montant du devis *</label><input type="number" class="form-control" id="deal-amount" placeholder="0"></div>
-        <div class="form-group"><label>Étape du pipeline</label><select class="form-control" id="deal-stage"></select></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label>Commercial responsable</label><select class="form-control" id="deal-user"></select></div>
-        <div class="form-group"><label>Source</label>
-          <select class="form-control" id="deal-source">
-            <option value="Prospection">Prospection directe</option>
-            <option value="Réseau">Réseau / Recommandation</option>
-            <option value="Site web">Site web</option>
-            <option value="Salon">Salon / Événement</option>
-            <option value="Appel entrant">Appel entrant</option>
-            <option value="Autre">Autre</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label>Date du devis</label><input type="date" class="form-control" id="deal-date"></div>
-        <div class="form-group"><label>Date clôture prévue</label><input type="date" class="form-control" id="deal-close-date"></div>
-      </div>
-      <div class="form-group"><label>Prochaine action</label><input type="text" class="form-control" id="deal-next-action" placeholder="Ex: Relancer le client lundi"></div>
-      <div class="form-group" id="deal-loss-group" style="display:none"><label>Motif de perte *</label><textarea class="form-control" id="deal-loss-reason" placeholder="Pourquoi cette affaire a été perdue ?"></textarea></div>
-      <div class="form-group"><label>Notes</label><textarea class="form-control" id="deal-notes" placeholder="Notes internes..."></textarea></div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-outline" onclick="Modal.close('modal-deal')">Annuler</button>
-      <button class="btn btn-primary" onclick="Deals.save()"><i class="fas fa-check"></i> Enregistrer</button>
-    </div>
-  </div>
-</div>
-
-<!-- CONTACT MODAL -->
-<div class="modal-overlay" id="modal-contact">
-  <div class="modal-box">
-    <div class="modal-header">
-      <h3 id="contact-modal-title">Nouveau contact</h3>
-      <button class="btn btn-ghost btn-icon" onclick="Modal.close('modal-contact')"><i class="fas fa-xmark"></i></button>
-    </div>
-    <div class="modal-body">
-      <input type="hidden" id="contact-id">
-      <div class="form-group"><label>Raison sociale *</label><input type="text" class="form-control" id="contact-name" placeholder="Nom de l'entreprise"></div>
-      <div class="form-row">
-        <div class="form-group"><label>Type</label>
-          <select class="form-control" id="contact-type">
-            <option value="Prospect">Prospect</option>
-            <option value="Client actif">Client actif</option>
-            <option value="Client inactif">Client inactif</option>
-            <option value="Partenaire">Partenaire</option>
-          </select>
-        </div>
-        <div class="form-group"><label>Secteur d'activité</label><input type="text" class="form-control" id="contact-sector" placeholder="Ex: BTP, Finance..."></div>
-      </div>
-      <div class="form-group"><label>Interlocuteur principal</label><input type="text" class="form-control" id="contact-person" placeholder="Nom Prénom, Fonction"></div>
-      <div class="form-row">
-        <div class="form-group"><label>Téléphone</label><input type="tel" class="form-control" id="contact-phone" placeholder="+225 07 00 00 00"></div>
-        <div class="form-group"><label>Email</label><input type="email" class="form-control" id="contact-email" placeholder="contact@entreprise.com"></div>
-      </div>
-      <div class="form-group"><label>Adresse</label><input type="text" class="form-control" id="contact-address" placeholder="Adresse complète"></div>
-      <div class="form-group"><label>Commercial assigné</label><select class="form-control" id="contact-user"></select></div>
-      <div class="form-group"><label>Notes</label><textarea class="form-control" id="contact-notes" placeholder="Notes sur ce contact..."></textarea></div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-outline" onclick="Modal.close('modal-contact')">Annuler</button>
-      <button class="btn btn-primary" onclick="Contacts.save()"><i class="fas fa-check"></i> Enregistrer</button>
-    </div>
-  </div>
-</div>
-
-<!-- USER MODAL -->
-<div class="modal-overlay" id="modal-user">
-  <div class="modal-box">
-    <div class="modal-header">
-      <h3 id="user-modal-title">Nouvel utilisateur</h3>
-      <button class="btn btn-ghost btn-icon" onclick="Modal.close('modal-user')"><i class="fas fa-xmark"></i></button>
-    </div>
-    <div class="modal-body">
-      <input type="hidden" id="user-id">
-      <div class="form-group"><label>Nom complet *</label><input type="text" class="form-control" id="user-name" placeholder="Prénom Nom"></div>
-      <div class="form-row">
-        <div class="form-group"><label>Identifiant (login) *</label><input type="text" class="form-control" id="user-login" placeholder="prenom.nom"></div>
-        <div class="form-group"><label>Mot de passe</label><input type="password" class="form-control" id="user-pass" placeholder="Min. 8 caractères"></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label>Rôle</label>
-          <select class="form-control" id="user-role">
-            <option value="Commercial">Commercial</option>
-            <option value="Manager">Manager</option>
-            <option value="Super Admin">Super Admin</option>
-            <option value="Lecture seule">Lecture seule</option>
-          </select>
-        </div>
-        <div class="form-group"><label>Équipe / Zone</label><input type="text" class="form-control" id="user-team" placeholder="Ex: Zone Nord, Équipe A"></div>
-      </div>
-      <!-- ═══ OBJECTIF & COMMISSION INDIVIDUELS ═══ -->
-      <div style="background:var(--primary-bg);border:1px solid rgba(37,99,235,0.15);border-radius:var(--radius);padding:1rem;margin-bottom:1rem">
-        <p style="font-size:.75rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.4px;margin-bottom:.75rem">
-          <i class="fas fa-target"></i> Objectif & Commission individuels
-        </p>
-        <div class="form-row">
-          <div class="form-group" style="margin-bottom:0">
-            <label>Objectif mensuel individuel</label>
-            <input type="number" class="form-control" id="user-target" placeholder="Ex: 2000000" min="0">
-            <span style="font-size:.7rem;color:var(--text-muted)">Laisser vide = objectif global ÷ équipe</span>
-          </div>
-          <div class="form-group" style="margin-bottom:0">
-            <label>Taux de commission (%)</label>
-            <input type="number" class="form-control" id="user-rate" value="5" step="0.5" min="0" max="100">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-outline" onclick="Modal.close('modal-user')">Annuler</button>
-      <button class="btn btn-primary" onclick="Users.save()"><i class="fas fa-check"></i> Enregistrer</button>
-    </div>
-  </div>
-</div>
-
-<!-- CONTACT DETAIL MODAL -->
-<div class="modal-overlay" id="modal-contact-detail">
-  <div class="modal-box" style="width:620px">
-    <div class="modal-header">
-      <h3 id="contact-detail-title">Fiche client</h3>
-      <button class="btn btn-ghost btn-icon" onclick="Modal.close('modal-contact-detail')"><i class="fas fa-xmark"></i></button>
-    </div>
-    <div class="modal-body" id="contact-detail-body"></div>
-  </div>
-</div>
-
-<!-- TOAST CONTAINER -->
-<div class="toast-container" id="toast-container"></div>
-
-<!-- ═══════════════ JAVASCRIPT ═══════════════ -->
-<script>
-/* ═══════════════════════════════════════════════
-   DATA LAYER
-   ═══════════════════════════════════════════════ */
-const DB_KEY = 'crm_dc_v2';
-const DEFAULT_STAGES = {
-  1:{name:'Prospection',prob:10,color:'#94a3b8'},
-  2:{name:'Qualification',prob:25,color:'#6366f1'},
-  3:{name:'Proposition / Devis',prob:50,color:'#f59e0b'},
-  4:{name:'Négociation',prob:75,color:'#8b5cf6'},
-  5:{name:'Clos – Gagné',prob:100,color:'#059669'},
-  6:{name:'Clos – Perdu',prob:0,color:'#dc2626'}
-};
-
-function hashPassword(p){
-  let h=0;for(let i=0;i<p.length;i++){h=((h<<5)-h)+p.charCodeAt(i);h|=0}return 'h_'+Math.abs(h).toString(36);
-}
-
-function defaultState(){
-  return {
-    settings:{company:'Mon Entreprise',currency:'FCFA',target:7000000,annualTarget:84000000,
-      commMode:'flat',commTrigger:'signed',bonusRate:2,tiers:[{min:0,max:10000000,rate:5},{min:10000000,max:Infinity,rate:7}]},
-    stages:JSON.parse(JSON.stringify(DEFAULT_STAGES)),
-    users:[{id:1,name:'Administrateur',login:'admin',role:'Super Admin',rate:5,target:0,team:'Direction',active:true,pass:hashPassword('Admin@2026')}],
-    contacts:[],
-    deals:[],
-    audit:[],
-    commissions:{}
-  };
-}
-
-let S = JSON.parse(localStorage.getItem(DB_KEY)) || defaultState();
-let currentUser = null;
-let chartPipeline = null, chartMonthly = null;
-
-function save(){
-  try{localStorage.setItem(DB_KEY, JSON.stringify(S));}catch(e){Toast.show('Erreur de sauvegarde: espace insuffisant','error');}
-}
-
-function addAudit(action, details=''){
-  S.audit.unshift({date:new Date().toISOString(), user:currentUser?currentUser.name:'Système', action, details});
-  if(S.audit.length>200) S.audit = S.audit.slice(0,200);
-}
-
-function fmt(n){
-  if(!n&&n!==0) return '0';
-  return Number(n).toLocaleString('fr-FR');
-}
-function fmtCur(n){return fmt(n)+' '+S.settings.currency}
-
-function getContact(id){return S.contacts.find(c=>c.id===id)}
-function getUser(id){return S.users.find(u=>u.id===id)}
-function getStageName(s){return(S.stages[s]||{name:'?'}).name}
-function getStageColor(s){return(S.stages[s]||{color:'#ccc'}).color}
-function getStageProb(s){return(S.stages[s]||{prob:0}).prob}
-
-/* ─── Calcul de l'objectif individuel d'un utilisateur ─── */
-function getUserTarget(u){
-  /* Priorité 1 : objectif défini explicitement sur la fiche utilisateur */
-  if(u.target && u.target > 0) return u.target;
-  /* Priorité 2 : fallback = objectif global divisé par le nombre de commerciaux actifs */
-  const actifs = S.users.filter(x => x.active !== false && x.role !== 'Lecture seule');
-  return S.settings.target / (actifs.length || 1);
-}
-
-/* ═══════════════════════════════════════════════
-   AUTH
-   ═══════════════════════════════════════════════ */
-const Auth = {
-  login(){
-    const u=document.getElementById('login-user').value.trim();
-    const p=document.getElementById('login-pass').value;
-    const errEl=document.getElementById('login-error');
-    if(!u||!p){errEl.style.display='block';return}
-    const user=S.users.find(x=>x.login===u && x.pass===hashPassword(p));
-    if(user){
-      if(user.active===false){errEl.innerHTML='<i class="fas fa-ban"></i> Compte désactivé. Contactez l\'administrateur.';errEl.style.display='block';return}
-      currentUser=user;
-      document.getElementById('login-screen').style.display='none';
-      document.getElementById('sidebar-uname').textContent=user.name;
-      document.getElementById('sidebar-urole').textContent=user.role;
-      document.getElementById('sidebar-avatar').textContent=user.name.charAt(0).toUpperCase();
-      addAudit('Connexion','Utilisateur: '+user.name);save();
-      if(user.role==='Commercial'){document.querySelector('[data-view="admin"]').parentElement.style.display='none';}
-      if(user.role==='Lecture seule'){
-        document.querySelector('[data-view="admin"]').parentElement.style.display='none';
-        document.querySelectorAll('.btn-primary').forEach(b=>{if(b.textContent.includes('Nouvelle'))b.style.display='none'});
-      }
-      App.init();
-    } else {
-      errEl.style.display='block';
-    }
-  },
-  logout(){
-    addAudit('Déconnexion');save();
-    currentUser=null;location.reload();
-  }
-};
-
-/* ═══════════════════════════════════════════════
-   TOAST
-   ═══════════════════════════════════════════════ */
-const Toast = {
-  show(msg, type='success'){
-    const c=document.getElementById('toast-container');
-    const t=document.createElement('div');
-    t.className='toast toast-'+type;
-    t.innerHTML=`<i class="fas fa-${type==='success'?'check-circle':type==='error'?'exclamation-circle':'info-circle'}"></i> ${msg}`;
-    c.appendChild(t);
-    setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300)},3000);
-  }
-};
-
-/* ═══════════════════════════════════════════════
-   MODAL
-   ═══════════════════════════════════════════════ */
-const Modal = {
-  open(id){document.getElementById(id).classList.add('open')},
-  close(id){document.getElementById(id).classList.remove('open')}
-};
-
-/* ═══════════════════════════════════════════════
-   NAV
-   ═══════════════════════════════════════════════ */
-const Nav = {
-  init(){
-    document.querySelectorAll('[data-view]').forEach(a=>{
-      a.addEventListener('click',()=>{
-        document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-        document.querySelectorAll('[data-view]').forEach(x=>x.classList.remove('active'));
-        a.classList.add('active');
-        const viewId='view-'+a.dataset.view;
-        document.getElementById(viewId).classList.add('active');
-        const titles={dashboard:'Tableau de bord',pipeline:'Pipeline commercial',contacts:'Gestion des contacts',
-          commissions:'Suivi des commissions',reports:'Rapports & Exports',admin:'Administration'};
-        document.getElementById('page-title').textContent=titles[a.dataset.view]||'';
-      });
-    });
-    document.querySelectorAll('.admin-tab').forEach(tab=>{
-      tab.addEventListener('click',()=>{
-        document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
-        document.querySelectorAll('.admin-panel').forEach(p=>p.style.display='none');
-        tab.classList.add('active');
-        document.getElementById(tab.dataset.tab).style.display='block';
-      });
-    });
-  }
-};
-
-/* ═══════════════════════════════════════════════
-   PERIOD FILTER
-   ═══════════════════════════════════════════════ */
-function buildPeriodFilter(){
-  const sel=document.getElementById('filter-period');
-  sel.innerHTML='';
-  const now=new Date();
-  for(let i=5;i>=-6;i--){
-    const d=new Date(now.getFullYear(), now.getMonth()-i, 1);
-    const val=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
-    const label=d.toLocaleString('fr-FR',{month:'long',year:'numeric'});
-    const opt=document.createElement('option');
-    opt.value=val; opt.textContent=label.charAt(0).toUpperCase()+label.slice(1);
-    if(i===0)opt.selected=true;
-    sel.appendChild(opt);
-  }
-  const optAll=document.createElement('option');
-  optAll.value='ALL';optAll.textContent='— Toutes les périodes —';
-  sel.appendChild(optAll);
-}
-
-function getPeriod(){return document.getElementById('filter-period').value}
-function filterByPeriod(items){
-  const p=getPeriod();
-  if(p==='ALL')return items;
-  return items.filter(d=>(d.date||'').startsWith(p));
-}
-
-/* ═══════════════════════════════════════════════
-   DEALS  —  avec création automatique de contact
-   ═══════════════════════════════════════════════ */
-const Deals = {
-  openNew(){
-    document.getElementById('deal-id').value='';
-    document.getElementById('deal-modal-title').textContent='Nouvelle affaire';
-    document.getElementById('deal-name').value='';
-    document.getElementById('deal-interlocuteur').value='';
-    document.getElementById('deal-amount').value='';
-    document.getElementById('deal-date').value=new Date().toISOString().split('T')[0];
-    document.getElementById('deal-close-date').value='';
-    document.getElementById('deal-next-action').value='';
-    document.getElementById('deal-loss-reason').value='';
-    document.getElementById('deal-notes').value='';
-    document.getElementById('deal-stage').value='1';
-    document.getElementById('deal-loss-group').style.display='none';
-    document.getElementById('deal-new-contact-name').value='';
-    document.getElementById('deal-new-contact-name').style.display='none';
-    document.getElementById('new-contact-hint').style.display='none';
-    this._populateSelects();
-    Modal.open('modal-deal');
-  },
-
-  edit(id){
-    const d=S.deals.find(x=>x.id===id);if(!d)return;
-    document.getElementById('deal-id').value=d.id;
-    document.getElementById('deal-modal-title').textContent='Modifier l\'affaire';
-    document.getElementById('deal-name').value=d.name||'';
-    document.getElementById('deal-interlocuteur').value=d.interlocuteur||'';
-    document.getElementById('deal-amount').value=d.amount||'';
-    document.getElementById('deal-stage').value=d.stage||1;
-    document.getElementById('deal-date').value=d.date||'';
-    document.getElementById('deal-close-date').value=d.closeDate||'';
-    document.getElementById('deal-source').value=d.source||'Prospection';
-    document.getElementById('deal-next-action').value=d.nextAction||'';
-    document.getElementById('deal-loss-reason').value=d.lossReason||'';
-    document.getElementById('deal-notes').value=d.notes||'';
-    document.getElementById('deal-loss-group').style.display=d.stage==6?'block':'none';
-    document.getElementById('deal-new-contact-name').style.display='none';
-    document.getElementById('new-contact-hint').style.display='none';
-    this._populateSelects();
-    document.getElementById('deal-contact').value=d.contactId||'';
-    document.getElementById('deal-user').value=d.userId||'';
-    Modal.open('modal-deal');
-  },
-
-  _populateSelects(){
-    const cs=document.getElementById('deal-contact');
-    cs.innerHTML='<option value="">— Choisir un contact existant —</option>'
-      + S.contacts.map(c=>`<option value="${c.id}">${c.name}</option>`).join('')
-      + '<option value="__new__">➕ Nouveau client (créer automatiquement)</option>';
-    const us=document.getElementById('deal-user');
-    us.innerHTML=S.users.filter(u=>u.active!==false).map(u=>`<option value="${u.id}">${u.name}</option>`).join('');
-    if(currentUser)us.value=currentUser.id;
-    const ss=document.getElementById('deal-stage');
-    ss.innerHTML=Object.entries(S.stages).map(([k,v])=>`<option value="${k}">${k}. ${v.name} (${v.prob}%)</option>`).join('');
-    ss.onchange=()=>{document.getElementById('deal-loss-group').style.display=ss.value==='6'?'block':'none'};
-  },
-
-  /* Affiche / masque le champ de création automatique */
-  onContactChange(){
-    const val = document.getElementById('deal-contact').value;
-    const nameInput = document.getElementById('deal-new-contact-name');
-    const hint = document.getElementById('new-contact-hint');
-    if(val === '__new__'){
-      nameInput.style.display = 'block';
-      nameInput.focus();
-    } else {
-      nameInput.style.display = 'none';
-      hint.style.display = 'none';
-    }
-  },
-
-  onNewContactNameInput(){
-    const val = document.getElementById('deal-new-contact-name').value.trim();
-    document.getElementById('new-contact-hint').style.display = val ? 'block' : 'none';
-  },
-
-  save(){
-    const id=document.getElementById('deal-id').value;
-    const name=document.getElementById('deal-name').value.trim();
-    const amount=parseFloat(document.getElementById('deal-amount').value);
-    if(!name){Toast.show('Le nom de l\'affaire est obligatoire','error');return}
-    if(!amount||amount<=0){Toast.show('Le montant est obligatoire','error');return}
-    const stage=parseInt(document.getElementById('deal-stage').value);
-    if(stage===6 && !document.getElementById('deal-loss-reason').value.trim()){Toast.show('Le motif de perte est obligatoire','error');return}
-
-    /* ─── Gestion contact : création automatique si "__new__" ─── */
-    let contactId = parseInt(document.getElementById('deal-contact').value) || null;
-    const contactSelectVal = document.getElementById('deal-contact').value;
-    if(contactSelectVal === '__new__'){
-      const newName = document.getElementById('deal-new-contact-name').value.trim();
-      if(!newName){Toast.show('Veuillez saisir le nom du nouveau client','error');return}
-      // Vérifier si un contact avec ce nom existe déjà (évite les doublons)
-      const existing = S.contacts.find(c => c.name.toLowerCase() === newName.toLowerCase());
-      if(existing){
-        contactId = existing.id;
-        Toast.show('Contact existant retrouvé : '+existing.name,'info');
-      } else {
-        const newContact = {
-          id: Date.now(),
-          name: newName,
-          type: 'Prospect',
-          sector: '',
-          person: document.getElementById('deal-interlocuteur').value.trim() || '',
-          phone: '',
-          email: '',
-          address: '',
-          userId: parseInt(document.getElementById('deal-user').value) || currentUser?.id || null,
-          notes: 'Créé automatiquement lors de l\'affaire : '+name,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
-        };
-        S.contacts.push(newContact);
-        contactId = newContact.id;
-        addAudit('Création contact automatique', newName+' (via affaire '+name+')');
-        Toast.show('✅ Contact "'+newName+'" créé automatiquement dans la base');
-      }
-    }
-
-    const data={
-      name, amount, stage, contactId,
-      interlocuteur:document.getElementById('deal-interlocuteur').value.trim(),
-      userId:parseInt(document.getElementById('deal-user').value)||currentUser?.id||1,
-      source:document.getElementById('deal-source').value,
-      date:document.getElementById('deal-date').value,
-      closeDate:document.getElementById('deal-close-date').value,
-      nextAction:document.getElementById('deal-next-action').value.trim(),
-      lossReason:document.getElementById('deal-loss-reason').value.trim(),
-      notes:document.getElementById('deal-notes').value.trim()
-    };
-
-    if(id){
-      const idx=S.deals.findIndex(d=>d.id==id);
-      S.deals[idx]={...S.deals[idx],...data,updatedAt:new Date().toISOString()};
-      addAudit('Modification affaire', name+' – '+fmtCur(amount));
-      Toast.show('Affaire mise à jour');
-    } else {
-      data.id=Date.now();
-      data.ref='AF-'+String(S.deals.length+1).padStart(4,'0');
-      data.createdAt=new Date().toISOString();
-      data.updatedAt=data.createdAt;
-      S.deals.push(data);
-      addAudit('Création affaire', data.ref+' – '+name);
-      Toast.show('Affaire créée avec succès');
-    }
-    save(); Modal.close('modal-deal'); App.refreshAll();
-  },
-
-  delete(id){
-    const d=S.deals.find(x=>x.id===id);
-    if(!d||!confirm('Supprimer définitivement l\'affaire '+d.ref+' ?'))return;
-    S.deals=S.deals.filter(x=>x.id!==id);
-    addAudit('Suppression affaire', d.ref+' – '+d.name);
-    save(); App.refreshAll(); Toast.show('Affaire supprimée');
-  },
-
-  changeStage(id,newStage){
-    const d=S.deals.find(x=>x.id===id);if(!d)return;
-    d.stage=parseInt(newStage);d.updatedAt=new Date().toISOString();
-    addAudit('Changement étape', d.ref+' → '+getStageName(newStage));
-    save(); App.refreshAll();
-  }
-};
-
-/* ═══════════════════════════════════════════════
-   CONTACTS
-   ═══════════════════════════════════════════════ */
-const Contacts = {
-  openNew(){
-    document.getElementById('contact-id').value='';
-    document.getElementById('contact-modal-title').textContent='Nouveau contact';
-    ['contact-name','contact-sector','contact-person','contact-phone','contact-email','contact-address','contact-notes'].forEach(x=>document.getElementById(x).value='');
-    document.getElementById('contact-type').value='Prospect';
-    const us=document.getElementById('contact-user');
-    us.innerHTML='<option value="">— Non assigné —</option>'+S.users.filter(u=>u.active!==false).map(u=>`<option value="${u.id}">${u.name}</option>`).join('');
-    Modal.open('modal-contact');
-  },
-  edit(id){
-    const c=S.contacts.find(x=>x.id===id);if(!c)return;
-    document.getElementById('contact-id').value=c.id;
-    document.getElementById('contact-modal-title').textContent='Modifier le contact';
-    document.getElementById('contact-name').value=c.name||'';
-    document.getElementById('contact-type').value=c.type||'Prospect';
-    document.getElementById('contact-sector').value=c.sector||'';
-    document.getElementById('contact-person').value=c.person||'';
-    document.getElementById('contact-phone').value=c.phone||'';
-    document.getElementById('contact-email').value=c.email||'';
-    document.getElementById('contact-address').value=c.address||'';
-    document.getElementById('contact-notes').value=c.notes||'';
-    const us=document.getElementById('contact-user');
-    us.innerHTML='<option value="">— Non assigné —</option>'+S.users.filter(u=>u.active!==false).map(u=>`<option value="${u.id}">${u.name}</option>`).join('');
-    us.value=c.userId||'';
-    Modal.open('modal-contact');
-  },
-  save(){
-    const id=document.getElementById('contact-id').value;
-    const name=document.getElementById('contact-name').value.trim();
-    if(!name){Toast.show('La raison sociale est obligatoire','error');return}
-    const data={
-      name, type:document.getElementById('contact-type').value,
-      sector:document.getElementById('contact-sector').value.trim(),
-      person:document.getElementById('contact-person').value.trim(),
-      phone:document.getElementById('contact-phone').value.trim(),
-      email:document.getElementById('contact-email').value.trim(),
-      address:document.getElementById('contact-address').value.trim(),
-      userId:parseInt(document.getElementById('contact-user').value)||null,
-      notes:document.getElementById('contact-notes').value.trim()
-    };
-    if(id){
-      const idx=S.contacts.findIndex(c=>c.id==id);
-      S.contacts[idx]={...S.contacts[idx],...data,updatedAt:new Date().toISOString()};
-      addAudit('Modification contact', name); Toast.show('Contact mis à jour');
-    } else {
-      data.id=Date.now(); data.createdAt=new Date().toISOString(); data.updatedAt=data.createdAt;
-      S.contacts.push(data);
-      addAudit('Création contact', name); Toast.show('Contact créé avec succès');
-    }
-    save(); Modal.close('modal-contact'); App.refreshAll();
-  },
-  delete(id){
-    const c=S.contacts.find(x=>x.id===id);
-    if(!c||!confirm('Supprimer le contact '+c.name+' ?'))return;
-    S.contacts=S.contacts.filter(x=>x.id!==id);
-    addAudit('Suppression contact', c.name); save(); App.refreshAll(); Toast.show('Contact supprimé');
-  },
-  showDetail(id){
-    const c=S.contacts.find(x=>x.id===id);if(!c)return;
-    const deals=S.deals.filter(d=>d.contactId===c.id);
-    const caTotal=deals.filter(d=>d.stage===5).reduce((a,b)=>a+b.amount,0);
-    const user=c.userId?getUser(c.userId):null;
-    const typeBadge={'Prospect':'badge-prospect','Client actif':'badge-client','Client inactif':'badge-inactif','Partenaire':'badge-partenaire'};
-    document.getElementById('contact-detail-title').textContent=c.name;
-    document.getElementById('contact-detail-body').innerHTML=`
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem">
-        <div><span style="font-size:.72rem;color:var(--text-muted);text-transform:uppercase;font-weight:600">Type</span><br><span class="badge ${typeBadge[c.type]||''}">${c.type}</span></div>
-        <div><span style="font-size:.72rem;color:var(--text-muted);text-transform:uppercase;font-weight:600">Secteur</span><br><strong>${c.sector||'—'}</strong></div>
-        <div><span style="font-size:.72rem;color:var(--text-muted);text-transform:uppercase;font-weight:600">Interlocuteur</span><br><strong>${c.person||'—'}</strong></div>
-        <div><span style="font-size:.72rem;color:var(--text-muted);text-transform:uppercase;font-weight:600">Commercial</span><br><strong>${user?user.name:'Non assigné'}</strong></div>
-        <div><span style="font-size:.72rem;color:var(--text-muted);text-transform:uppercase;font-weight:600">Téléphone</span><br><strong>${c.phone||'—'}</strong></div>
-        <div><span style="font-size:.72rem;color:var(--text-muted);text-transform:uppercase;font-weight:600">Email</span><br><strong>${c.email||'—'}</strong></div>
-      </div>
-      ${c.address?`<div style="margin-bottom:1rem"><span style="font-size:.72rem;color:var(--text-muted);text-transform:uppercase;font-weight:600">Adresse</span><br><strong>${c.address}</strong></div>`:''}
-      ${c.notes?`<div style="margin-bottom:1rem;padding:1rem;background:var(--bg);border-radius:var(--radius)"><span style="font-size:.72rem;color:var(--text-muted);text-transform:uppercase;font-weight:600">Notes</span><br>${c.notes}</div>`:''}
-      <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)">
-        <h4 style="font-size:.85rem;margin-bottom:.75rem"><i class="fas fa-briefcase" style="color:var(--primary)"></i> Affaires liées (${deals.length}) — CA gagné: <strong style="color:var(--success)">${fmtCur(caTotal)}</strong></h4>
-        ${deals.length?`<table><thead><tr><th>Réf.</th><th>Affaire</th><th>Montant</th><th>Étape</th></tr></thead><tbody>
-          ${deals.map(d=>`<tr><td>${d.ref}</td><td>${d.name}</td><td>${fmtCur(d.amount)}</td><td><span class="stage-badge" style="background:${getStageColor(d.stage)}20;color:${getStageColor(d.stage)}">${getStageName(d.stage)}</span></td></tr>`).join('')}
-        </tbody></table>`:'<p style="color:var(--text-muted);font-size:.85rem">Aucune affaire liée.</p>'}
-      </div>`;
-    Modal.open('modal-contact-detail');
-  },
-  render(){
-    const search=(document.getElementById('contact-search').value||'').toLowerCase();
-    const typeFilter=document.getElementById('contact-type-filter').value;
-    let items=S.contacts.filter(c=>{
-      if(typeFilter && c.type!==typeFilter)return false;
-      if(search && !c.name.toLowerCase().includes(search) && !(c.person||'').toLowerCase().includes(search) && !(c.sector||'').toLowerCase().includes(search))return false;
-      return true;
-    });
-    const tbody=document.querySelector('#tbl-contacts tbody');
-    if(!items.length){tbody.innerHTML=`<tr><td colspan="8"><div class="empty-state"><i class="fas fa-building"></i><h4>Aucun contact</h4><p>Ajoutez votre premier client ou prospect</p></div></td></tr>`;return}
-    const typeBadge={'Prospect':'badge-prospect','Client actif':'badge-client','Client inactif':'badge-inactif','Partenaire':'badge-partenaire'};
-    tbody.innerHTML=items.map(c=>{
-      const user=c.userId?getUser(c.userId):null;
-      return `<tr>
-        <td><strong style="cursor:pointer;color:var(--primary)" onclick="Contacts.showDetail(${c.id})">${c.name}</strong></td>
-        <td><span class="badge ${typeBadge[c.type]||''}">${c.type}</span></td>
-        <td>${c.sector||'—'}</td>
-        <td>${c.person||'—'}</td>
-        <td>${c.phone||'—'}</td>
-        <td>${c.email||'—'}</td>
-        <td>${user?user.name:'—'}</td>
-        <td>
-          <button class="btn btn-ghost btn-icon btn-sm" onclick="Contacts.edit(${c.id})"><i class="fas fa-pen" style="color:var(--primary)"></i></button>
-          <button class="btn btn-ghost btn-icon btn-sm" onclick="Contacts.delete(${c.id})"><i class="fas fa-trash" style="color:var(--danger)"></i></button>
+<!-- ══════════════════════════════
+     HEADER
+══════════════════════════════ -->
+<tr>
+  <td align="center" style="background-color:#111C52; padding: 40px 40px 32px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" style="padding-bottom:12px;">
+          <img
+            src="https://static.wixstatic.com/media/d3492f_3679eee6e1b24b259225e6e63889965b~mv2.jpeg"
+            alt="TERA EVENTS"
+            width="140"
+            style="display:block; margin:0 auto; width:140px; height:auto; border:0;"
+          />
         </td>
-      </tr>`}).join('');
-  }
-};
+      </tr>
 
-/* ═══════════════════════════════════════════════
-   USERS  —  avec objectif individuel
-   ═══════════════════════════════════════════════ */
-const Users = {
-  openNew(){
-    document.getElementById('user-id').value='';
-    document.getElementById('user-modal-title').textContent='Nouvel utilisateur';
-    ['user-name','user-login','user-pass','user-team'].forEach(x=>document.getElementById(x).value='');
-    document.getElementById('user-role').value='Commercial';
-    document.getElementById('user-rate').value=5;
-    document.getElementById('user-target').value='';
-    Modal.open('modal-user');
-  },
-  edit(id){
-    const u=S.users.find(x=>x.id===id);if(!u)return;
-    document.getElementById('user-id').value=u.id;
-    document.getElementById('user-modal-title').textContent='Modifier l\'utilisateur';
-    document.getElementById('user-name').value=u.name;
-    document.getElementById('user-login').value=u.login;
-    document.getElementById('user-pass').value='';
-    document.getElementById('user-role').value=u.role;
-    document.getElementById('user-rate').value=u.rate||0;
-    document.getElementById('user-target').value=u.target||'';
-    document.getElementById('user-team').value=u.team||'';
-    Modal.open('modal-user');
-  },
-  save(){
-    const id=document.getElementById('user-id').value;
-    const name=document.getElementById('user-name').value.trim();
-    const login=document.getElementById('user-login').value.trim();
-    if(!name||!login){Toast.show('Nom et identifiant obligatoires','error');return}
-    const pass=document.getElementById('user-pass').value;
-    const targetVal = document.getElementById('user-target').value;
-    const data={
-      name, login, role:document.getElementById('user-role').value,
-      rate:parseFloat(document.getElementById('user-rate').value)||0,
-      target:targetVal ? parseFloat(targetVal) : 0,
-      team:document.getElementById('user-team').value.trim(), active:true
-    };
-    if(id){
-      const idx=S.users.findIndex(u=>u.id==id);
-      if(pass) data.pass=hashPassword(pass);
-      S.users[idx]={...S.users[idx],...data};
-      addAudit('Modification utilisateur', name); Toast.show('Utilisateur mis à jour');
-    } else {
-      if(!pass){Toast.show('Le mot de passe est obligatoire pour un nouvel utilisateur','error');return}
-      data.id=Date.now(); data.pass=hashPassword(pass);
-      S.users.push(data);
-      addAudit('Création utilisateur', name+' | Objectif: '+(data.target?fmtCur(data.target):'global')+'  Taux: '+data.rate+'%');
-      Toast.show('Utilisateur créé');
-    }
-    save(); Modal.close('modal-user'); App.refreshAll();
-  },
-  toggleActive(id){
-    const u=S.users.find(x=>x.id===id);if(!u||u.id===1)return;
-    u.active=!u.active;
-    addAudit(u.active?'Activation':'Désactivation'+' utilisateur', u.name);
-    save(); App.refreshAll();
-  },
-  delete(id){
-    if(id===1){Toast.show('Impossible de supprimer le Super Admin principal','error');return}
-    const u=S.users.find(x=>x.id===id);
-    if(!u||!confirm('Supprimer l\'utilisateur '+u.name+' ?'))return;
-    S.users=S.users.filter(x=>x.id!==id);
-    addAudit('Suppression utilisateur', u.name); save(); App.refreshAll(); Toast.show('Utilisateur supprimé');
-  },
-  render(){
-    const tbody=document.querySelector('#tbl-users tbody');
-    tbody.innerHTML=S.users.map(u=>`<tr${u.active===false?' style="opacity:.5"':''}>
-      <td><strong>${u.name}</strong></td>
-      <td><code style="font-size:.78rem;background:var(--bg);padding:.2rem .5rem;border-radius:4px">${u.login}</code></td>
-      <td>${u.role}</td>
-      <td><strong style="color:var(--primary)">${u.target && u.target>0 ? fmtCur(u.target) : '<span style="color:var(--text-muted);font-style:italic;font-weight:400">Global ÷ équipe</span>'}</strong></td>
-      <td><strong>${u.rate||0}%</strong></td>
-      <td><span class="badge ${u.active!==false?'badge-client':'badge-inactif'}">${u.active!==false?'Actif':'Inactif'}</span></td>
-      <td>
-        <button class="btn btn-ghost btn-icon btn-sm" onclick="Users.edit(${u.id})" title="Modifier"><i class="fas fa-pen" style="color:var(--primary)"></i></button>
-        ${u.id!==1?`<button class="btn btn-ghost btn-icon btn-sm" onclick="Users.toggleActive(${u.id})" title="${u.active!==false?'Désactiver':'Activer'}"><i class="fas fa-${u.active!==false?'ban':'check'}" style="color:${u.active!==false?'var(--warning)':'var(--success)'}"></i></button>
-        <button class="btn btn-ghost btn-icon btn-sm" onclick="Users.delete(${u.id})" title="Supprimer"><i class="fas fa-trash" style="color:var(--danger)"></i></button>`:''}
-      </td>
-    </tr>`).join('');
-  }
-};
+      <tr>
+        <td align="center" style="padding-bottom: 16px;">
+          <table role="presentation" cellpadding="0" cellspacing="0" align="center">
+            <tr>
+              <td style="width:60px; height:1px; background: linear-gradient(90deg, transparent, #C4906A, transparent); font-size:0; line-height:0;">&nbsp;</td>
+            </tr>
+          </table>
+          <!-- Ligne dorée simulée -->
+          <div style="width:60px; height:1px; background-color:#C4906A; margin:0 auto;"></div>
+        </td>
+      </tr>
+      <tr>
+        <td align="center" style="font-family: 'Montserrat', Arial, sans-serif; font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: #C9B8A0; font-weight: 600;">
+          Luxury Venue &amp; Event Coordinator
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
 
-/* ═══════════════════════════════════════════════
-   PIPELINE
-   ═══════════════════════════════════════════════ */
-const Pipeline = {
-  render(){
-    const search=(document.getElementById('pipeline-search').value||'').toLowerCase();
-    const userFilter=document.getElementById('pipeline-user-filter').value;
-    const uf=document.getElementById('pipeline-user-filter');
-    const curVal=uf.value;
-    uf.innerHTML='<option value="">Tous les commerciaux</option>'+S.users.filter(u=>u.active!==false).map(u=>`<option value="${u.id}">${u.name}</option>`).join('');
-    uf.value=curVal;
-    let deals=filterByPeriod(S.deals);
-    if(search) deals=deals.filter(d=>d.name.toLowerCase().includes(search)||(d.ref||'').toLowerCase().includes(search));
-    if(userFilter) deals=deals.filter(d=>d.userId==userFilter);
-    const kanban=document.getElementById('kanban');
-    kanban.innerHTML=Object.entries(S.stages).map(([k,v])=>{
-      const stageDeals=deals.filter(d=>d.stage==k);
-      const total=stageDeals.reduce((a,b)=>a+b.amount,0);
-      return `<div class="kanban-col">
-        <div class="kanban-col-header" style="border-bottom-color:${v.color}">
-          <h4><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${v.color};margin-right:4px"></span> ${v.name} <span class="col-count">${stageDeals.length}</span></h4>
-          <span class="col-total">${fmtCur(total)}</span>
-        </div>
-        <div class="kanban-col-body">${stageDeals.length?stageDeals.map(d=>{
-          const contact=getContact(d.contactId);
-          const user=getUser(d.userId);
-          return `<div class="kanban-card" ondblclick="Deals.edit(${d.id})">
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <span class="kc-ref">${d.ref||''}</span>
-              <div class="kc-actions">
-                <select class="form-control" style="width:auto;padding:.15rem .4rem;font-size:.68rem;margin:0;border-radius:4px" onchange="Deals.changeStage(${d.id},this.value)">
-                  ${Object.entries(S.stages).map(([sk,sv])=>`<option value="${sk}" ${sk==k?'selected':''}>${sv.name}</option>`).join('')}
-                </select>
-              </div>
-            </div>
-            <div class="kc-name">${d.name}</div>
-            <div class="kc-client"><i class="fas fa-building" style="font-size:.65rem;margin-right:.2rem"></i>${contact?contact.name:'—'}</div>
-            <div class="kc-amount">${fmtCur(d.amount)}</div>
-            <div class="kc-footer">
-              <span class="kc-user"><i class="fas fa-user"></i> ${user?user.name:'—'}</span>
-              <span style="font-size:.68rem;color:var(--text-muted)">${d.date||''}</span>
-            </div>
-          </div>`}).join(''):`<div class="empty-state" style="padding:2rem"><i class="fas fa-inbox"></i><p style="font-size:.78rem">Aucune affaire</p></div>`}</div>
-      </div>`}).join('');
-  }
-};
 
-/* ═══════════════════════════════════════════════
-   COMMISSIONS  —  calcul par objectif individuel
-   ═══════════════════════════════════════════════ */
-const Commissions = {
-  calculate(){
-    const period=getPeriod();
-    const commercials=S.users.filter(u=>u.role!=='Lecture seule'&&u.active!==false);
-    let totalComm=0, totalCA=0, totalBonus=0;
+<!-- ══════════════════════════════
+     HERO
+══════════════════════════════ -->
+<tr>
+  <td align="center" style="background-color:#1B2A6B; padding: 48px 40px 40px; border-bottom: 3px solid #C4906A;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" style="font-family: 'Montserrat', Arial, sans-serif; font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: #C4906A; font-weight: 600; padding-bottom: 18px;">
+          &#10022; Message de l''équipe TERA EVENTS &#10022;
+        </td>
+      </tr>
+      <tr>
+        <td align="center" class="mob-font-hero" style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 36px; font-weight: 300; color: #ffffff; line-height: 1.25; padding-bottom: 22px;">
+          Nous avons repensé l''événementiel.<br>
+          <em style="color:#E8C5A8;">Pour vous.</em>
+        </td>
+      </tr>
+      <tr>
+        <td align="center" style="font-family: 'Montserrat', Arial, sans-serif; font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.75); line-height: 1.9; padding-bottom: 8px;">
+          Chère cliente, cher client,<br><br>
+          Depuis notre création, nous avons eu l''honneur d''orchestrer vos moments les plus précieux. Aujourd''hui, nous franchissons une <strong style="color:#E8C5A8; font-weight:500;">nouvelle étape</strong> — plus de formules, plus de flexibilité, et toujours la même promesse : faire de chaque événement une expérience <strong style="color:#E8C5A8; font-weight:500;">unique, élégante et sans faille</strong>.<br><br>
+          Trois univers. Une seule adresse.
+        </td>
+      </tr>
+      <tr>
+        <td align="center" style="padding-top:20px;">
+          <div style="width:60px; height:1px; background-color:#C4906A; margin:0 auto 16px;"></div>
+          <span style="font-family: 'Dancing Script', 'Brush Script MT', cursive; font-size: 22px; color: #C4906A;">Joséphine &amp; l'équipe TERA EVENTS</span>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
 
-    const rows=commercials.map(u=>{
-      /* Objectif individuel de l'utilisateur */
-      const targetUser = getUserTarget(u);
 
-      /* Affaires gagnées pour cet utilisateur sur la période */
-      const wonDeals=S.deals.filter(d=>d.stage===5 && d.userId===u.id && (period==='ALL'||(d.date||'').startsWith(period)));
-      const ca=wonDeals.reduce((a,b)=>a+b.amount,0);
+<!-- NAV PILLS -->
+<tr>
+  <td align="center" style="background-color:#111C52; padding: 0 30px 26px;">
+    <table role="presentation" cellpadding="0" cellspacing="0" align="center">
+      <tr>
+        <td style="padding: 4px;">
+          <a href="#" class="mob-nav-pill" style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; font-weight:700; color:#E8C5A8; text-decoration:none; border:1px solid rgba(196,144,106,0.5); padding:8px 14px; display:inline-block;">&#9671; Salle TERA</a>
+        </td>
+        <td style="padding: 4px;">
+          <a href="#" class="mob-nav-pill" style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; font-weight:700; color:#E8C5A8; text-decoration:none; border:1px solid rgba(196,144,106,0.5); padding:8px 14px; display:inline-block;">&#9671; Corporate</a>
+        </td>
+        <td style="padding: 4px;">
+          <a href="#" class="mob-nav-pill" style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; font-weight:700; color:#E8C5A8; text-decoration:none; border:1px solid rgba(196,144,106,0.5); padding:8px 14px; display:inline-block;">&#9671; Event Planning</a>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
 
-      /* Taux d'atteinte de l'objectif individuel */
-      const atteinte=targetUser>0?Math.round((ca/targetUser)*100):0;
 
-      /* Taux de commission : individuel (fiche user) ou paliers */
-      let rate = u.rate || 0;
-      if(S.settings.commMode==='tiered' && S.settings.tiers){
-        const tier=S.settings.tiers.find(t=>ca>=t.min&&ca<(t.max===Infinity?Number.MAX_SAFE_INTEGER:t.max));
-        if(tier) rate=tier.rate;
-      }
+<!-- ══════════════════════════════
+     01 · SALLE TERA
+══════════════════════════════ -->
+<tr>
+  <td align="center" style="background-color:#FAF6F0; padding: 36px 40px 8px;">
+    <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:5px; text-transform:uppercase; color:#C4906A; font-weight:700; margin:0 0 8px;">01 &middot; Privatisations festives</p>
+    <p class="mob-font-title" style="font-family:'Cormorant Garamond',Georgia,serif; font-size:28px; font-weight:400; color:#1B2A6B; letter-spacing:1px; margin:0 0 6px;">Salle TERA</p>
+    <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:#C9B8A0; font-weight:600; margin:0 0 10px;">Capacité &middot; jusqu''à 100 personnes</p>
+    <p style="font-family:'Montserrat',Arial,sans-serif; font-size:12px; font-weight:300; color:#4A4A4A; line-height:1.8; margin:0;">
+      Mariages, anniversaires, baptêmes, soirées privées… Un cadre intimiste et raffiné, entièrement équipé, pour que vos célébrations soient inoubliables.
+    </p>
+  </td>
+</tr>
 
-      /* Commission de base */
-      const commission=Math.round(ca*rate/100);
+<!-- CARDS SALLE — TABLE 2 colonnes -->
+<tr>
+  <td style="background-color:#FAF6F0; padding: 16px 32px 0;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      <tr>
+        <!-- Card 1 -->
+        <td class="mob-card" valign="top" width="48%" style="background:#ffffff; border-top:3px solid #2D4A3E; padding:22px 18px;">
+          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:#C9B8A0; font-weight:600; margin:0 0 8px;">Formule &middot; 01</p>
+          <p style="font-family:'Cormorant Garamond',Georgia,serif; font-size:16px; font-weight:600; color:#1B2A6B; text-transform:uppercase; letter-spacing:1.5px; line-height:1.3; margin:0 0 10px;">Location<br>de la Salle</p>
+          <div style="width:28px; height:2px; background-color:#2D4A3E; margin-bottom:12px;"></div>
+          <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px; position:relative;"><span style="color:#2D4A3E; margin-right:4px;">—</span> Accès à la salle</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#2D4A3E; margin-right:4px;">—</span> Logistique complète</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#2D4A3E; margin-right:4px;">—</span> Écran de projection &amp; sono</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#2D4A3E; margin-right:4px;">—</span> Ingénieur son dédié</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#2D4A3E; margin-right:4px;">—</span> Protocole d''accueil</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#2D4A3E; margin-right:4px;">—</span> Wi-Fi haut débit</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#2D4A3E; margin-right:4px;">—</span> Groupe électrogène</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#2D4A3E; margin-right:4px;">—</span> Nettoyage avant et après</td></tr>
+          </table>
+        </td>
+        <!-- Spacer -->
+        <td width="4%" style="font-size:0; line-height:0;">&nbsp;</td>
+        <!-- Card 2 -->
+        <td class="mob-card" valign="top" width="48%" style="background:#ffffff; border-top:3px solid #C4906A; padding:22px 18px;">
+          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:#C9B8A0; font-weight:600; margin:0 0 8px;">Formule &middot; 02</p>
+          <p style="font-family:'Cormorant Garamond',Georgia,serif; font-size:16px; font-weight:600; color:#1B2A6B; text-transform:uppercase; letter-spacing:1.5px; line-height:1.3; margin:0 0 10px;">Packages<br>Salle TERA</p>
+          <div style="width:28px; height:2px; background-color:#C4906A; margin-bottom:12px;"></div>
+          <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#C4906A; margin-right:4px;">—</span> Tout ce qui est en Location</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#C4906A; margin-right:4px;">—</span> Décoration sur mesure</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#C4906A; margin-right:4px;">—</span> Traiteur &amp; bar professionnel</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#C4906A; margin-right:4px;">—</span> Couverture photo &amp; vidéo (option)</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#C4906A; margin-right:4px;">—</span> Équipe dédiée Jour J</td></tr>
+          </table>
+          <div style="background-color:#2D4A3E; display:inline-block; margin-top:16px; padding:6px 14px;">
+            <span style="font-family:'Montserrat',Arial,sans-serif; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#ffffff;">&minus;20% sur la salle</span>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
 
-      /* Bonus dépassement objectif */
-      const bonus=atteinte>100 ? Math.round((ca-targetUser)*(S.settings.bonusRate||0)/100) : 0;
+<!-- CTA SALLE -->
+<tr>
+  <td align="center" style="background-color:#EEF1F5; padding: 20px 32px 36px;">
+    <a href="https://tera.events/event-planning.html"
+       style="font-family:'Montserrat',Arial,sans-serif; font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#ffffff; text-decoration:none; background-color:#3A4A5C; padding:14px 48px; display:inline-block;">
+      En savoir plus
+    </a>
+  </td>
+</tr>
 
-      const total=commission+bonus;
-      totalComm+=total; totalCA+=ca; totalBonus+=bonus;
 
-      const commKey=period+'_'+u.id;
-      const status=(S.commissions||{})[commKey]||'Attente';
-      return {user:u, ca, targetUser, atteinte, rate, commission, bonus, total, status, commKey};
-    });
+<!-- ══════════════════════════════
+     SEPARATOR CORPORATE
+══════════════════════════════ -->
+<tr>
+  <td align="center" style="background-color:#3A4A5C; padding: 28px 40px;">
+    <p style="font-family:'Cormorant Garamond',Georgia,serif; font-size:19px; font-style:italic; color:#ffffff; line-height:1.5; margin:0;">
+      Vous organisez un événement d''entreprise ?<br>
+      TERA EVENTS crée des expériences <strong style="color:#C8D8E8; font-style:normal; font-weight:600;">corporate sur-mesure</strong>.
+    </p>
+  </td>
+</tr>
 
-    return {rows, totalComm, totalCA, totalBonus};
-  },
 
-  render(){
-    const {rows, totalComm, totalCA, totalBonus}=this.calculate();
-    document.getElementById('comm-summary').innerHTML=`
-      <div class="cs-card"><div class="cs-label">CA total gagné</div><div class="cs-value" style="color:var(--success)">${fmtCur(totalCA)}</div></div>
-      <div class="cs-card"><div class="cs-label">Commissions totales</div><div class="cs-value" style="color:var(--primary)">${fmtCur(totalComm)}</div></div>
-      <div class="cs-card"><div class="cs-label">Bonus distribués</div><div class="cs-value" style="color:var(--warning)">${fmtCur(totalBonus)}</div></div>`;
+<!-- ══════════════════════════════
+     02 · CORPORATE
+══════════════════════════════ -->
+<tr>
+  <td align="center" style="background-color:#EEF1F5; padding: 36px 40px 8px;">
+    <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:5px; text-transform:uppercase; color:#3A4A5C; font-weight:700; margin:0 0 8px;">02 &middot; Événements d''entreprise</p>
+    <p class="mob-font-title" style="font-family:'Cormorant Garamond',Georgia,serif; font-size:28px; font-weight:400; color:#1B2A6B; letter-spacing:1px; margin:0 0 10px;">Corporate</p>
+    <p style="font-family:'Montserrat',Arial,sans-serif; font-size:12px; font-weight:300; color:#4A4A4A; line-height:1.8; margin:0;">
+      Séminaires, lancements, afterworks, team buildings… Nous concevons des expériences professionnelles qui valorisent votre image.
+    </p>
+  </td>
+</tr>
 
-    const statusBadge={'Attente':'badge-attente','Validée':'badge-validee','Payée':'badge-payee'};
-    const tbody=document.querySelector('#tbl-commissions tbody');
-    tbody.innerHTML=rows.map(r=>`<tr>
-      <td>
-        <strong>${r.user.name}</strong>
-        <div style="font-size:.7rem;color:var(--text-muted)">${r.user.role}</div>
-      </td>
-      <td><strong style="color:var(--success)">${fmtCur(r.ca)}</strong></td>
-      <td>
-        <strong>${fmtCur(r.targetUser)}</strong>
-        ${r.user.target&&r.user.target>0
-          ? '<div style="font-size:.68rem;color:var(--primary)"><i class="fas fa-user" style="font-size:.6rem"></i> individuel</div>'
-          : '<div style="font-size:.68rem;color:var(--text-muted)"><i class="fas fa-users" style="font-size:.6rem"></i> global ÷ équipe</div>'}
-      </td>
-      <td>
-        <div style="display:flex;align-items:center;gap:.5rem">
-          <div class="progress" style="width:80px"><div class="progress-bar" style="width:${Math.min(100,r.atteinte)}%;background:${r.atteinte>=100?'var(--success)':r.atteinte>=50?'var(--primary)':'var(--danger)'}"></div></div>
-          <strong style="color:${r.atteinte>=100?'var(--success)':r.atteinte>=50?'var(--primary)':'var(--danger)'}">${r.atteinte}%</strong>
-        </div>
-      </td>
-      <td><strong>${r.rate}%</strong></td>
-      <td>${fmtCur(r.commission)}</td>
-      <td>${r.bonus>0?`<strong style="color:var(--warning)">${fmtCur(r.bonus)}</strong>`:'—'}</td>
-      <td><strong style="color:var(--primary)">${fmtCur(r.total)}</strong></td>
-      <td><span class="badge ${statusBadge[r.status]||'badge-attente'}">${r.status}</span></td>
-      <td>
-        ${currentUser?.role==='Super Admin'||currentUser?.role==='Manager'?`
-        <select class="form-control" style="width:auto;padding:.2rem .4rem;font-size:.72rem;margin:0" onchange="Commissions.setStatus('${r.commKey}',this.value)">
-          <option value="Attente" ${r.status==='Attente'?'selected':''}>En attente</option>
-          <option value="Validée" ${r.status==='Validée'?'selected':''}>Validée</option>
-          <option value="Payée" ${r.status==='Payée'?'selected':''}>Payée</option>
-        </select>`:'—'}
-      </td>
-    </tr>`).join('');
-  },
+<!-- CARDS CORPORATE -->
+<tr>
+  <td style="background-color:#EEF1F5; padding: 16px 32px 0;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      <tr>
+        <td class="mob-card" valign="top" width="48%" style="background:#ffffff; border-top:3px solid #3A4A5C; padding:22px 18px;">
+          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:#C9B8A0; font-weight:600; margin:0 0 8px;">Formule &middot; 01</p>
+          <p style="font-family:'Cormorant Garamond',Georgia,serif; font-size:16px; font-weight:600; color:#1B2A6B; text-transform:uppercase; letter-spacing:1.5px; line-height:1.3; margin:0 0 10px;">Business<br>Day</p>
+          <div style="width:28px; height:2px; background-color:#3A4A5C; margin-bottom:12px;"></div>
+          <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#3A4A5C; margin-right:4px;">—</span> Séminaires &amp; formations</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#3A4A5C; margin-right:4px;">—</span> Conférences &amp; panels</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#3A4A5C; margin-right:4px;">—</span> Cadre professionnel équipé</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#3A4A5C; margin-right:4px;">—</span> Sono, projection, Wi-Fi HD</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#3A4A5C; margin-right:4px;">—</span> Coffee break &amp; restauration</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#3A4A5C; margin-right:4px;">—</span> Coordination logistique</td></tr>
+          </table>
+        </td>
+        <td width="4%" style="font-size:0; line-height:0;">&nbsp;</td>
+        <td class="mob-card" valign="top" width="48%" style="background:#ffffff; border-top:3px solid #3A4A5C; padding:22px 18px;">
+          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:#C9B8A0; font-weight:600; margin:0 0 8px;">Formule &middot; 02</p>
+          <p style="font-family:'Cormorant Garamond',Georgia,serif; font-size:16px; font-weight:600; color:#1B2A6B; text-transform:uppercase; letter-spacing:1.5px; line-height:1.3; margin:0 0 10px;">The Launch<br>&amp; Afterwork</p>
+          <div style="width:28px; height:2px; background-color:#3A4A5C; margin-bottom:12px;"></div>
+          <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#3A4A5C; margin-right:4px;">—</span> Lancements de produits &amp; marques</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#3A4A5C; margin-right:4px;">—</span> Soirées réseau &amp; afterworks</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#3A4A5C; margin-right:4px;">—</span> Scénographie &amp; branding espace</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#3A4A5C; margin-right:4px;">—</span> Bar à cocktail ou open bar</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#3A4A5C; margin-right:4px;">—</span> Couverture photo &amp; vidéo</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#3A4A5C; margin-right:4px;">—</span> Coordination Jour J</td></tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
 
-  setStatus(key, status){
-    if(!S.commissions)S.commissions={};
-    S.commissions[key]=status;
-    addAudit('Changement statut commission', key+' → '+status);
-    save(); this.render(); Toast.show('Statut commission mis à jour');
-  }
-};
+<!-- CTA CORPORATE -->
+<tr>
+  <td align="center" style="background-color:#EEF1F5; padding: 20px 32px 36px;">
+    <a href="https://tera.events/corporate.html"
+       style="font-family:'Montserrat',Arial,sans-serif; font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#ffffff; text-decoration:none; background-color:#3A4A5C; padding:14px 48px; display:inline-block;">
+      En savoir plus
+    </a>
+  </td>
+</tr>
 
-/* ═══════════════════════════════════════════════
-   DASHBOARD
-   ═══════════════════════════════════════════════ */
-const Dashboard = {
-  render(){
-    const deals=filterByPeriod(S.deals);
-    const realized=deals.filter(d=>d.stage===5).reduce((a,b)=>a+b.amount,0);
-    const lost=deals.filter(d=>d.stage===6).reduce((a,b)=>a+b.amount,0);
-    const activeDeals=deals.filter(d=>d.stage<5&&d.stage>0);
-    const weighted=activeDeals.reduce((a,b)=>a+(b.amount*getStageProb(b.stage)/100),0);
-    const totalClosed=deals.filter(d=>d.stage>=5).length;
-    const won=deals.filter(d=>d.stage===5).length;
-    const conversion=totalClosed>0?Math.round(won/totalClosed*100):0;
-    const quoteSent=deals.filter(d=>d.stage>=3).length;
-    const target=S.settings.target||1;
-    const targetPct=Math.round(realized/target*100);
 
-    document.getElementById('kpi-grid').innerHTML=`
-      <div class="kpi-card">
-        <div class="kpi-icon" style="background:var(--success-light);color:var(--success)"><i class="fas fa-trophy"></i></div>
-        <div class="kpi-label">CA Réalisé</div>
-        <div class="kpi-value" style="color:var(--success)">${fmtCur(realized)}</div>
-        <div class="kpi-sub">sur ${won} affaire(s) gagnée(s)</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-icon" style="background:var(--primary-bg);color:var(--primary)"><i class="fas fa-scale-balanced"></i></div>
-        <div class="kpi-label">Pipeline pondéré</div>
-        <div class="kpi-value" style="color:var(--primary)">${fmtCur(Math.round(weighted))}</div>
-        <div class="kpi-sub">${activeDeals.length} affaire(s) en cours</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-icon" style="background:var(--warning-light);color:var(--warning)"><i class="fas fa-file-invoice"></i></div>
-        <div class="kpi-label">Devis envoyés</div>
-        <div class="kpi-value">${quoteSent}</div>
-        <div class="kpi-sub">${fmtCur(deals.filter(d=>d.stage>=3).reduce((a,b)=>a+b.amount,0))} en valeur</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-icon" style="background:var(--info-light);color:var(--info)"><i class="fas fa-percent"></i></div>
-        <div class="kpi-label">Taux de conversion</div>
-        <div class="kpi-value">${conversion}%</div>
-        <div class="kpi-sub">${won} gagné / ${totalClosed} clôturé</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-icon" style="background:var(--danger-light);color:var(--danger)"><i class="fas fa-bullseye"></i></div>
-        <div class="kpi-label">Objectif global</div>
-        <div class="kpi-value">${targetPct}%</div>
-        <div class="progress" style="margin-top:.5rem"><div class="progress-bar" style="width:${Math.min(100,targetPct)}%;background:${targetPct>=100?'var(--success)':targetPct>=50?'var(--primary)':'var(--danger)'}"></div></div>
-        <div class="kpi-sub">Objectif : ${fmtCur(target)}</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-icon" style="background:var(--danger-light);color:var(--danger)"><i class="fas fa-circle-xmark"></i></div>
-        <div class="kpi-label">Perdu</div>
-        <div class="kpi-value" style="color:var(--danger)">${fmtCur(lost)}</div>
-        <div class="kpi-sub">${deals.filter(d=>d.stage===6).length} affaire(s)</div>
-      </div>`;
+<!-- ══════════════════════════════
+     SEPARATOR EVENT PLANNING
+══════════════════════════════ -->
+<tr>
+  <td align="center" style="background-color:#1B2A6B; padding: 28px 40px; border-bottom:3px solid #C4906A;">
+    <p style="font-family:'Cormorant Garamond',Georgia,serif; font-size:19px; font-style:italic; color:#ffffff; line-height:1.5; margin:0;">
+      Vous avez déjà une organisation en cours ?<br>
+      Confiez-nous la <strong style="color:#C4906A; font-style:normal; font-weight:600;">coordination</strong>, nous gérons le reste.
+    </p>
+  </td>
+</tr>
 
-    const showDeals=deals.filter(d=>d.stage<6).sort((a,b)=>b.amount-a.amount);
-    const tbody=document.querySelector('#tbl-dashboard tbody');
-    if(!showDeals.length){
-      tbody.innerHTML=`<tr><td colspan="9"><div class="empty-state"><i class="fas fa-briefcase"></i><h4>Aucune affaire</h4><p>Créez votre première affaire pour commencer le suivi</p></div></td></tr>`;
-    } else {
-      tbody.innerHTML=showDeals.map(d=>{
-        const contact=getContact(d.contactId);
-        const user=getUser(d.userId);
-        return `<tr>
-          <td><code style="font-size:.75rem;background:var(--bg);padding:.15rem .4rem;border-radius:3px">${d.ref||''}</code></td>
-          <td><strong>${d.name}</strong></td>
-          <td>${contact?`<span style="cursor:pointer;color:var(--primary)" onclick="Contacts.showDetail(${contact.id})">${contact.name}</span>`:'—'}</td>
-          <td>${d.interlocuteur||'—'}</td>
-          <td style="font-weight:700">${fmtCur(d.amount)}</td>
-          <td><span class="stage-badge" style="background:${getStageColor(d.stage)}18;color:${getStageColor(d.stage)}">${getStageName(d.stage)}</span></td>
-          <td>${user?user.name:'—'}</td>
-          <td>${d.date||'—'}</td>
-          <td>
-            <button class="btn btn-ghost btn-icon btn-sm" onclick="Deals.edit(${d.id})" title="Modifier"><i class="fas fa-pen" style="color:var(--primary)"></i></button>
-            <button class="btn btn-ghost btn-icon btn-sm" onclick="Deals.delete(${d.id})" title="Supprimer"><i class="fas fa-trash" style="color:var(--danger)"></i></button>
-          </td>
-        </tr>`}).join('');
-    }
-    this.renderCharts(deals);
-  },
-  renderCharts(deals){
-    const pipeData=Object.entries(S.stages).map(([k,v])=>({
-      label:v.name, count:deals.filter(d=>d.stage==k).length,
-      total:deals.filter(d=>d.stage==k).reduce((a,b)=>a+b.amount,0), color:v.color
-    }));
-    if(chartPipeline)chartPipeline.destroy();
-    chartPipeline=new Chart(document.getElementById('chart-pipeline'),{
-      type:'bar', data:{labels:pipeData.map(p=>p.label),datasets:[
-        {label:'Montant ('+S.settings.currency+')',data:pipeData.map(p=>p.total),backgroundColor:pipeData.map(p=>p.color+'44'),borderColor:pipeData.map(p=>p.color),borderWidth:2,borderRadius:6}
-      ]}, options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>fmt(v)},grid:{color:'#f1f5f9'}},x:{grid:{display:false}}}}
-    });
-    const now=new Date();
-    const months=[];
-    for(let i=5;i>=0;i--){
-      const d=new Date(now.getFullYear(),now.getMonth()-i,1);
-      const key=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
-      const label=d.toLocaleString('fr-FR',{month:'short'});
-      const wonAmt=S.deals.filter(dd=>dd.stage===5&&(dd.date||'').startsWith(key)).reduce((a,b)=>a+b.amount,0);
-      const pipe=S.deals.filter(dd=>dd.stage<5&&dd.stage>0&&(dd.date||'').startsWith(key)).reduce((a,b)=>a+b.amount,0);
-      months.push({label,won:wonAmt,pipe});
-    }
-    if(chartMonthly)chartMonthly.destroy();
-    chartMonthly=new Chart(document.getElementById('chart-monthly'),{
-      type:'bar', data:{labels:months.map(m=>m.label),datasets:[
-        {label:'CA Gagné',data:months.map(m=>m.won),backgroundColor:'#05966944',borderColor:'#059669',borderWidth:2,borderRadius:6},
-        {label:'Pipeline',data:months.map(m=>m.pipe),backgroundColor:'#2563eb33',borderColor:'#2563eb',borderWidth:2,borderRadius:6}
-      ]}, options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:16,font:{size:11}}}},scales:{y:{ticks:{callback:v=>fmt(v)},grid:{color:'#f1f5f9'}},x:{grid:{display:false}}}}
-    });
-  }
-};
 
-/* ═══════════════════════════════════════════════
-   ADMIN
-   ═══════════════════════════════════════════════ */
-const Admin = {
-  render(){
-    document.getElementById('cfg-company').value=S.settings.company;
-    document.getElementById('cfg-currency').value=S.settings.currency;
-    document.getElementById('cfg-target').value=S.settings.target;
-    document.getElementById('cfg-annual-target').value=S.settings.annualTarget||'';
-    document.getElementById('cfg-comm-mode').value=S.settings.commMode||'flat';
-    document.getElementById('cfg-comm-trigger').value=S.settings.commTrigger||'signed';
-    document.getElementById('cfg-bonus-rate').value=S.settings.bonusRate||0;
-    document.getElementById('cfg-comm-mode').onchange=()=>{
-      document.getElementById('cfg-tiers-section').style.display=document.getElementById('cfg-comm-mode').value==='tiered'?'block':'none';
-    };
-    document.getElementById('cfg-tiers-section').style.display=S.settings.commMode==='tiered'?'block':'none';
-    document.getElementById('cfg-stages-list').innerHTML=Object.entries(S.stages).map(([k,v])=>`
-      <div style="display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem;padding:.5rem;background:var(--bg);border-radius:var(--radius)">
-        <span style="width:12px;height:12px;border-radius:50%;background:${v.color};flex-shrink:0"></span>
-        <strong style="font-size:.82rem;flex:1">${k}. ${v.name}</strong>
-        <span style="font-size:.75rem;color:var(--text-muted)">${v.prob}%</span>
-      </div>`).join('');
-    this.renderTiers();
-    Users.render();
-    const auditTbody=document.querySelector('#tbl-audit tbody');
-    auditTbody.innerHTML=(S.audit||[]).slice(0,50).map(a=>`<tr>
-      <td style="font-size:.78rem;white-space:nowrap">${new Date(a.date).toLocaleString('fr-FR')}</td>
-      <td>${a.user}</td><td>${a.action}</td><td style="font-size:.78rem;color:var(--text-secondary)">${a.details||'—'}</td>
-    </tr>`).join('');
-    document.getElementById('sidebar-company').textContent=S.settings.company;
-    document.getElementById('sidebar-logo-circle').textContent=(S.settings.company||'C').charAt(0).toUpperCase();
-  },
-  saveSettings(){
-    S.settings.company=document.getElementById('cfg-company').value.trim();
-    S.settings.currency=document.getElementById('cfg-currency').value;
-    S.settings.target=parseFloat(document.getElementById('cfg-target').value)||0;
-    S.settings.annualTarget=parseFloat(document.getElementById('cfg-annual-target').value)||0;
-    addAudit('Modification paramètres', 'Entreprise: '+S.settings.company);
-    save(); App.refreshAll(); Toast.show('Paramètres enregistrés');
-  },
-  saveCommRules(){
-    S.settings.commMode=document.getElementById('cfg-comm-mode').value;
-    S.settings.commTrigger=document.getElementById('cfg-comm-trigger').value;
-    S.settings.bonusRate=parseFloat(document.getElementById('cfg-bonus-rate').value)||0;
-    addAudit('Modification règles commission');
-    save(); App.refreshAll(); Toast.show('Règles de commission mises à jour');
-  },
-  renderTiers(){
-    if(!S.settings.tiers)S.settings.tiers=[];
-    document.getElementById('cfg-tiers-list').innerHTML=S.settings.tiers.map((t,i)=>`
-      <div style="display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem">
-        <input type="number" class="form-control" value="${t.min}" style="width:120px;margin:0" placeholder="Min" onchange="S.settings.tiers[${i}].min=parseFloat(this.value)">
-        <span style="color:var(--text-muted)">→</span>
-        <input type="number" class="form-control" value="${t.max===Infinity?'':t.max}" style="width:120px;margin:0" placeholder="Max (vide=∞)" onchange="S.settings.tiers[${i}].max=this.value?parseFloat(this.value):Infinity">
-        <span style="color:var(--text-muted)">:</span>
-        <input type="number" class="form-control" value="${t.rate}" style="width:80px;margin:0" placeholder="%" onchange="S.settings.tiers[${i}].rate=parseFloat(this.value)">
-        <span style="font-size:.78rem;color:var(--text-muted)">%</span>
-        <button class="btn btn-ghost btn-icon btn-sm" onclick="S.settings.tiers.splice(${i},1);Admin.renderTiers()"><i class="fas fa-xmark" style="color:var(--danger)"></i></button>
-      </div>`).join('');
-  },
-  addTier(){
-    if(!S.settings.tiers)S.settings.tiers=[];
-    S.settings.tiers.push({min:0,max:Infinity,rate:5});
-    this.renderTiers();
-  }
-};
+<!-- ══════════════════════════════
+     03 · EVENT PLANNING
+══════════════════════════════ -->
+<tr>
+  <td align="center" style="background-color:#F0E8DC; padding: 36px 40px 8px;">
+    <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:5px; text-transform:uppercase; color:#C4906A; font-weight:700; margin:0 0 8px;">03 &middot; Accompagnement sur-mesure</p>
+    <p class="mob-font-title" style="font-family:'Cormorant Garamond',Georgia,serif; font-size:28px; font-weight:400; color:#1B2A6B; letter-spacing:1px; margin:0 0 10px;">Event Planning</p>
+    <p style="font-family:'Montserrat',Arial,sans-serif; font-size:12px; font-weight:300; color:#4A4A4A; line-height:1.8; margin:0;">
+      Que vous partiez de zéro ou que vous ayez déjà posé les bases, TERA EVENTS intervient au niveau qui vous convient.
+    </p>
+  </td>
+</tr>
 
-/* ═══════════════════════════════════════════════
-   REPORTS
-   ═══════════════════════════════════════════════ */
-const Reports = {
-  _generateHeader(){
-    return `<div style="text-align:center;padding:1rem;border-bottom:2px solid #1e293b;margin-bottom:1.5rem">
-      <h2 style="margin:0;font-size:1.2rem">${S.settings.company}</h2>
-      <p style="margin:.25rem 0 0;color:#64748b;font-size:.8rem">Rapport généré le ${new Date().toLocaleDateString('fr-FR')} — Période: ${getPeriod()==='ALL'?'Toutes':getPeriod()}</p>
-    </div>`;
-  },
-  _exportPDF(element, filename){
-    html2pdf().set({margin:[10,10,10,10],filename:filename+'.pdf',html2canvas:{scale:2,useCORS:true},jsPDF:{format:'a4',orientation:'landscape'}}).from(element).save();
-    Toast.show('Export PDF en cours...');
-  },
-  exportDashboard(){
-    const div=document.createElement('div');
-    div.style.cssText='padding:1.5rem;font-family:Plus Jakarta Sans,sans-serif;font-size:12px;color:#1e293b';
-    const deals=filterByPeriod(S.deals);
-    const realized=deals.filter(d=>d.stage===5).reduce((a,b)=>a+b.amount,0);
-    const weighted=deals.filter(d=>d.stage<5).reduce((a,b)=>a+(b.amount*getStageProb(b.stage)/100),0);
-    const activeDeals=deals.filter(d=>d.stage<6);
-    div.innerHTML=this._generateHeader()+`
-      <h3 style="margin-bottom:1rem">Rapport d'activité commerciale</h3>
-      <table style="width:100%;margin-bottom:1rem;font-size:11px"><tr>
-        <td style="padding:.5rem;background:#f1f5f9;border-radius:6px;text-align:center"><strong>CA Réalisé</strong><br><span style="font-size:1.1rem;font-weight:800;color:#059669">${fmtCur(realized)}</span></td>
-        <td style="padding:.5rem;background:#f1f5f9;border-radius:6px;text-align:center"><strong>Pipeline pondéré</strong><br><span style="font-size:1.1rem;font-weight:800;color:#2563eb">${fmtCur(Math.round(weighted))}</span></td>
-        <td style="padding:.5rem;background:#f1f5f9;border-radius:6px;text-align:center"><strong>Affaires actives</strong><br><span style="font-size:1.1rem;font-weight:800">${activeDeals.length}</span></td>
-      </tr></table>
-      <table style="width:100%;border-collapse:collapse;font-size:10px">
-        <thead><tr style="background:#0f172a;color:white"><th style="padding:6px;text-align:left">Réf.</th><th style="padding:6px;text-align:left">Affaire</th><th style="padding:6px;text-align:left">Client</th><th style="padding:6px;text-align:left">Interlocuteur</th><th style="padding:6px;text-align:left">Montant</th><th style="padding:6px;text-align:left">Étape</th><th style="padding:6px;text-align:left">Commercial</th></tr></thead>
-        <tbody>${activeDeals.map((d,i)=>{const c=getContact(d.contactId);const u=getUser(d.userId);return`<tr style="background:${i%2?'#f8fafc':'white'}"><td style="padding:5px">${d.ref||''}</td><td style="padding:5px">${d.name}</td><td style="padding:5px">${c?c.name:'—'}</td><td style="padding:5px">${d.interlocuteur||'—'}</td><td style="padding:5px;font-weight:700">${fmtCur(d.amount)}</td><td style="padding:5px">${getStageName(d.stage)}</td><td style="padding:5px">${u?u.name:'—'}</td></tr>`}).join('')}</tbody>
-      </table>`;
-    this._exportPDF(div, 'Rapport_Activite_'+S.settings.company);
-  },
-  exportCommissions(){
-    const div=document.createElement('div');
-    div.style.cssText='padding:1.5rem;font-family:Plus Jakarta Sans,sans-serif;font-size:12px;color:#1e293b';
-    const {rows,totalComm,totalCA}=Commissions.calculate();
-    div.innerHTML=this._generateHeader()+`
-      <h3 style="margin-bottom:1rem">Rapport de Commissions — Objectifs individuels</h3>
-      <table style="width:100%;border-collapse:collapse;font-size:10px">
-        <thead><tr style="background:#0f172a;color:white">
-          <th style="padding:6px;text-align:left">Commercial</th>
-          <th style="padding:6px;text-align:left">CA Réalisé</th>
-          <th style="padding:6px;text-align:left">Objectif individuel</th>
-          <th style="padding:6px;text-align:left">Atteinte</th>
-          <th style="padding:6px;text-align:left">Taux comm.</th>
-          <th style="padding:6px;text-align:left">Commission</th>
-          <th style="padding:6px;text-align:left">Bonus</th>
-          <th style="padding:6px;text-align:left">Total</th>
-          <th style="padding:6px;text-align:left">Statut</th>
-        </tr></thead>
-        <tbody>${rows.map((r,i)=>`<tr style="background:${i%2?'#f8fafc':'white'}">
-          <td style="padding:5px;font-weight:700">${r.user.name}</td>
-          <td style="padding:5px">${fmtCur(r.ca)}</td>
-          <td style="padding:5px">${fmtCur(r.targetUser)}</td>
-          <td style="padding:5px">${r.atteinte}%</td>
-          <td style="padding:5px">${r.rate}%</td>
-          <td style="padding:5px">${fmtCur(r.commission)}</td>
-          <td style="padding:5px">${r.bonus>0?fmtCur(r.bonus):'—'}</td>
-          <td style="padding:5px;font-weight:700">${fmtCur(r.total)}</td>
-          <td style="padding:5px">${r.status}</td>
-        </tr>`).join('')}
-        <tr style="background:#0f172a;color:white;font-weight:700">
-          <td style="padding:6px">TOTAL</td>
-          <td style="padding:6px">${fmtCur(totalCA)}</td>
-          <td style="padding:6px" colspan="5"></td>
-          <td style="padding:6px">${fmtCur(totalComm)}</td>
-          <td style="padding:6px"></td>
-        </tr></tbody>
-      </table>`;
-    this._exportPDF(div, 'Rapport_Commissions_'+S.settings.company);
-  },
-  exportPipeline(){
-    const div=document.createElement('div');
-    div.style.cssText='padding:1.5rem;font-family:Plus Jakarta Sans,sans-serif;font-size:12px;color:#1e293b';
-    const deals=filterByPeriod(S.deals);
-    let html=this._generateHeader()+'<h3 style="margin-bottom:1rem">Rapport Pipeline Détaillé</h3>';
-    Object.entries(S.stages).forEach(([k,v])=>{
-      const sd=deals.filter(d=>d.stage==k);
-      const total=sd.reduce((a,b)=>a+b.amount,0);
-      html+=`<h4 style="margin:1rem 0 .5rem;color:${v.color}">${v.name} (${sd.length}) — ${fmtCur(total)}</h4>`;
-      if(sd.length){
-        html+=`<table style="width:100%;border-collapse:collapse;font-size:10px;margin-bottom:.5rem"><thead><tr style="background:#f1f5f9"><th style="padding:4px;text-align:left">Réf.</th><th style="padding:4px;text-align:left">Affaire</th><th style="padding:4px;text-align:left">Client</th><th style="padding:4px;text-align:right">Montant</th><th style="padding:4px;text-align:left">Commercial</th></tr></thead><tbody>`;
-        sd.forEach(d=>{const c=getContact(d.contactId);const u=getUser(d.userId);
-          html+=`<tr><td style="padding:3px">${d.ref||''}</td><td style="padding:3px">${d.name}</td><td style="padding:3px">${c?c.name:'—'}</td><td style="padding:3px;text-align:right;font-weight:700">${fmtCur(d.amount)}</td><td style="padding:3px">${u?u.name:'—'}</td></tr>`;
-        });
-        html+='</tbody></table>';
-      }
-    });
-    div.innerHTML=html;
-    this._exportPDF(div, 'Rapport_Pipeline_'+S.settings.company);
-  },
-  exportPerformance(){
-    const div=document.createElement('div');
-    div.style.cssText='padding:1.5rem;font-family:Plus Jakarta Sans,sans-serif;font-size:12px;color:#1e293b';
-    const commercials=S.users.filter(u=>u.active!==false&&u.role!=='Lecture seule');
-    const perf=commercials.map(u=>{
-      const deals=filterByPeriod(S.deals).filter(d=>d.userId===u.id);
-      const won=deals.filter(d=>d.stage===5);
-      const ca=won.reduce((a,b)=>a+b.amount,0);
-      const closed=deals.filter(d=>d.stage>=5).length;
-      const conv=closed>0?Math.round(won.length/closed*100):0;
-      const targetUser=getUserTarget(u);
-      const atteinte=targetUser>0?Math.round(ca/targetUser*100):0;
-      return {name:u.name, deals:deals.length, won:won.length, ca, conv, targetUser, atteinte, rate:u.rate||0};
-    }).sort((a,b)=>b.ca-a.ca);
-    div.innerHTML=this._generateHeader()+`
-      <h3 style="margin-bottom:1rem">Performance Individuelle — Objectifs individuels</h3>
-      <table style="width:100%;border-collapse:collapse;font-size:10px">
-        <thead><tr style="background:#0f172a;color:white">
-          <th style="padding:6px;text-align:left">Rang</th>
-          <th style="padding:6px;text-align:left">Commercial</th>
-          <th style="padding:6px;text-align:left">Objectif</th>
-          <th style="padding:6px;text-align:left">CA Réalisé</th>
-          <th style="padding:6px;text-align:left">Atteinte</th>
-          <th style="padding:6px;text-align:left">Taux comm.</th>
-          <th style="padding:6px;text-align:left">Gagnées</th>
-          <th style="padding:6px;text-align:left">Conversion</th>
-        </tr></thead>
-        <tbody>${perf.map((p,i)=>`<tr style="background:${i%2?'#f8fafc':'white'}">
-          <td style="padding:5px;font-weight:700">${i+1}</td>
-          <td style="padding:5px">${p.name}</td>
-          <td style="padding:5px">${fmtCur(p.targetUser)}</td>
-          <td style="padding:5px;font-weight:700">${fmtCur(p.ca)}</td>
-          <td style="padding:5px">${p.atteinte}%</td>
-          <td style="padding:5px">${p.rate}%</td>
-          <td style="padding:5px">${p.won}</td>
-          <td style="padding:5px">${p.conv}%</td>
-        </tr>`).join('')}</tbody>
-      </table>`;
-    this._exportPDF(div, 'Performance_'+S.settings.company);
-  },
-  exportForecast(){
-    const div=document.createElement('div');
-    div.style.cssText='padding:1.5rem;font-family:Plus Jakarta Sans,sans-serif;font-size:12px;color:#1e293b';
-    const activeDeals=S.deals.filter(d=>d.stage>0&&d.stage<5);
-    const forecast=activeDeals.reduce((a,b)=>a+(b.amount*getStageProb(b.stage)/100),0);
-    const realized=filterByPeriod(S.deals).filter(d=>d.stage===5).reduce((a,b)=>a+b.amount,0);
-    div.innerHTML=this._generateHeader()+`
-      <h3 style="margin-bottom:1rem">Prévisionnel (Forecast)</h3>
-      <table style="width:100%;margin-bottom:1.5rem"><tr>
-        <td style="padding:1rem;background:#dbeafe;border-radius:8px;text-align:center"><strong>CA Déjà Réalisé</strong><br><span style="font-size:1.3rem;font-weight:800;color:#059669">${fmtCur(realized)}</span></td>
-        <td style="padding:1rem;background:#ede9fe;border-radius:8px;text-align:center"><strong>Forecast Pipeline</strong><br><span style="font-size:1.3rem;font-weight:800;color:#7c3aed">${fmtCur(Math.round(forecast))}</span></td>
-        <td style="padding:1rem;background:#d1fae5;border-radius:8px;text-align:center"><strong>Total Projeté</strong><br><span style="font-size:1.3rem;font-weight:800;color:#059669">${fmtCur(Math.round(realized+forecast))}</span></td>
-      </tr></table>
-      <h4 style="margin-bottom:.5rem">Détail du pipeline actif</h4>
-      <table style="width:100%;border-collapse:collapse;font-size:10px">
-        <thead><tr style="background:#0f172a;color:white"><th style="padding:6px;text-align:left">Affaire</th><th style="padding:6px;text-align:left">Client</th><th style="padding:6px;text-align:right">Montant</th><th style="padding:6px;text-align:left">Étape</th><th style="padding:6px;text-align:right">Prob.</th><th style="padding:6px;text-align:right">Pondéré</th></tr></thead>
-        <tbody>${activeDeals.sort((a,b)=>b.amount-a.amount).map((d,i)=>{const c=getContact(d.contactId);return`<tr style="background:${i%2?'#f8fafc':'white'}"><td style="padding:5px">${d.name}</td><td style="padding:5px">${c?c.name:'—'}</td><td style="padding:5px;text-align:right;font-weight:700">${fmtCur(d.amount)}</td><td style="padding:5px">${getStageName(d.stage)}</td><td style="padding:5px;text-align:right">${getStageProb(d.stage)}%</td><td style="padding:5px;text-align:right;font-weight:700;color:#7c3aed">${fmtCur(Math.round(d.amount*getStageProb(d.stage)/100))}</td></tr>`}).join('')}
-        <tr style="background:#0f172a;color:white;font-weight:700"><td style="padding:6px" colspan="2">TOTAL FORECAST</td><td style="padding:6px;text-align:right">${fmtCur(activeDeals.reduce((a,b)=>a+b.amount,0))}</td><td style="padding:6px" colspan="2"></td><td style="padding:6px;text-align:right">${fmtCur(Math.round(forecast))}</td></tr>
-        </tbody></table>`;
-    this._exportPDF(div, 'Forecast_'+S.settings.company);
-  }
-};
+<!-- CARDS EVENT PLANNING -->
+<tr>
+  <td style="background-color:#F0E8DC; padding: 16px 32px 0;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      <tr>
+        <td class="mob-card" valign="top" width="48%" style="background:#ffffff; border-left:3px solid #1B2A6B; padding:22px 18px;">
+          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:#C9B8A0; font-weight:600; margin:0 0 8px;">Formule &middot; 01</p>
+          <p style="font-family:'Cormorant Garamond',Georgia,serif; font-size:16px; font-weight:600; color:#1B2A6B; text-transform:uppercase; letter-spacing:1.5px; line-height:1.3; margin:0 0 10px;">Coordination<br>Complète</p>
+          <div style="width:28px; height:2px; background-color:#1B2A6B; margin-bottom:12px;"></div>
+          <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#1B2A6B; margin-right:4px;">—</span> Recherche &amp; sélection du lieu</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#1B2A6B; margin-right:4px;">—</span> Conception du concept &amp; scénographie</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#1B2A6B; margin-right:4px;">—</span> Coordination de tous les prestataires</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#1B2A6B; margin-right:4px;">—</span> Décoration &amp; traiteur inclus</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#1B2A6B; margin-right:4px;">—</span> Suivi budget &amp; planning complet</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#1B2A6B; margin-right:4px;">—</span> Gestion complète le Jour J</td></tr>
+          </table>
+        </td>
+        <td width="4%" style="font-size:0; line-height:0;">&nbsp;</td>
+        <td class="mob-card" valign="top" width="48%" style="background:#ffffff; border-left:3px solid #C4906A; padding:22px 18px;">
+          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:#C9B8A0; font-weight:600; margin:0 0 8px;">Formule &middot; 02</p>
+          <p style="font-family:'Cormorant Garamond',Georgia,serif; font-size:16px; font-weight:600; color:#1B2A6B; text-transform:uppercase; letter-spacing:1.5px; line-height:1.3; margin:0 0 10px;">Coordination<br>Partielle</p>
+          <div style="width:28px; height:2px; background-color:#C4906A; margin-bottom:12px;"></div>
+          <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#C4906A; margin-right:4px;">—</span> Audit de votre organisation existante</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#C4906A; margin-right:4px;">—</span> Conseil &amp; optimisation du concept</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#C4906A; margin-right:4px;">—</span> Coordination des prestataires choisis</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#C4906A; margin-right:4px;">—</span> Supervision de la mise en place</td></tr>
+            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#C4906A; margin-right:4px;">—</span> Présence &amp; gestion le Jour J</td></tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
 
-/* ═══════════════════════════════════════════════
-   APP CONTROLLER
-   ═══════════════════════════════════════════════ */
-const App = {
-  init(){
-    buildPeriodFilter();
-    Nav.init();
-    this.refreshAll();
-  },
-  refreshAll(){
-    Dashboard.render();
-    Pipeline.render();
-    Contacts.render();
-    Commissions.render();
-    Admin.render();
-  },
-  exportJSON(){
-    const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement('a');
-    a.href=url;a.download='CRM_Backup_'+S.settings.company.replace(/\s/g,'_')+'_'+new Date().toISOString().split('T')[0]+'.json';
-    a.click();URL.revokeObjectURL(url);
-    addAudit('Export données JSON');save();
-    Toast.show('Sauvegarde JSON téléchargée');
-  },
-  importJSON(event){
-    const file=event.target.files[0];if(!file)return;
-    if(!confirm('ATTENTION : Cette opération remplacera toutes les données actuelles. Continuer ?'))return;
-    const reader=new FileReader();
-    reader.onload=e=>{
-      try{
-        const data=JSON.parse(e.target.result);
-        if(!data.settings||!data.users||!data.deals){throw new Error('Format invalide');}
-        Object.assign(S,data);
-        save();addAudit('Import données JSON',file.name);
-        App.refreshAll();Toast.show('Données importées avec succès');
-      }catch(err){Toast.show('Erreur: fichier invalide — '+err.message,'error');}
-    };
-    reader.readAsText(file);
-  }
-};
-</script>
-</body>
-</html>
+<!-- CTA EVENT PLANNING -->
+<tr>
+  <td align="center" style="background-color:#F0E8DC; padding: 20px 32px 36px;">
+    <a href="https://tera.events/event-planning.html"
+       style="font-family:'Montserrat',Arial,sans-serif; font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#ffffff; text-decoration:none; background-color:#1B2A6B; padding:14px 48px; display:inline-block;">
+      En savoir plus
+    </a>
+  </td>
+</tr>
+
+
+<!-- ══════════════════════════════
+     FEATURES STRIP
+══════════════════════════════ -->
+<tr>
+  <td style="background-color:#ffffff; padding: 28px 32px; border-top:1px solid #F0E8DC; border-bottom:1px solid #F0E8DC;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" width="25%" style="padding: 0 6px; border-right:1px solid #C9B8A0;">
+          <p style="font-size:18px; margin:0 0 6px;">&#10022;</p>
+          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:8px; letter-spacing:2px; text-transform:uppercase; color:#1B2A6B; font-weight:700; line-height:1.4; margin:0 0 3px;">Décoration<br>sur mesure</p>
+          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; color:#4A4A4A; font-weight:300; margin:0;">Scénographie unique</p>
+        </td>
+        <td align="center" width="25%" style="padding: 0 6px; border-right:1px solid #C9B8A0;">
+          <p style="font-size:18px; margin:0 0 6px;">&#9671;</p>
+          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:8px; letter-spacing:2px; text-transform:uppercase; color:#1B2A6B; font-weight:700; line-height:1.4; margin:0 0 3px;">Service<br>traiteur</p>
+          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; color:#4A4A4A; font-weight:300; margin:0;">Cocktails dînatoires, services à l'assiette, buffets</p>
+        </td>
+        <td align="center" width="25%" style="padding: 0 6px; border-right:1px solid #C9B8A0;">
+          <p style="font-size:18px; margin:0 0 6px;">&#9673;</p>
+          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:8px; letter-spacing:2px; text-transform:uppercase; color:#1B2A6B; font-weight:700; line-height:1.4; margin:0 0 3px;">Communication; événementielle<br>pro</p>
+          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; color:#4A4A4A; font-weight:300; margin:0;">Couverture photo et vidéo, supports de communication</p>
+        </td>
+        <td align="center" width="25%" style="padding: 0 6px;">
+          <p style="font-size:18px; margin:0 0 6px;">&#9672;</p>
+          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:8px; letter-spacing:2px; text-transform:uppercase; color:#1B2A6B; font-weight:700; line-height:1.4; margin:0 0 3px;">Suivi complet<br>Jour J</p>
+          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; color:#4A4A4A; font-weight:300; margin:0;">Festif &amp; Corporate</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+
+
+<!-- ══════════════════════════════
+     MAIN CTA
+══════════════════════════════ -->
+<tr>
+  <td align="center" style="background-color:#111C52; padding: 52px 40px;">
+    <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:5px; text-transform:uppercase; color:#C9B8A0; margin:0 0 14px;">&#10022; Commençons ensemble &#10022;</p>
+    <p style="font-family:'Cormorant Garamond',Georgia,serif; font-size:30px; font-weight:300; color:#ffffff; margin:0 0 10px;">Votre prochain événement<br>mérite le meilleur.</p>
+    <p style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:rgba(255,255,255,0.5); font-weight:300; margin:0 0 32px;">Devis personnalisé &middot; Réponse sous 24h &middot; Sans engagement</p>
+    <!-- 🔗 BOUTON PRINCIPAL -->
+    <a href="https://tera.events/contact.html" style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#ffffff; text-decoration:none; background-color:#C4906A; padding:18px 48px; display:inline-block; margin-bottom:32px;">
+      Demander mon devis
+    </a>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      <!-- 🔗 Téléphone -->
+      <tr><td align="center" style="font-family:'Montserrat',Arial,sans-serif; font-size:12px; color:rgba(255,255,255,0.65); padding:4px 0;">
+        <strong style="color:#ffffff;">&#128222;</strong> &nbsp;
+        <a href="tel:+2250566221010" style="color:#E8C5A8; text-decoration:none;">+225 05 66 22 10 10</a>
+        &nbsp;&middot;&nbsp; WhatsApp disponible
+      </td></tr>
+      <!-- 🔗 Email -->
+      <tr><td align="center" style="font-family:'Montserrat',Arial,sans-serif; font-size:12px; color:rgba(255,255,255,0.65); padding:4px 0;">
+        <strong style="color:#ffffff;">&#9993;</strong> &nbsp;
+        <a href="/cdn-cgi/l/email-protection#e496819781969285908d8b8a97a490819685ca8192818a9097" style="color:#E8C5A8; text-decoration:none;"><span class="__cf_email__" data-cfemail="4331263026313522372a2c2d3003372631226d2635262d3730">[email&#160;protected]</span></a>
+      </td></tr>
+      <!-- 🔗 Site web -->
+      <tr><td align="center" style="font-family:'Montserrat',Arial,sans-serif; font-size:12px; color:rgba(255,255,255,0.65); padding:4px 0;">
+        <strong style="color:#ffffff;">&#127760;</strong> &nbsp;
+        <a href="https://tera.events" style="color:#E8C5A8; text-decoration:none;">www.tera.events</a>
+      </td></tr>
+    </table>
+  </td>
+</tr>
+
+
+<!-- ══════════════════════════════
+     FOOTER
+══════════════════════════════ -->
+<tr>
+  <td align="center" style="background-color:#0D1540; padding: 28px 40px;">
+    <p style="font-family:'Cormorant Garamond',Georgia,serif; font-size:16px; letter-spacing:5px; color:rgba(255,255,255,0.4); margin:0 0 10px;">TERA EVENTS</p>
+    <table role="presentation" cellpadding="0" cellspacing="0" align="center" style="margin-bottom:12px;">
+      <tr>
+        <!-- 🔗 Réseaux sociaux -->
+        <td style="padding:0 8px;"><a href="https://www.instagram.com/tera.events.ci" style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.35); text-decoration:none;">Instagram</a></td>
+        <td style="padding:0 8px;"><a href="https://www.facebook.com/tera.events.ci"  style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.35); text-decoration:none;">Facebook</a></td>
+        <td style="padding:0 8px;"><a href="https://tera.events"                    style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.35); text-decoration:none;">Site web</a></td>
+      </tr>
+    </table>
+    <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; color:rgba(255,255,255,0.2); letter-spacing:0.5px; line-height:1.8; margin:0;">
+      Abidjan, Côte d''Ivoire &mdash; NATERALIA SARL<br>
+      &copy; 2026 TERA EVENTS &middot; Tous droits réservés<br><br>
+      Vous recevez cet email car vous faites partie de la communauté
