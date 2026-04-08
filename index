@@ -1,445 +1,612 @@
 <!DOCTYPE html>
-<html lang="fr" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>TERA EVENTS — Nos Nouvelles Formules</title>
-<!--[if mso]>
-<noscript>
-<xml>
-<o:OfficeDocumentSettings>
-<o:PixelsPerInch>96</o:PixelsPerInch>
-</o:OfficeDocumentSettings>
-</xml>
-</noscript>
-<![endif]-->
-<style>
-  /* RESET */
-  body, table, td, p, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-  table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse; }
-  img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; display: block; }
-  body { margin: 0; padding: 0; background-color: #EDE8E0; }
+<title>Tera events — Agence d'Event Planning à Abidjan | Corporate & Privé</title>
+<meta name="description" content="Tera events, agence d'event planning à Abidjan. Événements corporate et privés dans notre espace ou dans le lieu de votre choix.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>/* TERA EVENTS — Design System v2
+   Palette extraite du logo :
+   Bleu marine  #152060
+   Or champagne #C4916E
+   Blanc        #FFFFFF
+*/
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
 
-  /* WEB FONTS — fallback gracieux si bloquées */
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&family=Dancing+Script:wght@600&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-  .body-wrapper { background-color: #EDE8E0; width: 100%; }
-  .email-container { max-width: 600px; margin: 0 auto; }
+:root{
+  /* Bleus */
+  --b1:#0E1847;        /* très profond */
+  --b2:#152060;        /* bleu logo principal */
+  --b3:#1C2B78;        /* légèrement plus clair */
+  --b4:#253490;        /* hover / accent */
+  --b-pale:#EEF0F8;    /* fond sections claires */
+  --b-tint:#DDE1F3;    /* bordures douces côté bleu */
 
-  /* MOBILE */
-  @media only screen and (max-width: 620px) {
-    .email-container { width: 100% !important; }
-    .mob-full { width: 100% !important; display: block !important; }
-    .mob-pad  { padding: 24px 20px !important; }
-    .mob-hide { display: none !important; }
-    .mob-font-hero { font-size: 28px !important; line-height: 36px !important; }
-    .mob-font-title { font-size: 24px !important; }
-    .mob-stack { display: block !important; width: 100% !important; }
-    .mob-card  { width: 100% !important; display: block !important; margin-bottom: 12px !important; }
-    .mob-nav-pill { padding: 6px 10px !important; font-size: 8px !important; }
-    .mob-center { text-align: center !important; }
-  }
+  /* Or */
+  --or:#C4916E;        /* rose-or du logo */
+  --or2:#D9AF93;       /* or clair hover */
+  --or3:#EDD5C2;       /* or très pâle */
+  --or4:#8B5E3C;       /* or foncé */
+
+  /* Blanc / neutres */
+  --blanc:#FFFFFF;
+  --off:#FAFAF8;
+  --gris:#6B7080;
+  --gris2:#9CA4B0;
+
+  /* Borders */
+  --bor-or:rgba(196,145,110,0.25);
+  --bor-or-h:rgba(196,145,110,0.55);
+  --bor-b:rgba(255,255,255,0.12);
+  --bor-b-h:rgba(255,255,255,0.25);
+
+  --r:2px; --r2:6px; --r3:12px;
+  --t:0.30s cubic-bezier(.4,0,.2,1);
+  --shadow:0 20px 60px rgba(14,24,71,0.18);
+}
+
+html{scroll-behavior:smooth}
+body{background:var(--blanc);color:var(--b2);font-family:'DM Sans',sans-serif;font-weight:300;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:400;line-height:1.1;color:var(--b2)}
+a{text-decoration:none}
+img{display:block;max-width:100%}
+
+.container{max-width:1180px;margin:0 auto;padding:0 clamp(1.5rem,5vw,3.5rem)}
+section{padding:clamp(4rem,8vw,8rem) 0}
+
+/* Typographie */
+.eyebrow{font-family:'DM Sans',sans-serif;font-size:0.65rem;font-weight:500;letter-spacing:0.26em;text-transform:uppercase;color:var(--or);display:block;margin-bottom:0.9rem}
+.eyebrow-w{font-family:'DM Sans',sans-serif;font-size:0.65rem;font-weight:500;letter-spacing:0.26em;text-transform:uppercase;color:var(--or3);display:block;margin-bottom:0.9rem}
+
+/* Boutons */
+.btn{display:inline-flex;align-items:center;gap:0.55rem;font-family:'DM Sans',sans-serif;font-size:0.72rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;padding:0.9rem 2rem;border-radius:var(--r);transition:all var(--t);cursor:pointer;border:1px solid transparent;white-space:nowrap}
+.btn-or{background:var(--or);color:var(--blanc);border-color:var(--or)}
+.btn-or:hover{background:var(--or2);border-color:var(--or2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(196,145,110,0.35)}
+.btn-bleu{background:var(--b2);color:var(--blanc);border-color:var(--b2)}
+.btn-bleu:hover{background:var(--b3);border-color:var(--b3);transform:translateY(-2px)}
+.btn-outline-w{background:transparent;color:var(--blanc);border-color:rgba(255,255,255,0.45)}
+.btn-outline-w:hover{border-color:var(--or);color:var(--or3)}
+.btn-outline-b{background:transparent;color:var(--b2);border-color:var(--bor-or-h)}
+.btn-outline-b:hover{border-color:var(--or);color:var(--or4)}
+.btn-ghost{background:transparent;color:var(--or);border:none;padding-left:0;padding-right:0;gap:0.5rem}
+.btn-ghost:hover{color:var(--or2);gap:0.9rem}
+
+/* === NAVIGATION === */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.2rem clamp(1.5rem,5vw,3.5rem);display:flex;align-items:center;justify-content:space-between;transition:all var(--t);background:rgba(14,24,71,0.88);backdrop-filter:blur(12px)}
+.nav.scrolled{background:rgba(14,24,71,0.97);backdrop-filter:blur(20px);padding:0.8rem clamp(1.5rem,5vw,3.5rem);border-bottom:1px solid var(--bor-b)}
+.nav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
+.nav-logo-img{height:50px;width:auto;display:block}
+.nav.scrolled .nav-logo-img{height:42px}
+.nav-links{display:flex;align-items:center;gap:1.8rem;list-style:none;margin:0;padding:0}
+.nav-links a{font-size:0.7rem;font-weight:400;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.78);transition:color var(--t);white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{color:var(--blanc)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
+.nav-toggle span{width:22px;height:1px;background:var(--blanc);display:block;transition:all .3s ease}
+.nav.open .nav-toggle span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.nav.open .nav-toggle span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav.open .nav-toggle span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+@media(max-width:960px){
+  .nav-links{display:none;flex-direction:column;position:fixed;inset:0;background:var(--b1);justify-content:center;align-items:center;gap:2.5rem;z-index:150;padding:2rem}
+  .nav-toggle{display:flex}
+  .nav.open .nav-links{display:flex}
+  .nav.open .nav-links a{font-size:1.1rem;color:rgba(255,255,255,0.8)}
+  .nav.open .nav-links .btn{display:inline-flex;margin-top:0.5rem}
+}
+
+/* Sections */
+.section-bleu{background:var(--b2);color:var(--blanc)}
+.section-bleu h1,.section-bleu h2,.section-bleu h3,.section-bleu h4{color:var(--blanc)}
+.section-dark{background:var(--b1);color:var(--blanc)}
+.section-dark h1,.section-dark h2,.section-dark h3,.section-dark h4{color:var(--blanc)}
+.section-pale{background:var(--b-pale)}
+.section-off{background:var(--off)}
+
+/* Cards */
+.card-w{background:var(--blanc);border:1px solid var(--bor-or);border-radius:var(--r3);padding:2rem;transition:border-color var(--t),transform var(--t),box-shadow var(--t)}
+.card-w:hover{border-color:var(--bor-or-h);transform:translateY(-4px);box-shadow:var(--shadow)}
+.card-b{background:rgba(255,255,255,0.07);border:1px solid var(--bor-b);border-radius:var(--r3);padding:2rem;transition:border-color var(--t),background var(--t)}
+.card-b:hover{background:rgba(255,255,255,0.11);border-color:var(--bor-b-h)}
+
+/* Ligne or décorative */
+.or-line{width:36px;height:1px;background:var(--or);display:inline-block;vertical-align:middle;margin-right:0.8rem}
+
+/* Dividers */
+.div-or{border:none;height:1px;background:var(--bor-or);margin:2.5rem 0}
+.div-bw{border:none;height:1px;background:var(--bor-b)}
+
+/* Reveal */
+.reveal{opacity:1;transform:none}
+.js-ready .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.65s ease,transform 0.65s ease}
+.js-ready .reveal.in{opacity:1;transform:none}
+.js-ready .d1{transition-delay:0.1s}.js-ready .d2{transition-delay:0.2s}.js-ready .d3{transition-delay:0.3s}.js-ready .d4{transition-delay:0.4s}
+
+/* Footer */
+footer{background:var(--b1);color:rgba(255,255,255,0.7);padding:4.5rem 0 2rem}
+.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid var(--bor-b);margin-bottom:2rem}
+.footer-logo-name{display:none}
+.footer-logo-tag{font-size:0.58rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--or);display:block;margin-bottom:1.2rem}
+.footer-desc{font-size:0.82rem;line-height:1.7;margin-bottom:1.5rem;color:rgba(255,255,255,0.55)}
+.footer-socials{display:flex;gap:0.65rem}
+.footer-socials a{width:32px;height:32px;border:1px solid var(--bor-b);border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.55);transition:all var(--t)}
+.footer-socials a:hover{border-color:var(--or);color:var(--or)}
+.footer-col-title{font-size:0.62rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--or);margin-bottom:1.1rem;display:block}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:0.55rem}
+.footer-links a{font-size:0.82rem;color:rgba(255,255,255,0.5);transition:color var(--t)}
+.footer-links a:hover{color:var(--blanc)}
+.footer-ci{display:flex;gap:0.65rem;align-items:flex-start;margin-bottom:0.65rem}
+.footer-ci-text{font-size:0.8rem;color:rgba(255,255,255,0.5);line-height:1.55}
+.footer-ci-text a{color:rgba(255,255,255,0.5)}
+.footer-ci-text a:hover{color:var(--or)}
+.footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.75rem}
+.footer-bottom p,.footer-bottom a{font-size:0.72rem;color:rgba(255,255,255,0.35);text-decoration:none}
+.footer-bottom a:hover{color:var(--or)}
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;gap:2rem}}
+@media(max-width:550px){.footer-grid{grid-template-columns:1fr}}
+
+/* Hero */
+.hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;padding-bottom:clamp(4rem,8vh,6rem);background:var(--b2);overflow:hidden}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:0.60;mix-blend-mode:luminosity}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(155deg,rgba(14,24,71,0.25) 0%,rgba(21,32,96,0.50) 55%,var(--b1) 100%)}
+.hero-deco{position:absolute;top:-100px;right:-100px;width:600px;height:600px;border-radius:50%;border:1px solid rgba(196,145,110,0.10);pointer-events:none}
+.hero-deco2{position:absolute;top:-50px;right:-50px;width:450px;height:450px;border-radius:50%;border:1px solid rgba(196,145,110,0.07);pointer-events:none}
+.hero-content{position:relative;z-index:2;width:100%}
+.hero-pill{display:inline-flex;align-items:center;gap:0.6rem;border:1px solid var(--bor-b);background:rgba(255,255,255,0.05);padding:0.38rem 1.1rem;border-radius:40px;margin-bottom:2rem;font-size:0.65rem;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.7)}
+.hero-pill-dot{width:5px;height:5px;background:var(--or);border-radius:50%}
+.hero h1{font-size:clamp(3rem,7.5vw,7rem);font-weight:300;letter-spacing:-0.03em;line-height:0.97;color:var(--blanc);margin-bottom:0.15em}
+.hero h1 em{font-style:italic;color:var(--or3)}
+.hero-sub{font-size:clamp(0.95rem,1.6vw,1.12rem);color:rgba(255,255,255,0.68);line-height:1.7;max-width:520px;margin:1.4rem 0 2.4rem}
+.hero-sub strong{color:var(--blanc)}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:0.9rem;margin-bottom:3.5rem}
+.hero-stats{border-top:1px solid var(--bor-b);padding-top:2rem;display:flex;gap:3rem;flex-wrap:wrap}
+.hstat-n{font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:300;color:var(--blanc);line-height:1;display:block}
+.hstat-n span{color:var(--or)}
+.hstat-l{font-size:0.65rem;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.45)}
+.hero-scroll-ind{position:absolute;right:clamp(1.5rem,5vw,3.5rem);bottom:2rem;z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px}
+.hero-scroll-ind span{font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);writing-mode:vertical-lr}
+.scroll-line{width:1px;height:45px;background:linear-gradient(to bottom,var(--or),transparent);animation:sl 2s ease-in-out infinite}
+@keyframes sl{0%,100%{opacity:1}50%{opacity:0.3}}
+
+/* Dual offer strip */
+.duo{display:grid;grid-template-columns:1fr 1fr}
+.duo-col{padding:clamp(3rem,6vw,5rem);display:flex;flex-direction:column;gap:1.5rem;position:relative;transition:background var(--t)}
+.duo-col:first-child{background:var(--blanc);border-right:1px solid var(--bor-or)}
+.duo-col:last-child{background:var(--b-pale)}
+.duo-col:hover{background:var(--or3)}
+.duo-num{font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:300;color:var(--bor-or);line-height:1;position:absolute;top:1.5rem;right:2rem}
+.duo-icon{width:44px;height:44px;border:1px solid var(--bor-or);border-radius:var(--r);display:flex;align-items:center;justify-content:center}
+.duo-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,2.5vw,2.2rem);font-weight:400;color:var(--b2);line-height:1.15}
+.duo-desc{font-size:0.88rem;color:var(--gris);line-height:1.72;flex:1}
+.duo-note{font-size:0.75rem;color:var(--b4);font-weight:500;letter-spacing:0.04em}
+@media(max-width:640px){.duo{grid-template-columns:1fr}.duo-col:first-child{border-right:none;border-bottom:1px solid var(--bor-or)}}
+
+/* Singularité */
+.singu{display:grid;grid-template-columns:1fr 1.1fr;gap:0;border:1px solid var(--bor-or);border-radius:var(--r3);overflow:hidden;margin-top:clamp(3rem,6vw,6rem)}
+.singu-text{padding:clamp(2.5rem,5vw,4rem);border-right:1px solid var(--bor-or)}
+.singu-visual{position:relative;min-height:400px;overflow:hidden}
+.singu-visual img{width:100%;height:100%;object-fit:cover;opacity:0.85;transition:opacity var(--t);display:block}
+.singu-visual:hover img{opacity:1}
+.singu-list{list-style:none;margin-top:1.8rem;display:flex;flex-direction:column;gap:0.85rem}
+.singu-list li{display:flex;gap:0.9rem;align-items:flex-start;font-size:0.88rem;color:var(--gris);line-height:1.6}
+.singu-list li::before{content:'';width:5px;height:5px;background:var(--or);border-radius:50%;flex-shrink:0;margin-top:7px}
+@media(max-width:760px){.singu{grid-template-columns:1fr}.singu-text{border-right:none;border-bottom:1px solid var(--bor-or)}.singu-visual{min-height:280px}}
+
+/* Services */
+.svcs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--bor-or);border-radius:var(--r3);overflow:hidden}
+.svc{padding:2rem 1.75rem;border-right:1px solid var(--bor-or);background:var(--blanc);transition:background var(--t)}
+.svc:last-child{border-right:none}
+.svc:hover{background:var(--b-pale)}
+.svc svg{opacity:0.6;margin-bottom:1.1rem}
+.svc h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--b2);margin-bottom:0.5rem}
+.svc p{font-size:0.8rem;color:var(--gris);line-height:1.6}
+@media(max-width:900px){.svcs{grid-template-columns:1fr 1fr}.svc{border-right:none;border-bottom:1px solid var(--bor-or)}.svc:nth-child(odd){border-right:1px solid var(--bor-or)}}
+@media(max-width:480px){.svcs{grid-template-columns:1fr}.svc{border-right:none}}
+
+/* Clients */
+.clients-belt{border-top:1px solid var(--bor-or);border-bottom:1px solid var(--bor-or);padding:1.6rem 0;overflow:hidden}
+.clients-track{display:flex;gap:3rem;align-items:center;animation:mq 22s linear infinite;width:max-content}
+.clients-belt:hover .clients-track{animation-play-state:paused}
+@keyframes mq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.clogo{font-family:'Cormorant Garamond',serif;font-size:0.8rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--gris2);padding:0.45rem 1.3rem;border:1px solid var(--bor-or);white-space:nowrap;transition:all var(--t)}
+.clogo:hover{color:var(--or4);border-color:var(--bor-or-h)}
+
+/* Testimonials */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.testi{background:var(--blanc);border:1px solid var(--bor-or);border-radius:var(--r3);padding:2rem;position:relative}
+.testi::before{content:'"';font-family:'Cormorant Garamond',serif;font-size:5.5rem;font-weight:300;color:var(--or);opacity:0.15;position:absolute;top:-4px;left:1.5rem;line-height:1}
+.testi-cat{font-size:0.62rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--or);margin-bottom:0.9rem;display:block}
+.testi-txt{font-size:0.88rem;color:var(--gris);line-height:1.7;font-style:italic;position:relative;z-index:1;margin-bottom:1.4rem}
+.testi-auth strong{display:block;font-size:0.85rem;font-weight:500;color:var(--b2)}
+.testi-auth span{font-size:0.76rem;color:var(--gris2)}
+@media(max-width:760px){.testi-grid{grid-template-columns:1fr}}
+
+/* CTA Banner */
+.cta-band{background:var(--b2);border-radius:var(--r3);padding:clamp(3rem,6vw,5rem);text-align:center;position:relative;overflow:hidden}
+.cta-band::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:400px;height:400px;background:radial-gradient(circle,rgba(196,145,110,0.10) 0%,transparent 65%);pointer-events:none}
+.cta-band h2{color:var(--blanc);font-size:clamp(2rem,4vw,3.5rem)}
+.cta-band p{color:rgba(255,255,255,0.65);max-width:500px;margin:1rem auto 0;line-height:1.72}
+.cta-band-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem}
+
+/* ══ HAMBURGER MOBILE ══════════════════════════════════════════ */
+@media(max-width:960px){.nav-links{display:none !important}.nav-toggle{display:none !important}}
+#hbg-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:9999;position:relative}
+#hbg-btn span{display:block;width:25px;height:2px;background:#fff;border-radius:2px;transition:all .3s ease}
+@media(max-width:960px){#hbg-btn{display:flex}}
+#hbg-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+#hbg-btn.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+#hbg-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+#hbg-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:#0E1847;z-index:9998;flex-direction:column;padding-top:72px;overflow-y:auto}
+#hbg-menu.open{display:flex !important}
+#hbg-menu a{display:block;padding:1rem 2rem;color:rgba(255,255,255,.8);font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.08);transition:background .2s,color .2s}
+#hbg-menu a:first-child{border-top:1px solid rgba(255,255,255,.08)}
+#hbg-menu a:hover{color:#C4916E;background:rgba(255,255,255,.04)}
+#hbg-menu .hbg-cta{margin:1.5rem 2rem;padding:.9rem;background:#C4916E;color:#fff !important;text-align:center;border-radius:2px;border:none !important}
+#hbg-menu .hbg-cta:hover{background:#D9AF93 !important}
+#hbg-close{position:absolute;top:1rem;right:1.5rem;background:none;border:none;color:rgba(255,255,255,.7);font-size:1.6rem;cursor:pointer;z-index:9999;line-height:1;padding:4px 8px}
+/* ══════════════════════════════════════════════════════════════ */
+
+/* ══ POPUP SALLE TERA ══════════════════════════════════════════ */
+#popup-overlay{
+  display:none;
+  position:fixed;inset:0;
+  background:rgba(14,24,71,0.75);
+  backdrop-filter:blur(4px);
+  z-index:99999;
+  align-items:center;
+  justify-content:center;
+  padding:1.5rem;
+}
+#popup-overlay.visible{display:flex}
+#popup-box{
+  position:relative;
+  width:100%;max-width:480px;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 32px 80px rgba(0,0,0,0.5);
+  animation:popIn .45s cubic-bezier(.34,1.56,.64,1) both;
+}
+@keyframes popIn{
+  from{opacity:0;transform:scale(.88) translateY(20px)}
+  to{opacity:1;transform:scale(1) translateY(0)}
+}
+#popup-img{
+  width:100%;
+  display:block;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  object-position:center top;
+}
+#popup-close{
+  position:absolute;top:.9rem;right:.9rem;
+  width:32px;height:32px;
+  background:rgba(14,24,71,0.75);
+  border:1px solid rgba(255,255,255,0.25);
+  border-radius:50%;
+  color:#fff;font-size:1rem;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s;
+  line-height:1;
+}
+#popup-close:hover{background:rgba(196,145,110,0.9)}
+#popup-cta{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:1.5rem 2rem;
+  background:linear-gradient(to top, rgba(14,24,71,0.95) 0%, rgba(14,24,71,0.7) 70%, transparent 100%);
+  text-align:center;
+}
+#popup-cta a{
+  display:inline-block;
+  background:#C4916E;
+  color:#fff;
+  font-family:'DM Sans',sans-serif;
+  font-size:.72rem;
+  font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  padding:.85rem 2rem;
+  border-radius:2px;
+  text-decoration:none;
+  transition:background .2s,transform .2s;
+}
+#popup-cta a:hover{background:#D9AF93;transform:translateY(-2px)}
+/* ═══════════════════════════════════════════════════════════════ */
+
 </style>
 </head>
 <body>
-<div class="body-wrapper">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-<tr><td align="center" style="padding: 20px 10px;">
-<table class="email-container" role="presentation" width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;">
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="data:image/jpeg;base64,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" alt="Tera events" class="nav-logo-img">
+  </a>
+  <ul class="nav-links" id="nav-links"><li><a href="corporate.html">Corporate</a></li><li><a href="evenements-prives.html">Privé</a></li><li><a href="event-planning.html">Event planning</a></li>
+    <li><a href="traiteur.html">Traiteur</a></li><li><a href="nos-realisations.html">Réalisations</a></li><li><a href="equipe.html">L'équipe</a></li>
+    <li><a href="contact.html" class="btn btn-or" style="margin-left:0.5rem;padding:0.65rem 1.5rem">Devis gratuit</a></li>
+  </ul>
+  <button id="hbg-btn" onclick="hbgToggle()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<!-- ══ POPUP SALLE TERA ══════════════════════════════════════ -->
+<div id="popup-overlay" onclick="closePopup()">
+  <div id="popup-box" onclick="event.stopPropagation()">
+    <img id="popup-img" 
+         src="https://static.wixstatic.com/media/d3492f_210372d726914ab7a93f7d7561072537~mv2.png" 
+         alt="Salle Tera — Offre spéciale">
+    <button id="popup-close" onclick="closePopup()" aria-label="Fermer">&#x2715;</button>
+    <div id="popup-cta">
+      <a href="contact.html">Demander un devis</a>
+    </div>
+  </div>
+</div>
+<!-- ═══════════════════════════════════════════════════════════ -->
 
+<div id="hbg-menu" onclick="hbgClose()">
+  <button id="hbg-close" onclick="event.stopPropagation();hbgClose()">&#x2715;</button>
+  <a href="corporate.html" onclick="event.stopPropagation();hbgClose()">Corporate</a>
+  <a href="evenements-prives.html" onclick="event.stopPropagation();hbgClose()">Privé</a>
+  <a href="event-planning.html" onclick="event.stopPropagation();hbgClose()">Event planning</a>
+  <a href="traiteur.html" onclick="event.stopPropagation();hbgClose()">Traiteur</a>
+  <a href="nos-realisations.html" onclick="event.stopPropagation();hbgClose()">Réalisations</a>
+  <a href="equipe.html" onclick="event.stopPropagation();hbgClose()">L'équipe</a>
+  <a href="contact.html" class="hbg-cta" onclick="hbgClose()">Devis gratuit</a>
+</div>
 
-<!-- ══════════════════════════════
-     HEADER
-══════════════════════════════ -->
-<tr>
-  <td align="center" style="background-color:#111C52; padding: 40px 40px 32px;">
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-      <tr>
-        <td align="center" style="padding-bottom:12px;">
-          <img
-            src="https://static.wixstatic.com/media/d3492f_3679eee6e1b24b259225e6e63889965b~mv2.jpeg"
-            alt="TERA EVENTS"
-            width="140"
-            style="display:block; margin:0 auto; width:140px; height:auto; border:0;"
-          />
-        </td>
-      </tr>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://static.wixstatic.com/media/d3492f_778d329bf1fa466cbafbd77d90ae9339~mv2.jpeg/v1/fill/w_1920,h_1080/IMG_2923.jpg" alt="Tera events — Abidjan">
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-deco"></div><div class="hero-deco2"></div>
+  <div class="container hero-content" style="padding-top:120px">
+    <div class="hero-pill"><span class="hero-pill-dot"></span>Agence d'event planning · Abidjan</div>
+    <h1>L'art de créer<br>des <em>moments</em><br>d'exception</h1>
+    <p class="hero-sub">Nous concevons et organisons vos événements — <strong>dans notre espace</strong> ou <strong>dans le lieu de votre choix.</strong> Corporate &amp; privé.</p>
+    <div class="hero-ctas">
+      <a href="corporate.html" class="btn btn-or">Notre offre corporate</a>
+      <a href="contact.html" class="btn btn-outline-w">Demander un devis</a>
+    </div>
+    <div class="hero-stats">
+      <div><span class="hstat-n">4<span>+</span></span><span class="hstat-l">Années d'expérience</span></div>
+      <div><span class="hstat-n">100<span>+</span></span><span class="hstat-l">Événements reçus et organisés</span></div>
+      <div><span class="hstat-n">100<span>%</span></span><span class="hstat-l">Satisfaction client</span></div>
+    </div>
+  </div>
+  <div class="hero-scroll-ind"><span>Découvrir</span><div class="scroll-line"></div></div>
+</section>
 
-      <tr>
-        <td align="center" style="padding-bottom: 16px;">
-          <table role="presentation" cellpadding="0" cellspacing="0" align="center">
-            <tr>
-              <td style="width:60px; height:1px; background: linear-gradient(90deg, transparent, #C4906A, transparent); font-size:0; line-height:0;">&nbsp;</td>
-            </tr>
-          </table>
-          <!-- Ligne dorée simulée -->
-          <div style="width:60px; height:1px; background-color:#C4906A; margin:0 auto;"></div>
-        </td>
-      </tr>
-      <tr>
-        <td align="center" style="font-family: 'Montserrat', Arial, sans-serif; font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: #C9B8A0; font-weight: 600;">
-          Luxury Venue &amp; Event Coordinator
-        </td>
-      </tr>
-    </table>
-  </td>
-</tr>
+<!-- DOUBLE OFFRE -->
+<div class="duo reveal">
+  <div class="duo-col">
+    <span class="duo-num">01</span>
+    <div class="duo-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C4916E" stroke-width="1.3"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+    <span class="eyebrow">Expertise 01</span>
+    <h2 class="duo-title">Événements Corporate</h2>
+    <p class="duo-desc">Séminaires, conférences, lancements de produit, soirées d'entreprise, team buildings… Nous accompagnons les entreprises, institutions et ONG dans la création d'expériences professionnelles marquantes (jusqu'à 200 personnes).</p>
+    <p class="duo-note">Dans notre salle ou sur le site de votre choix</p>
+    <a href="corporate.html" class="btn btn-ghost">Découvrir l'offre <span>→</span></a>
+  </div>
+  <div class="duo-col">
+    <span class="duo-num">02</span>
+    <div class="duo-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C4916E" stroke-width="1.3"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+    <span class="eyebrow">Expertise 02</span>
+    <h2 class="duo-title">Événements Privés</h2>
+    <p class="duo-desc">Mariages, anniversaires, baptêmes, soirées de gala… Chaque célébration est unique. Nous créons des univers intimes et personnalisés qui traduisent vos envies en décors, ambiances et émotions inoubliables.</p>
+    <p class="duo-note">Chez vous, chez nous, ou partout ailleurs</p>
+    <a href="evenements-prives.html" class="btn btn-ghost">Découvrir l'offre <span>→</span></a>
+  </div>
+</div>
 
+<!-- SINGULARITÉ -->
+<section>
+  <div class="container">
+    <div class="reveal" style="margin-bottom:1rem"><span class="eyebrow">Notre singularité</span></div>
+    <div class="singu reveal">
+      <div class="singu-text">
+        <h2 style="font-size:clamp(1.8rem,3vw,2.8rem);margin-bottom:1.2rem">Votre vision.<br>Nos solutions.<br><em style="color:var(--or);font-style:italic">N'importe où.</em></h2>
+        <p style="font-size:0.9rem;color:var(--gris);line-height:1.75">TERA EVENTS est avant tout une agence d'Event Planning. Nous disposons de notre propre espace, la salle TERA, à Cocody — mais notre expertise ne s'arrête pas là. Nous vous accompagnons où vous avez besoin de nous.</p>
+        <ul class="singu-list">
+          <li>Dans <strong>notre Salle TERA </strong> — jusqu'à 100 personnes, tout inclus si souhaité</li>
+          <li>Dans <strong>vos bureaux, restaurant</strong>, ou tout lieu que vous choisissez</li>
+          <li>Prise en charge <strong>complète ou partielle</strong> selon votre niveau de besoin</li>
+        </ul>
+        <div style="margin-top:2.2rem"><a href="contact.html" class="btn btn-or">Parlons de votre projet</a></div>
+      </div>
+      <div class="singu-visual">
+        <img src="https://static.wixstatic.com/media/d3492f_c947843c043c49b29ad0bbb04adfc834~mv2.jpeg" alt="Événement Tera events">
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- ══════════════════════════════
-     HERO
-══════════════════════════════ -->
-<tr>
-  <td align="center" style="background-color:#1B2A6B; padding: 48px 40px 40px; border-bottom: 3px solid #C4906A;">
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-      <tr>
-        <td align="center" style="font-family: 'Montserrat', Arial, sans-serif; font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: #C4906A; font-weight: 600; padding-bottom: 18px;">
-          &#10022; Message de l''équipe TERA EVENTS &#10022;
-        </td>
-      </tr>
-      <tr>
-        <td align="center" class="mob-font-hero" style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 36px; font-weight: 300; color: #ffffff; line-height: 1.25; padding-bottom: 22px;">
-          Nous avons repensé l''événementiel.<br>
-          <em style="color:#E8C5A8;">Pour vous.</em>
-        </td>
-      </tr>
-      <tr>
-        <td align="center" style="font-family: 'Montserrat', Arial, sans-serif; font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.75); line-height: 1.9; padding-bottom: 8px;">
-          Chère cliente, cher client,<br><br>
-          Depuis notre création, nous avons eu l''honneur d''orchestrer vos moments les plus précieux. Aujourd''hui, nous franchissons une <strong style="color:#E8C5A8; font-weight:500;">nouvelle étape</strong> — plus de formules, plus de flexibilité, et toujours la même promesse : faire de chaque événement une expérience <strong style="color:#E8C5A8; font-weight:500;">unique, élégante et sans faille</strong>.<br><br>
-          Trois univers. Une seule adresse.
-        </td>
-      </tr>
-      <tr>
-        <td align="center" style="padding-top:20px;">
-          <div style="width:60px; height:1px; background-color:#C4906A; margin:0 auto 16px;"></div>
-          <span style="font-family: 'Dancing Script', 'Brush Script MT', cursive; font-size: 22px; color: #C4906A;">Joséphine &amp; l'équipe TERA EVENTS</span>
-        </td>
-      </tr>
-    </table>
-  </td>
-</tr>
+<!-- SERVICES -->
+<section class="section-off">
+  <div class="container">
+    <div class="reveal" style="margin-bottom:2.5rem;text-align:center">
+      <span class="eyebrow">Ce que nous faisons</span>
+      <h2 style="font-size:clamp(2rem,3.5vw,3rem)">Une prise en charge à 360°</h2>
+    </div>
+    <div class="svcs reveal">
+      <div class="svc">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C4916E" stroke-width="1.3"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <h4>Décoration &amp; Scénographie</h4>
+        <p>Des créations visuelles uniques qui subliment chaque espace et reflètent votre identité.</p>
+      </div>
+      <div class="svc">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C4916E" stroke-width="1.3"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        <h4>Traiteur &amp; Bar</h4>
+        <p>Buffets, cocktails, service à table — et une équipe de chefs pour des expériences gustatives d'exception.</p>
+      </div>
+      <div class="svc">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C4916E" stroke-width="1.3"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <h4>Communication &amp; Médias</h4>
+        <p>Supports visuels, couverture photo &amp; vidéo, communication digitale de votre événement.</p>
+      </div>
+      <div class="svc">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C4916E" stroke-width="1.3"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <h4>Coordination Jour J</h4>
+        <p>Une équipe dédiée pour gérer le timing, les prestataires et chaque imprévu avec sang-froid.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- CLIENTS DÉFILANT -->
+<div class="clients-belt reveal" style="background:var(--blanc)">
+  <div class="clients-track">
+    <span class="clogo">Particuliers</span><span class="clogo">Entreprises &amp; PME</span><span class="clogo">ONG &amp; Ambassades</span><span class="clogo">Institutions</span><span class="clogo">Startups</span><span class="clogo">Agences de communication</span>
+    <span class="clogo">Particuliers</span><span class="clogo">Entreprises &amp; PME</span><span class="clogo">ONG &amp; Ambassades</span><span class="clogo">Institutions</span><span class="clogo">Startups</span><span class="clogo">Agences de communication</span>
+  </div>
+</div>
 
-<!-- NAV PILLS -->
-<tr>
-  <td align="center" style="background-color:#111C52; padding: 0 30px 26px;">
-    <table role="presentation" cellpadding="0" cellspacing="0" align="center">
-      <tr>
-        <td style="padding: 4px;">
-          <a href="#" class="mob-nav-pill" style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; font-weight:700; color:#E8C5A8; text-decoration:none; border:1px solid rgba(196,144,106,0.5); padding:8px 14px; display:inline-block;">&#9671; Salle TERA</a>
-        </td>
-        <td style="padding: 4px;">
-          <a href="#" class="mob-nav-pill" style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; font-weight:700; color:#E8C5A8; text-decoration:none; border:1px solid rgba(196,144,106,0.5); padding:8px 14px; display:inline-block;">&#9671; Corporate</a>
-        </td>
-        <td style="padding: 4px;">
-          <a href="#" class="mob-nav-pill" style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; font-weight:700; color:#E8C5A8; text-decoration:none; border:1px solid rgba(196,144,106,0.5); padding:8px 14px; display:inline-block;">&#9671; Event Planning</a>
-        </td>
-      </tr>
-    </table>
-  </td>
-</tr>
+<!-- RÉALISATIONS APERÇU -->
+<section>
+  <div class="container">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:2.5rem" class="reveal">
+      <div><span class="eyebrow">Nos réalisations</span><h2 style="font-size:clamp(2rem,3.5vw,3rem)">Des moments<br>qui marquent</h2></div>
+      <a href="nos-realisations.html" class="btn btn-outline-b" style="flex-shrink:0">Tout voir</a>
+    </div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:3px;border-radius:var(--r3);overflow:hidden;height:460px" class="reveal">
+      <div style="position:relative;overflow:hidden">
+        <img src="https://static.wixstatic.com/media/d3492f_f218848499c544b495a61c974fe362f0~mv2.png" alt="" style="width:100%;height:100%;object-fit:cover;opacity:0.82;transition:all 0.6s ease">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(14,24,71,0.85) 0%,transparent 50%);padding:1.5rem;display:flex;flex-direction:column;justify-content:flex-end">
+          <span style="font-size:0.6rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--or);background:rgba(196,145,110,0.12);border:1px solid rgba(196,145,110,0.3);padding:0.2rem 0.6rem;display:inline-block;margin-bottom:0.4rem;width:fit-content">Corporate</span>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--blanc)">Séminaire institutionnel</p>
+        </div>
+      </div>
+      <div style="position:relative;overflow:hidden">
+        <img src="https://static.wixstatic.com/media/d3492f_3a0591e2b5924c898ff28347c6e7a710~mv2.jpg" alt="" style="width:100%;height:100%;object-fit:cover;opacity:0.82;transition:all 0.6s ease">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(14,24,71,0.85) 0%,transparent 50%);padding:1.5rem;display:flex;flex-direction:column;justify-content:flex-end">
+          <span style="font-size:0.6rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--or);background:rgba(196,145,110,0.12);border:1px solid rgba(196,145,110,0.3);padding:0.2rem 0.6rem;display:inline-block;margin-bottom:0.4rem;width:fit-content">Privé</span>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--blanc)">Anniversaire haut de gamme</p>
+        </div>
+      </div>
+      <div style="position:relative;overflow:hidden">
+        <img src="https://static.wixstatic.com/media/d3492f_ee85abe7dc3748bf87d0f03b5790073b~mv2.jpeg" alt="" style="width:100%;height:100%;object-fit:cover;opacity:0.82;transition:all 0.6s ease">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(14,24,71,0.85) 0%,transparent 50%);padding:1.5rem;display:flex;flex-direction:column;justify-content:flex-end">
+          <span style="font-size:0.6rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--or);background:rgba(196,145,110,0.12);border:1px solid rgba(196,145,110,0.3);padding:0.2rem 0.6rem;display:inline-block;margin-bottom:0.4rem;width:fit-content">Décoration</span>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--blanc)">Scénographie sur mesure</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- TÉMOIGNAGES -->
+<section class="section-pale">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:3rem" class="reveal">
+      <span class="eyebrow">Témoignages</span>
+      <h2 style="font-size:clamp(2rem,3.5vw,3rem)">Ce que disent nos clients</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi reveal"><span class="testi-cat">Corporate</span><p class="testi-txt">L'équipe a parfaitement compris nos attentes et livré un séminaire au-delà de nos espérances. Professionnalisme et créativité au rendez-vous.</p><div class="testi-auth"><strong>Direction RH</strong><span>Institution partenaire, Abidjan</span></div></div>
+      <div class="testi reveal d2"><span class="testi-cat">Événement privé</span><p class="testi-txt">Merci merci merci ! La fête fut belle et c'est aussi grâce à vous et votre équipe. Tout était comme je l'avais imaginé.</p><div class="testi-auth"><strong>Madame Essombo</strong><span>Anniversaire, Abidjan</span></div></div>
+      <div class="testi reveal d3"><span class="testi-cat">Événement privé</span><p class="testi-txt">La fête s'est très bien passée, tout le monde était content. Vos équipes ont vraiment assuré. On n'a rien eu à faire — que profiter.</p><div class="testi-auth"><strong>Madame Silué</strong><span>Célébration familiale</span></div></div>
+    </div>
+  </div>
+</section>
 
-<!-- ══════════════════════════════
-     01 · SALLE TERA
-══════════════════════════════ -->
-<tr>
-  <td align="center" style="background-color:#FAF6F0; padding: 36px 40px 8px;">
-    <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:5px; text-transform:uppercase; color:#C4906A; font-weight:700; margin:0 0 8px;">01 &middot; Privatisations festives</p>
-    <p class="mob-font-title" style="font-family:'Cormorant Garamond',Georgia,serif; font-size:28px; font-weight:400; color:#1B2A6B; letter-spacing:1px; margin:0 0 6px;">Salle TERA</p>
-    <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:#C9B8A0; font-weight:600; margin:0 0 10px;">Capacité &middot; jusqu''à 100 personnes</p>
-    <p style="font-family:'Montserrat',Arial,sans-serif; font-size:12px; font-weight:300; color:#4A4A4A; line-height:1.8; margin:0;">
-      Mariages, anniversaires, baptêmes, soirées privées… Un cadre intimiste et raffiné, entièrement équipé, pour que vos célébrations soient inoubliables.
-    </p>
-  </td>
-</tr>
+<!-- CTA FINAL -->
+<section>
+  <div class="container">
+    <div class="cta-band reveal">
+      <span class="eyebrow-w" style="display:block;margin-bottom:0.8rem">Commençons ensemble</span>
+      <h2>Votre prochain événement<br>mérite <em style="color:var(--or3);font-style:italic">l'exception</em></h2>
+      <p>Prenons le temps d'un échange. Dites-nous votre projet — nous vous proposons une solution sur mesure, dans notre espace ou dans le vôtre.</p>
+      <div class="cta-band-btns">
+        <a href="contact.html" class="btn btn-or">Planifier notre rencontre</a>
+        <a href="nos-realisations.html" class="btn btn-outline-w">Voir nos réalisations</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- CARDS SALLE — TABLE 2 colonnes -->
-<tr>
-  <td style="background-color:#FAF6F0; padding: 16px 32px 0;">
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-      <tr>
-        <!-- Card 1 -->
-        <td class="mob-card" valign="top" width="48%" style="background:#ffffff; border-top:3px solid #2D4A3E; padding:22px 18px;">
-          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:#C9B8A0; font-weight:600; margin:0 0 8px;">Formule &middot; 01</p>
-          <p style="font-family:'Cormorant Garamond',Georgia,serif; font-size:16px; font-weight:600; color:#1B2A6B; text-transform:uppercase; letter-spacing:1.5px; line-height:1.3; margin:0 0 10px;">Location<br>de la Salle</p>
-          <div style="width:28px; height:2px; background-color:#2D4A3E; margin-bottom:12px;"></div>
-          <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px; position:relative;"><span style="color:#2D4A3E; margin-right:4px;">—</span> Accès à la salle</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#2D4A3E; margin-right:4px;">—</span> Logistique complète</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#2D4A3E; margin-right:4px;">—</span> Écran de projection &amp; sono</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#2D4A3E; margin-right:4px;">—</span> Ingénieur son dédié</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#2D4A3E; margin-right:4px;">—</span> Protocole d''accueil</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#2D4A3E; margin-right:4px;">—</span> Wi-Fi haut débit</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#2D4A3E; margin-right:4px;">—</span> Groupe électrogène</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#2D4A3E; margin-right:4px;">—</span> Nettoyage avant et après</td></tr>
-          </table>
-        </td>
-        <!-- Spacer -->
-        <td width="4%" style="font-size:0; line-height:0;">&nbsp;</td>
-        <!-- Card 2 -->
-        <td class="mob-card" valign="top" width="48%" style="background:#ffffff; border-top:3px solid #C4906A; padding:22px 18px;">
-          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:#C9B8A0; font-weight:600; margin:0 0 8px;">Formule &middot; 02</p>
-          <p style="font-family:'Cormorant Garamond',Georgia,serif; font-size:16px; font-weight:600; color:#1B2A6B; text-transform:uppercase; letter-spacing:1.5px; line-height:1.3; margin:0 0 10px;">Packages<br>Salle TERA</p>
-          <div style="width:28px; height:2px; background-color:#C4906A; margin-bottom:12px;"></div>
-          <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#C4906A; margin-right:4px;">—</span> Tout ce qui est en Location</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#C4906A; margin-right:4px;">—</span> Décoration sur mesure</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#C4906A; margin-right:4px;">—</span> Traiteur &amp; bar professionnel</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#C4906A; margin-right:4px;">—</span> Couverture photo &amp; vidéo (option)</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#C4906A; margin-right:4px;">—</span> Équipe dédiée Jour J</td></tr>
-          </table>
-          <div style="background-color:#2D4A3E; display:inline-block; margin-top:16px; padding:6px 14px;">
-            <span style="font-family:'Montserrat',Arial,sans-serif; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#ffffff;">&minus;20% sur la salle</span>
-          </div>
-        </td>
-      </tr>
-    </table>
-  </td>
-</tr>
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAQDAwMDAgQDAwMEBAQFBgoGBgUFBgwICQcKDgwPDg4MDQ0PERYTDxAVEQ0NExoTFRcYGRkZDxIbHRsYHRYYGRj/2wBDAQQEBAYFBgsGBgsYEA0QGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBj/wAARCAGQAXUDASIAAhEBAxEB/8QAHQABAAAHAQEAAAAAAAAAAAAAAAIDBAUGCAkHAf/EAF0QAAEDAwEEBQcFCAwLCAEFAAECAwQABQYRBxIhMQgTQVFhFCIyUnGBkRVCYoKhFiMzQ3JzorEJFyQlNDhTdJKztNIYJjU2RFRWY5WywTdXZHWTo8LRRVWDhPDx/8QAGwEBAAMBAQEBAAAAAAAAAAAAAAIDBAUBBgf/xAA/EQACAQICBggDBgUEAgMAAAAAAQIDESExBBJBUWGBBSJxkaGxwdETMvAGI0JScuEzNLLC8RRiguKS8hUk0v/aAAwDAQACEQMRAD8A1J6xfrq+Jp1i/XV8TUNK/WD5si6xfrq+Jp1i/XV8TUNKAi6xfrq+Jp1i/XV8TUNKAi6xfrq+Jp1i/XV8TUNKAi6xfrq+Jp1i/XV8TUNKAi6xfrq+Jp1i/XV8TUNKAi6xfrq+Jp1i/XV8TUNKAi6xfrq+Jp1i/XV8TUNKAi6xfrq+Jp1i/XV8TUNKAi6xfrq+Jp1i/XV8TUNKAi6xfrq+Jp1i/XV8TUNKAi6xfrq+Jp1i/XV8TUNKAi6xfrq+Jp1i/XV8TUNKAi6xfrq+Jp1i/XV8TUNKAi6xfrq+Jp1i/XV8TUNKAi6xfrq+Jp1i/XV8TUNKAi6xfrq+Jp1i/XV8TUNKAi6xfrq+Jp1i/XV8TUNKAi6xfrq+Jp1i/XV8TUNKAi6xfrq+Jp1i/XV8TUNKAi6xfrq+Jp1i/XV8TUNKAi6xfrq+Jp1i/XV8TUNKAi6xfrq+Jp1i/XV8TUNKAi6xfrq+JpUNKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUqbIiyYjiUSmHGVLQlxKVjQlKhqD7CKullgRrnarrG6vWe0wJUZQJ4hB++I05cUnX3VVUrRhDXeWHi8+wshSlOWptLQ22t15DTSCta1BKUjmSToBUT7D0aU5GkNqaeaUULQoaFKgdCDUCVKQoLQfOB3kkd44ir/AJkEuZObi2NG7gw1MT7VpG9+kDXkqrVWMNjT71YlGmnTlPamvUoE2h1WJrvweb6pEsRFNaHeBKCsK7tOBFTMesir/d3IKZSY5RFfk76k7wPVtle7p46aVXW1fW7Nb/FP4qTFkj4qQf1ipmBL3MqfVrp+9swf+wqs1SvONOs08Y3t3JmiFGDqUk8pW82jGE+cAe8a1X3G0S7ZDtsmSW924RvK2Qg6kI3ikb3cdUn3VbgdGge5Ov2Vl20BQbvdqtw/0Gzw4+ncer3z9q60TqNVYQW29+X7tGeFNOnKb2W8f2TMUShayQhClEAqISCdAOZr5WW4ynyDBcqvxO6vydu1sH6b6tV6exCD8axRttbrqWmkFbi1BKEjmSToB8a9hW1pTWyOHgn6idLVjF7Ze9vQhpV2yW0sWLJpFoZlKkKjBLbyyAAHd0FaRp2BRI91Wmp05qpFTjkyucHCTjLNClKVMiKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUq7Y9ZRkF5+S0XCPEkuNq8mD+oS+6PRa3uSSrjoTw14dtQqTjTi5yyRKEHOSjHNlFb4nl91jwvKGY/XuBsOvEhCSTpqSOyvk6FKttyfgTWVNSGFltxCuYIqCTGfhzHYktlxl9pRbcacG6pChwII7DWVOp+7HFTLR59+tLID4+dMip4Bfitvke9PHsqirWdOUZ/geHZufY/bZcvpUlUi4r514712/uUoHy/gp+dcLIn3uRFH/AOCj8DVpslyVZ8hiXEJ3ksuArT6yDwUPeCaisV2XZL9HuCUB1tJ3XWjydbVwWg+0E/ZU7JLQizX5ceOvrYTyEyIjv8oyvik+0cj4g1VGCjOWjy+WSbXP5l4358CyUnKMa8fmjZP0fpy4kvIbam0ZLKgtHeZSvfYV6zahvIPwI+FVtx/dmAWacOK4rrsBZ8ODiPsKqmXMfKuB2y7ji/BUbbJPbu8VMqPu3k+6oLKPLMMyC281NNt3BseLat1f6KvsqrXl8KE5fNCVn/TfxuWqC+JOEcpRuv6vSxDjv3yz5FF9e3FwDxQ4lX/3UWGnTI3j/wCAlf1KqYaOtyN6J2SYMlnTvJaJH6qhwzjf3P5hJP8A7Kq80nBV48E/Br0Gj4ug+NvFP1LHGaL77LAGpcUlAHtIH/Wr7nEgSdol2Wk6pQ/1KfYhIQP+WqTFY4lZlaGDyMpsn2A6n9VUs5xc++ynUaqckSFlPiVLOn6xWptPSeyPm/2M8U1o+G2S8F+5fro55BstsVrSdFzpD1zeHeB96b19wUffUeAtsRr9IyWa2FxbJHVN3Vclveiyj3rIP1TVHmTqfupVAaOrNvZbgo7vvaQFfpFVTp7nyRs7g2lPmyLm58oSe8Np1Syk/pK+FZVeWjqCzqO/J4vujh3Gl2jXctlNW5rBeOPZcxx992TJdkyFlx11ZccWealE6k/EmspySFHxvGbdjrjDRuzwTcLg4UgrY3k/emAeY0Sd5Q71CqfD4kRE5/IrqyHLdaUiQptXJ97X70171cT4A1ZLhPl3W7SblPdLsqS6p11Z7VE6mtL+8qqC+WOfbsXJY9xnX3dLWfzSy7Nr55d5JbadeWUMtLcUElRCElRAA1J4dgFQVm0wowjEVWpvhkd2aBmrB86DFVxDA7lr4FXcNBWGsMPypLceMy4884oIQ02kqUonkABzNW0a3xU526ux7+PZuK6tH4bUfxbVu4du8l0r6QUqKVAgg6EEaEGvlXlApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUq52PHb5k1wdgY/apNylNMLkqYjJ3l9WgaqUE8zpryGp7hXkpKKvJ2R7GLk7JYlTjGLzcsnyLdbJUNNwQyXY8R9zcXMUDxbaJ4Femp0JGumg41Z3mX4spxiQ04y80soW2tJSpCgeIIPEEGvgLrLwKStp1tXAjVKkKB+IIPvFejRrtZ9psdq2ZZLYteVpSG4eQO+azO04Jamacldge9yqy1atSlLXeMPFceK8V2GinThVjqrCfg/Z+ZSs7m0u1iMspTmURrRlZIHyu0kegT/AC6QOB+eBpzrDrZcp9hvzFxhqLMuK5qAsdo4KSodx4gj21MutpveKZK7bbpFkW25w3ASkndUhQ4pUlQ5jkQocD2VmUuO1tNs714t7SG8whtFy4Q2k6C6NJHGQ0kfjQPTSOfMVQtWirZ0pdyv/a/Dsyv61Z3yqx8bf3Lx7c7Hldph9TGymwtFNnuRP3oHXyN8cVsK9nNPek+FTICfukwGRa9N65WUKlxe92MT99bHfunRY8Nak4ffIMJ+TZL8VKsN0SGpWnEx1D0JCPpIPHxGoqB5i77PNoaA4EKlQXQ4hSeLclpQ4EHtQtB+3wqLjK3wb9aOMXvS/wA2fB3PVON/i/hlhJbvrNcVYjw0onTJ2NPKARdo5aa15B9HntH4gp+tUrC3A1nEWHJG43L34LyTw06xJRofYoipuU29vH8qjXSxLIt0xKLlbHe5JOu4fFCgUn2CpmZtoi5axkNtTuRbm03dY+7ySonVafc4lQry8azajlUj4rDvt5Elekk5Z034PHuv5lLiSVwdpVsjvDdUiX5OsHvOqD+upuKsljMJkdQ4txJiCPY2of8ASqrJwi37WG7mwNGJL0e5NEeq5urP271VsaL5LtjyCLpoEN3DT2FtRH66prVNenKf5qfl/wCxbRp6k1D8s7d9vYsWEjcyhMo8BFivyD4brStPtIqDDmEPZdEefGrMUKmO68t1tJV+sCpuMDqrJkc3+StfVA+Li0p/VrX2zjyPCb/czwU8G7c0fFZ3l6fVT9tXV226ts3qx7//AGKqKSVK+zWl3f8AqW+2xHshypmO4ohct8rdWfmpJKlqPsGtRX2eb1k78iO2S2tYajtJ7G0+ahI9wHxqutH714dc72fNek/vbFPaN4auqHsToPfX3HEItkKTlMhAIiHqYSFDg5JUOB8QgecfdU5VFGcqiXy9WK4u1/RcLMhGm3CNNv5us3wWXq+aPuRuptlvi4pHUCIh66atPJySocR7EDzR76ix1mPZ4Jy25ModDS9y3xnBqH3x84j1Ecz3nQVbrLa1Xq6OLlSFNRGQZEyUrjuI14nxUTwA7zXy93ZV3uSSyz1ERlIYiRhxDTY5DxUeZ7yaKm2v9Mnxk+3G3/LwXIOoleu1wiuzby8XzKJ9+Zcrm5IkLcky5LhUpR85Ti1H7ST2VmHlKNn0BbERaVZXIb3XpCTqLW2ocUIP8sRzV80cBxqiaKcMih9SUqyJ5GraTxFvQR6R/wB6RyHzRWOMMS7jcEMR2nZMl5eiUpBUpaj/AP3nU8NIW6kvH/r59mccaD31H4f9vLtykklStSSSTzPEk18rMGpNvwcaxjHuOSD8doHGLefodi3fHkmsRWtTjinFq3lqJUontJ4k1oo1vi3aXV2Pfy3fWRnrUvhYSfW28P3IaUpV5SKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKnwpsy3XBi4W+W/FlMqDjMhhwoW2ocilQ4g0hS3YFzjT2A0XY7qHkB1sOIKkqChvJVwUNRxB4GvTzkGyjaCojLLKrA764eN6x9ku295R+c/D11b1PNTR+rVFao4YOF47bY+Gb5FtOCllKz+tpKRl2I7R0JibS2xZsgICWsvgMAh09nlzCdOsH+9RoodoNYpmGBZDhUhj5WYZft8sb0K6wnA/Dmo72nRwPik6KHaKueU7J8rxqz/dBGREyDG1H73frG75XF+uU+c0rwWBpVJh20W94lFftaWol4x6YdZliuaOtiSB6wHNtfctGhHjWWlHVWtorvH8vtu7Hh2GmctZ6ukK0t/vv7c+0udjy6z5BY4+H7R1vKhsp6u235tPWSrX3JV2ux+9B4p5pqzX3H8m2cZZDfMjqnRuy7bdYLm+zJR811lwcFDvHMa6EVlL+z7H88iuXbZDJfcmoSXZOHz3AZzAHEmMvgJLY48BosdoNWbFs1TZre/hmaWt674u66eut6/MkQHeRejKVxbcHak8FciO2q4NdZ0Fh+KDz7UvpSzvvseNlVeOyS9fq68FWXu2ws9x2Vm2NxG494iJ6y/WdhOg07ZjCf5Mn00j0SdeRqXZEjaBhacWcIVkdpaU5Z3CeMuOPOXEJ7VDipHvFRXSwXvZtdrZneG3pNzsTzpNuvkdHmKPzo8hv8W5pqFNq4KGumvZPvtriXK1J2p7O0qt6YryHLrbI6vPs8jXVLrfaY6lcUn5p801VdaqUZdW/Vf5X+WW3h4Z2ZZZ6zclj+Jb1+Zefjlct2ONnK8Fn4csb1zt+/c7SCPOXoP3RHHtSN8DvSakRUi/bHJTA86Xj0gS0DtMV47qx7EuBJ+tV8vrypbVv2yYihEWWzLQLxEZGiYc3mHAnsaeGp7gSodtVu5aLLtUtORRWw3iOYR1tuIHosJe+9vsnxadIUPDSoSqPFxVnfWS3SXzR5q9t92yyMFlJ7LX3xfyvk8+xIxHI0mZs3xe+J9NlD9rdV3KaVvo/QX9lZNIZCtt9yfHoyrM7LHjvwgr9etW9FllRMCznEJyf3bYZrU8DTsSssOkeBSpCqvsRkv5Zj9wHHyrC3VE95bYdbP/KKprSSjJRySml2NKa8PItpRblFvN6j7m4v64mC2xPUbJr3J5GRMiRQe/QKcP6hX28IXDwPHbShJL0vrLktA5nfV1bY/opPxqp8kdVsbsUFhOr11vLxQkfO3EIaT9qzV/kNw17XLpcXEhdrxWMlIHYosJDbafrO/qNaJ1bTlPc5PuSglzeXEojTvBR3qK5O82+SMdyOG8q9WvC7cnrXYSEx1JTyXJcIU4fcSB7E1Ivx8svELFrIFSY8I+TM7nHyh4n74571cNe4VV21x60YzOzKYsm53FxyLAUee8ri+/7gd0HvJqBls4fjKZznmXy5snydJ9KHGPAuHuWvkO4amvYNwaSxcbpcZv5n2K78eB5NKV28E8XwivlXa/Ypb9Jj2yAnFrY6lxtle/Oko5SHx2A+ojkO86mpzDLeIwm7hNaSu+PJ34kVY1ERJ5OuD1vVT2czUUGFHxa2s3y7sIduT6d+3W9wahI7H3R3eqk8+dUVvtMy/Oyb5d5pjQEr3pVxf47yj81A+es9gHKprU1HGT6m17ZPcuHZnksLnnW100uvsWyK3v6wzeNiigW25ZBdHEs6uuHV1+Q8rRKB2rWo8hVylXaHZojlsxpxSluJ3JN0I3VvDtS36iPtNU92vzb0L5Is0dUG0oVr1ZOrkhQ+e6rtPhyFTImNhmEi55HJNshLGraCnekSPzaO76R4VbNqVp6RhHZHf22zfBYLbfZTBNXjQxe2WVuzd2vF7ONpgwJlymohwIzkh5XJDY14d57h4mr09EsFiiutTFpvF0Wgp6phwpjxiRpqVjitQ7hw1qROyJRhKtlkjC125XBSG1auv+LrnNXsHCrVDhS58tMWDFdkPHk20kqPwHKrWqlTrVHqx3Xx5vZ2LvK04U+rTWtLfs5Lbz7iRSrrdLIu0RkeVzoZmKVoqG0vrFtjTmojzR3aa61aq1U6kakdaLujNUpypvVmrMUpSpkBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpUbTTr76GWW1uOLUEoQhJUpRJ0AAHMk9lAZli+JYdkuPhL+0aDj2Q9aoCHeYjiIbiPmFMpG8EqPHUKSAO+vuR7I9oWMQPlObjrsy1EaputpWmfEUO/rWioD62lYfKjSoEhTE6O9FeSdC2+gtqB9igDVzxzLMoxCf5di1/uVne7VQn1Nhf5SR5qh7QayuFa+tTndPY15NetzQpU7as42e9ez/AGIsVzLKMLvBuuJ32Xa5B81wx3PMdHquIOqVjwUDWdHKtmGfEozvHTiF6c55DjDGsZxXrSIJOg8VNEHwqUdrdsyM7m0zZ3YciWRoq6W5PyVcPaXGRuLP5SKfcZsqyk64XtIXYZi/RtWZMdSnX1UzGtWz9ZKazVXG+tVg4y/NHHxX9ysXQTtanJSW54eD9GUN82V5hjNuRl2Oy4+R2FlYcayHG3lPIZI4guBOjkdQ+kBoe2rkznmL7RIzdu2tMLj3UJDcfNLayFSBpwAmNDQSEfTGix41SqxLbLshuCcnt0W72trTVN5srokxHk+LrRUhST3L4eFVf3bbOM+JTtFxn5Au7h0+6fFGUoC1etJhegvxU2Uq8KhK9RKT66WUo/MuWT5f+J6uo9VdW+yWT5/XafREzPYzJ8ofj2/JcLvaercW0vyi1XhrsG8Pwbo7NdFoPeKqUW5WLq/bV2RynLpjqB1V0tM0dY/b0L4KjTED8IwrkHRw5E6Ea1X2uxbRNnNlmXzCJtp2g4HK/wAoNQkmZCeR3S4h++ML0+doCPWqPGYMG7X1GWbA7q5Z8lbQoycKubyXDIb+e3GcV5spojmyvRft4VnnJNOTs74N7Hwmvwvj/g0RwajirZLauMXtXD/JRtptGMOjaHikN25bPb1rbb7ZFq33beV8VRnPYfPZd7dANdec1GHks3PZR5YmfEubXy/htz+bJWEnVsHsLjYKFJ7HEDvq72JDEi53PJNnmPBmelpTGW7MpgUA+x+MVFSrzlIB1UEab7R4jUVi+RZXj2PWFGP4xcXrxAZkM3zGZpX1cywPKXq9FfBHnejxSDoSEq4amqIqdSWrC98O3DJvit/4o8cC/XhGN5Wt75pcHu/DIyC1JTkWV4tf3UkIy+0ycZumo00nttdWCruKt1lXxqjxltKrDiD0hbbbrFkv9vdStYBSpsLIB/pnSvK7xlN6vU2a/JllluXOXcnIsUdSwmQoaFxDY4JOnDUVZiNTqeJ7zWxdFylGzlbs2YSXgnblxM76SipXUb8f/F+avzPY7BBaYVs6VIRrHtNjl5HI15adYtSNfaUtirPFsk+biVjxppXV3XLJSrvOdV+JioKtxSj2J/COe4V54xOmxm3248yQyl9kx3UtuEBxsnUoPenUA6cqzG25vIuDs6LdX2Iky7MRrSq87u6iBCRolaUtIHakJ1I7j315V0KrTbnF32+Law4N35JHtPTKU1qyVv8ACXilbmy4vKtFzucjKpbJGIWAJgWyIrh5atPFDY/KOriz2A6VQgeTBWf5mhMqbOUXbbbV8A+RydWPmsJ4BI+doOyskuCbKYMG/T7e6MUgFUTGbEoEPXh0HzpDgHHcUripXbwQKt12R8i3o33Om0XjMJe6qLj6Rq3DGnmdelPLQabrA99ZISv1VfdxttSfjOWx4Xby0zi/mdt/C++3hCOe21s7Em2KkIVmOeSX0sylFxiMDuyLgfoD5jQ5b3LTgKo1fdBnNwSzChtswYidEMtnqosFvvUo8B4qPE1fLpZ/JZyr/tSuT6ri+Atuyx1DytxPzQ582O33DnpyAqh3sqzmP5BZLUiDYox1EeP95iMfSddVoFK8VEnwrVCph8RNYbfwR4Ryvuv5ZGeUMfhtPHZ+KXGWdlwz4bSkM2wYySmz9XebonncHkfudk/7ls+mfpK9wq0sRL9lF3cWy1LuUtZ1ccPnaeKlHgke3QVelRMNx/8Ahs1WSzxzYhKLURB+k6fOX9UAeNW655Rd7rHFvQpuFB10RAgo6pr3pHFR9pNX0lL5qcbv80vRZ8rJFNVxtq1XZL8MfV+uLKg2rHrKdb3cvlGUP9BtiwUpPct7l7k61TzMonOxVQba0zaYJ5x4QKd/8tfpK95qZEwrIX4olSIaLbEI18puLgjI08N7ifcKmeQ4fbOM27yrw8PxVub6pr3ur4kewV5rUXLrSdSS3Ypclgu148Rasl1V8OPHBvnm+WHAxvw7+VCCCQQQRzBrIvurMPVNgs9vtQ/lgjr3z/8AuL10PsAqwvvvSZTkiQ6p11xRWtauaieZNb6U6kneUbLtx8MPFmKpCnH5ZXfZh7+BLpSlXFQpSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKmMPvRpLciO64y82oLQ42opUhQOoII4gg9tS6uFm+QzdAMhNxELcVqbeEF0K7PT4ac9ajN2i3a5KK1mlcy2Jtn2kMMCPNyH5ZjDgWL3GanoI7vvqSftqeNoWH3M6ZPsix15R9KRZJD1sd9uiSpH6NW4QNlb/oZPlEP8/a2nQP6DgqNOMbPX/wG1BDPhMsshH2pKq5bjoqx+HKL4Rkv6UdFPSMtdS7ZRfmy4eS7Dbx+Bu2aYs6eyXGZubCfrNlC9PdUadlNvuh/xS2pYVeCr0Y8mUu2vq8Nx9IGv1qoBgFhf/gW1bDXD2CQuRHP6TdTBsmuskaQctwaeOxLd+ZST7l7tefGhH5azXCS91fxPfhTl81JPsfs2vAvNtw/pAbM3DcsctmUW5nmp+yOeVRnB9IMlaFD2ioJG1CyXqSqNtU2X2i4y+S7naUmy3EHvVuDq3D+UiobTst2x2V8SMXUppwcQ5Zb+wD+g6KzATulLHjiPesTueTxQOLV6szF0SR3b2hV+lVE6tObu5Qk96lqvwb8yyNGcVZRmlua1l6eRYbBZcSTfGr3sg2yycWvQ/BwcmBtzp+gJbW8y4OzRYAPaKyLJoT6giXtt2Y3CzSlKC2s8wxpG6tXY46holh7v3klC6s0t2M9vDNejFJiKPBcmwNzbYr27hStv7NKqscvuEYvIU5iG0Pafs4dV6cW521M+GrwWGyneHtbNQnKUnrK7e/Bvvhd24OLPYwSwwXel3Sw7mSNoGYSYdgtk53JbFmV3Cg5YM6s0tcS6xQ2pO83Mb0ClHdOid/jqTopQ1rzHGbPAvr11l3u4yIzEOOZbryAFqUSvQ668ySfeTUefXpd/wBoNwuC5dpnaKDInWq3iCxLCBoHgyAN0q5nUA61TW+O9FxSXcZUpbECY4IgZaSC5KWgpcIBPBKU6oKld6gADx03xoOno+rF2k7dueKW7C+xLbZGX4qlWvJXSv5bedtpIWcZDhDTd5UjXgVLZBPu04Vmtj2dWO/WGPdYtzuKG3tRuLS3qhQOhB0HeKwBMNUtxluAw+t153qUMekpSuHAaAa89OVbB7N7A7F2cNMOOsuuNyH0uFhe+lKgrinXkSOR04a99czp3SJ6LQjKjUalftwxOl0Lo8NJrSjVgnG3jgeEykYyxNdZZ+V3kIWUBzeaTvaHTXTThVaq0Y/JwyZeLbNuAlRVtpXGkBHAKVoDqnmOdWubaX4NxQ1IUlTTqS608wd9LqOPFB7eWmh4g86n29pMyHLhWx55qQ61vqjO7qhISjz9EqAGihpvAacdCAew9WUbwjOE3sxzTV8b+PZwObF2nKE4Lb32wL/gORyIN68lTOtdvmuNeTxL/d1rWm0NDeUstJ4gKVqQOGoJ4c6zO1w5qIciZs4t7jDCiry3aBkihHKyfSLBXwbB+jvOHwrxdp1bTyHmiN9CgtJ01GoOor3FIZzhqHdZtj2h7TLoWkrEZuMbfbIiiOLaOrB1Sk6jVO6DpWXpGioS+Isnny7lycklnZtmjQKrnHU2rLn3vuTey6RhjjuCWSeUxG5WfX1xWpefStqFvntCPwr/ALVaA1W3bH9pGRQ2pGWyImOWhI1ZZuTqIEdsf7uOPOP9EnxrLpMDanbYqmIsbDNl8BQ0KUzY8V/T6ThUt5R+FYLMxzCkS1S8m2toukonVfyTBfmrUfzrpSKop1FJ6yd3vs5vlqrVjyuXVIOK1WsN11Bc7vWlzsW9cXZzZeD9zumTSR8yE35FG1/OL1WoewCpLmeTIiFN45arXjzR4b8RrfeI8XnNVfDSqxU7ZVb/AOCY7kt7WPn3Cc3EbP1Gkk/bUo54xEP7xYPjFs05OLiqluD6zqj+qtXw3UxlTlP9TSXdf0MzqKHyzUf0pt9/7mOEXm/zutKbhdJKj6Wi31H9dXdrZ/l62w6/Z1wWz+MnuojJH9Mg/ZUM3aFmU1vqncklMtHh1UVSY6Pg2BWOvSFyXS5IkKfWeanXN8n3k1rUdJtZasVzf/5Mzlo97vWk+S9zIzi9tin99MysrJHNuIVy1/oDT7atd1ZsbCmkWafMmcD1q5EcMjXhpujUnv51QoZdc4NtOL/JQT+oVMdhTWGOuehyWmydAtxpSU692pGlShTkpJzqN8MEvK/iQnOLi1Cnbji3528CRSlK1GcUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFVEODNuEjqIEORKdA3urYbLitO/QDlVPU+JNmwHi9BmSIrik7pWw4UEju1B5cBUZ61nq5ko6t1rZF3awjMnvwWK3hX/wDEWP1iqtvZtnjg1GK3BI73AlH6yKsTl2uz34W6T3NfWkLP/WqZb7qz99fcUfprJ/Wazaukv8Ue5+6NF9H/ACy717GXJ2XZuR59rYYH+/nx0frXUY2W5D/pM/GI/wCfvUYfqUaxqDYLzdVAW6yzphPazGUv7dNKvjezXKEoC7hEgWlvtXcpjMfT3E6/ZWepWlB2nWiuX/YuhRjPGFGT5/8AUrE7MVIOsjOMDinxu6VH9FJqvi4dDgkK/btxWER2xZkxZHs3GxVqTiWLQzreNotqSRzbtcZ2Yr46JT9tTg5slt3nKYy2+rHruswGz8N9VVurOeEZSl2QXnJW8S1U4wxcVHtl7O5mEGb8lgdV0o5kYJ7IbdydH26Csjtu0ZxmQhlHSfzK4L1GjUfHHJRPsDqjrWH2CU/dTvYNsNs7yE/6ddOumpR4qW6pLYrJxluQ2UJZv2120Y5x3fknBra09I19XfaSlKT9c1zq0FJ6rV3ueo33RhJm2k7K6y3rWS75SieEXJ5yRepj7zrjrjj7i1uOI6tSyVklRT80nmR2HhV0YnQZ+JR7JNkGHJhSXZESSUFTa0uhG+2vdBKTvNpUlQBHFQI5Gocvt79uzGah6HeYyH1+VMi8thEpxtzzkuOAcN5XE8KvWzi1Y85Lu2UZbGM2zWCIJa7eFlHl761bjEckcQhSzqojjupI7a706kFRVTstbuw7b25nGhTk6rguPuV2PtZHebzdMiel/KE1cB9mLPQlRQH1ADzVBATv7pc0A4lRHaa2D2G4yv8AaLihbToIlSknrEbh4L7tTwrVHJsqvuXXc3C+TOt3fNYitJDcaKjsbZaHmtoHIAD26njW8nRYheWdGCA69vqWqbNAUrUk/fPGvmvtJRlDRFJ2V2sFssn9ZHd6C0iP+oaxeDx5o0ret9wGJuMlt0hqb10YqQpKmwUqDh4a6J1COPLUVbmbq8zdUXeTMTJlso3WUoHAEJKUkkAABOuug56Vb1vyGbmuQ2+628hxWjiVkKSQTyPMVkkhtnJcJl3wtobvFrW35YptISJTDh3UukDhvpVoFEcwQedd9w+FbXxUnnuvZdz83zOQp/EvqZpd9vVeRiaRoAB2DSvbccZ8r2UWdu9xtt8+GllQaYsqAm2BG+rQMqIOqe/hz1rxMJKlBKRqonQAdprYNUSPgGP2+25TL217O5LbCUKlxJCZltdXp5y2wlSAlJOp3UqOlR6SeEYrO/Pwx7jzQrpyls+uRhkprZNbnFLf2ZbSHFjmqfcUME+3Rirc5leypg6NbJ5SiP8AXcjePxCUCvR499yyZocQ6WTMvX0I1/fk25w+GryVo/S0qdKPSpZiGQy4nKIo/H21u33dCh9RKlfZWDXs7Tl3znHzRstuXdCMvU8sOeYSjhD2RY0O4yLhLf8A/mK+ftiQ0/wTZpgzHcTAcdI/pOGrzddqO0K1yDHyjEsbQ7roUXXFGGVfahNW07UYz/GZsw2fSdeZRbFMk+9twVojRurunf8A5t+dip1ksFUt/wAEvIpTtOvKP4Lj+IxPzNjZ4f0galq2p5pp96nQY/8AN7bHb/Uiqs5zhb38L2O454mJOlsf/M1Aci2XPD7/ALM58c98TIHOHuWg1NUaaz0b+l/3EfjVNmkf1L0Le5tKzxznlM9A7m91H/KkVablkuQ3mOGLvfLhOaCgsNyH1LSFDkdDw14msjMzZC9zsOZwz/u7hHeA/pIFWm+owYQELxiRkKpRcAW1c2mQgI0OpCmzqTrpw076uoqipq1HVe/VXmrlVV1XF3q6y3az8nYx6lKV0DCKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQCqy0m0i8xzfBNNu3vv4glIe3dD6G95uuunPs1qjpXjV1Y9i7O5mrmQbPIXC07P5ExQ5OXm6LX+g0Ej7ap1bQrmwdLNZ8fs6eww7cgrH117xqVb9n+RzLe3cZbUW0W9xIWmZdZCY7akniCkHzlD2A1cG7dswsvnXa+3bJZA5x7MyIrGvcXndVEfkprluOi3tZ1Hzl6tLnY6UXpNr4QXKPli+RYp2YZVcRuzsiuTqTw6vryhP9FOgqZAwrKLsz5ai1OtRjxM2cQw0B377mmvu1q7ubQ02/VGHYpZceTyEgNmZK97zuuh9gFWVtGXZ1fOob+Vb/OPHc1U8UjvPYgePAVZFVIRvCMacd79lZeJW9STtOTnLh7u78EXBNjw+18b5lapzo5xLGz1nHuLy9Ej3A1VxMpt8SYiLhWCwkzFHRuRPSbjKUe9KSNwH2JqU7i9gxw/43X1D8xPO0WZSXnEnuce9BHsGpqKJk19nv8AyDglnTaEPDd6q3JK5Lo73Hz52nf6IrO7VFe7mt7erDuWa5NcS+P3bthF7ktaXjl38i83eNfZaUPbVc5kQmQNU2hlfXySO4MIIba+tp7KuOOTn24Dk3A7PAwyzteY/ld4IfknwbWRoFfQaTr4isU8kxnE1qdva2sjvQOpgNOExGFf75wcXVa/NTw7zV0nPOONx8j2lvuPgI3rbjjP3nfR2FSBwYZ/SVWacbxSzTywsn+mO3tk7LPEvjK0m3ms8btfqls7I47CXllqh3fGXMmsyLi9DiuFD+QX6YQ/eHlEDdZaOvBPE6Ak6a6nXhWIWu6IjWu5WmSXBEnpb31tjVTa21byFacN4cVAjUcDw4ivSRcbvHu1uu92iNzctlJS1j1gQ3oxa2z6DqmuST2pSe7eVy4Y1kWKQym6TbVcRIRaENt3Ke8vVE6c4s7zccAdmp8Duk8Na0aNpMdX4VXLY+fvk8E3glZXKdIoSb+LTz2rl7YtZ2xbuzE0i3Rz1i3VzCOTaUFtB/KJ46eAHvFb87AJzGLbCbTaMiu9tjznVvSnWDLaBYS6slKNArQaI3eA5cq0DuFvnWq4vwLjEdiyWFbjrTo0UhWmuh8dCKpOrbP4tH9EVZ0n0b/8hSVNTsr3va/qirQdOWh1HJwu8rXt7mV5XZ/kbM7jY7+rqJ8Z5SRMjKTIbkIJJQtQSeOqdDvJOvHiNdTVK1cbfaMYudugSXJsu5obYed6otNMspcDhCQrzlLUpKeOgAAPMnhYW2yo7jLZURqd1CddO0nQVmePbOr1dZCw9GSiUm2ovUK1uqKHLvGCvPDC06gK3EqOnPhwGta6jhSgvjSyt39niZqalUm/hL6+uZM2Y4s9keYtlmNYbjJjpD8exXqSuMi9aHdUw0saArGuum8OIA48q9VtFyFtuciybO8+vWze9tr6uThGau9bb3F/ybbziSga8gl1AJ9aqCXLxZrA4iZMWZfdlE+QryR5vRVzxGavzlNBXaNeISrzXBxGiucvI7gqDbLbZtrbH3cYhKb3bFnFqI8uZb9VLqvwm786O9xGh0NcmtVekTxWGxdmas8G1tWEtqbRvhSVKPr+6xS3PLerlJlU6zW+7fJe2nYj8g3B3im74q58nKfHrpbO/GeHbqnSrND2eYtdpaZOyva1ATNPFFsv+9ZJuvqpd1LSz7FCr4ZGe7PMMM7G71btomzB5Wi2pbHlcNr6EiOvz4bviCka8iasRtOyHP0/vFc17O745/8AjL06qTanldzcrTfZ17nAQO+rabcY3i3besVzi8V2LLayuaxs1jxwfJrBldd8p6RuzRpMXJp2SsQTwT8rtpuENwfRW4FtqHsVVlO1e23TQ5Xsrwi8FXpSIkVdseV477CgNfq1UOzNtuxB5EUz7vaLfIGrWjiZdsmJ70a77LgPhxp+2JgOTK3doGy6C1JX6V3xF35Mf19ZTB3mVn3JqyNKLWv8NSW+Ds/T+psi6sk9XXae6WK9fIpTM2GXf8PY81xd0/OhTGbkyPquhC9PfUJwHBbmdcb2wWTePKPf4T9uX7CvRaPtqr/a2wnJTvbPNqNsckK9G0ZS38lSdfVS7xZWfYoVi2U7Os6wnRWUYvcrcwr0JSm9+O4O9LyNUEe+rIODerTqyi9z/wCyuQlrWvOmmt6/bAvT2xTaJ1BftNqh5Axpr1tiuDM0H6qFb32Vhl0s14sc7yK92qdbZOmvUzGFMqI5agKA1HjVGw4th0PxnFNLHEOMqKT7iKq7jd7teHGV3e6TbgtlvqmlS31PFtGuu6kqJIGpJ0rZTVeMuvJNdjT82Z6kqLXVTT7bryRRUpStBQKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUBE4448pBdcW4UJCUlairdA5Aa8h4VdbHjF+yR5SbPbnZDbfF2QdEMtDvW4rRKfjUqyXCBa7kZc+yxrulLZDceS4pLYXw0UoJ9IDj5vbrVVfcvv+QtJj3Cbuwm/wcCMgMx2/yW06D3nU1nqOrfUppJb36Lb4F8FStrVG29y9/wBmXhNvwXGlb15uC8ono/0G1uFqKk9y5BGq/Yge+pF42i5DcrQbNBVGsNk//TLQjydpX5xQ85w+KiatVgxi8ZJJcRbY6epZG9IlvrDbEdPe44eCfZz8Kv8A8rYxhxCMbQ3fr0nnd5bX7mYV3x2T6R+mv3Csk4wU7P7yot+S9I9191zVGU3G6+7h4v1fl2ENqwJqNaW79nNz+520uDeYZ6vfmzR3Ms9gPrq0SPGoZeTyrkE4tglldtUCSsNJjRiXZk49nWuDion1RokVaoUHJM7yhxQeenzXAXZEuU75rSBzW4s8EoH/APgq/vZTbcMtr9lwN7rbg8gtTskKd1xxJ9JuNrxab71ekrwFRnGUp6suvPd+GPF/vdvYkSg4xhePVhv/ABPgvZYLa2QOxrVs6O7J8luuVJ49QCHItrP0jyceHd6KfE0QheOtIzHKyZ1/mjr7fBlneI7pL4PzR8xHbz5VMsVqtWI2BnM8sjIlTZA37LZHfx5/1l8cwyDxCeaz4VFZGFzEXHalm61TYzT+5HZeOhuUzTVLQH8mgaFWnAABPbVE7O8m77G9sn+WO5b/ADzZdC6tFK21LZFfmlvf1uR96+52GGZzy35WZ5ENGyo6uxWHOG94OOch6qe6rrDTb4OQwsfCku2XEml3S5rT6MqYANR4jf3G0+ANWi0y5sa3XTahe3etuD7yotsKx+ElKHnuAeq0g8O4lI7KoZLL1o2YQbejeNxyR8Slg8VGOhW60D+U4VK8dBVUqTk9V53thle2NuEI3S4vHEtVRRWssrXx3XwvxlKzfC2wyuxuKuLmGw7oEvv3+/O32eHAFBxtB3UhQPNPmucO6qfHo2PyjiFxm2aC4iflUpmQFtDRxlW5utkeqkr1A7K+h5EPa7LaaOrGNWR6MjTsU1HKSf8A1HFVjzctUDZdiUkEgx75IeH1epP/AEqqMHK2rhreqm/BW7ibko3vjb0cF4u/eZXZLnExeyWW/eSNA4/kMu0XMIQAp+HIB1CyOKuAcA18BVWY1ygx7liNsmOIyLCJa7xjktv03oRIW42nv0SUugdvnirROZD2VbTcYSNRKSu5R097jLgeGntQtYqiev09GO4ltEtjmt0szgtUsn5/VjeZK+8LaKkH2V6oOb1lm8r8VrK/BtyjzDkoXTyXo9V80lGXIyJzI2LelW0zHbXHlY1fz5DlWNKP3luQeKhp81K+LjSx6KtR4VTrmnZ3H8rtKE5dstyRRKoE06DfHpNLI/AS2+xY01AB4jlbnrhbcNzc3CLEVMwfKou+9B15sLPntjudZc13T2aDvqQzLVs1yeZjt0QMgwy9NIdW2k6Jmxlfg5LR+Y+jv7CCk8KnGmmrJXTWC3pbOE4b82rY7VXOTWMna23c3t/TLdkt2x3BUS74EP2y9j+RSpmNOkMyStIU7D1/0a4MHVKknkFkFKuzQ1CYOz/amd6zmBgmYOc7c8sotFxWexlw8YqyfmK1QewirY8b7snyqNkGKXVFwsdzaUYktbe/HuMc+mxIaPAqHJaDxB4jSp11xOx5tZpOUbNYymH2Gy7dMUUouOxB852MTxeY8PSR26itCaVqjlnlP0muGXsyhxbvBRxWcfWL8fdEiBle03ZBdZeKTUPxI+v7rx68sCRCfSe0sr1SUnsWgjXsNXLd2O58PNU5szvy+xW/Mszyvbxdja/WSKttg2nE2BnE9oFr+6zGW/NYQ65uTbd9KLI5p09RWqDy0FL9szC7C9lmzu6nKsca858tt7k63DulRxxSB/KJ1SefCrWlGf3vUk/xLJ9t8L8HybKVeUfu+tHc819b1zSLXmGzPMMJjty73a0u2l/+D3eA4mVBkDsKH0ap9x0PhUnFto+dYVqjGcouMCOr04fWdZGcHcpleqCPdXzD9oeYYK84rGb07HjP/wAIgugPxJI7nGF6oWPHTXxrLflLZBn3C821zZzfV/6faW1SrS8o9rkYnrGNe9slI7qvm5xWrpENaO9Lzj7XKYqLd6UtV7n7+9iSvaPhGShQz7ZdbTKUPOu2Ku/Jcgn1lNaKZX/RFeZHTeO6CBrwBrIsxwy4YZc40eZcbRco0xoyIc+0zESWJLW9u7wI4p4gjdUAeFY5V2jU6cY61J4Pi7cr5Fdac27VM19cxSlK0FIpSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQCsksUXE49rN4yOe7LWFlDVlh6ocdI085xwjRCDr2aqPHlWN0qurTdSOqm12fXliWU5qEtayfb9fsX+/wCXXO/R27fuM2+0sn7xa4SerYb8SOa1fSVqaix3FXbzHeutwlItdijK0k3J4agH+TbTzccPYke+q20Y1brfZmclzNxxm3ujfhW1lQEm4+I/k2u9Z91WzIsnuGRyWQ+hqLCjJ3IlvjDdYjI7kp7+9R4mscXf7rRlZLN+dt74vLbd4GqWH3ukO7eS99y4bdlliVt+ytl+1HHMZiLtlgSoFTZOr01Q/GPrHpHuSPNFVVjs9usNjZy/Ko4kIc1NrtSzoZyx+Mc7Qyk/0jwFQ4/ZLdbLKjL8sZLkAqIgW0ndXcnB39zKT6Su3kKs1yuN6zDKhIkBUufLWllllpOgHYhttI4JSOQFQUIu9KlhBfM972q+/e9mSxyk5yTVSpjJ/Kt2528ltzyzuECNdtoObvzLtP3E7pkz57g0RFYTzOnIADzUpHboKrLpOlZ/mVrxywMGJbGNIVriKPmsNa6qdX9I6Fa1e7sr7k8uNjlj+4S0PodWlYcvMxo8JEgcmkntbb5eKtT2V9gf4o7N3rwrzLvf0LiwvWZiA6OujuKz5gPcFGq3J2VSCtsgv7u7H9PFssSSbpyfGb9O/wAexFdeCxnO0qyYRji+rscEptcFfLVsHV6SrxUQtZPcBVwt0qBl3SK+UWEBNhs6VyGUHkiHDbJR8dxJ9qqx7GFKsGCX3LNdyS+n5Ht5HMLcGryx+S3w+tX3G3PkjZZll5A3XJqWbIwodziusd0+ogD31XUppRlGGzqLtk1rPxXiWQqNuMp5vrPsjkvB8rEWPvPSsUz3I5BPWuRG2io+vIkAn7EmqW7II2L4+sfOuM7T3JbqrhuiH0erv2LuN9jMg9pSyytZHxWKXlCE7BMRUD5yrpctR7OqqxJfFTX57d0Gvcg2/hNPPU85l0m3FFu262e8PH9zzo8Nb3cW3mA2v9Z+FW/HISmsgyLZ5LVuielyMzvfNlMqKmT79Cn61U+btKXjWEXVOoMmxhre+ky8tv8A+qizl56PmdsyuCdxdyhxrq0sdjoASv8ATbPxqmnSvCMFti0u2Dw9e4tnV1Zyk8k0+U1j9cT7jJVkeJzcGkDSa0pVwtIVzD6U/fWPrpGunrJqZjEljKcc/a/urqG5CVqescp06dS+fSjqJ5Ic+xWnfVJl2/a83i5PZVlhm4obu0NaPxa1HVafquBQ0qVmUZh6XEyy1N9TCu4LxQ3w8nkpP31sd2ivOHgqrklUtbBTxX+2azXPau1bSptwvfFxwfGLyfLf2bioxnI27Imdh+Xw338flu7syJp9+hPJ4B9nX0XE9o5KHA1TXa13vZ7l0SdbLqrsl2u8wVFKZDZ5OIPYexSTyOoPCq68kZri6spZAN8t6Et3dtI4yG/RRKA7+SV+41TYzkUBVpXiGVlblhfX1jUhI3nLa8fxzf0T89HaOPOpRbxqRjwnH1XHb/uXGxCSWFNvDOMvR+XB8DIXI9l2spL9vah2TOiCpyEjRqJej2qa7Gnz2o9FfZoawi13bJMKysTrVMnWW8QllBUglp1sj0kKSeY7ClQIPdXzILBccYvqrfNKSQA8xJYVq2+2eKHW1Dmk8wew+IrLo9/s+0KG1aM3ltwL+2gNQclWPNeA4JamaekOwO8x26ipJqnC8evSfO3uuGa4rLx/eytLq1Fyv7Pjk+G2uNwwLaedL0mDg+Wucrmw3u2q4L732xxjrPrp1Qe0CsIynEMiwu9fJeR21yG8pO+yvULakI7FtODzXEnvB+FU19sN2xq+PWi9Q1xZbXEpJ1StJ5LQocFJPYocDVQctyJeD/ce7dXnrIl9MhuG8AtLKxrxbJGqAdeISQDw1FXUacoWdGV4PY9i4P0eG6xTVqRldVY2mtq9V6rncsug110HGlKVtMgpSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAfVLWvdC1KVujdTqddB3DuHGssx2wW+NaDluWIWLO2sojRAd1y5Oj8WjubHzl9nIcaxKqiVPnTWozUyW8+iK0GGEuLJDSASd1PcNSaorU5TioRdlt324e/qXUZxg9aSu9m6/H68Csv9/uGSXpdyuK0BW6G2mWxutR2x6LaE/NSB/8AdZNB/wAQsTRenPNyS7MkW9BHnQYyhoqQR2LXxCO4amqDErPARFkZdkTO/ZbeoJSweBnyDxQwnw+co9iR41Yr1d51+vsq8XN7rJMhe+sjglI7EpHYkDQAdwrM4Kq/gQXUjnx/2+/dtZoU3TXxpvryy9/bv3Fbilh+6PJ2oT7xYhNpVImyTyZYQN5xZPfpwHiRTKb4vJsqdmMRy1GATGgxE/iWU+a22B36c/Emr1ch9yWzlmxjzLvfUomT/WZijiyye4qPnkd26Kp9n8WOnI3sinthcGxMKuLqVclrTwaR9Zwp+BqPxfm0p4pYRW//AC8F2cT34dtXR1g3jLh/hYsmZ4U2ty14WwsFuyx92SU8ly3NFvH3apR9WvmSfvbs3xWxjg4+27eHx4uq3G9fqI+2sdabnZBkqGlKU9NuMoJUo8SpxxfE/FVXraHOZmbSLkiMQYsJSYDGnLq2Uhsae9JPvr2FLUnSpPG15Pty8W2+QlV1o1Kq22S7M/JJcyfef3LsdxaJyMqVNnKHeN5LST+ia+3lZOxXFEdgn3Aj4t18zkeTQcUtfLyaxsrUO5Tq1uH9Yr5euGxzEx/4u4H9NuqqeVKW+cn3qZZUwlVjujFeMSde3fLNhuJO66mFOnwye4KKHQPtNTbkE3bYDY544yLJc37a739U8kPNfpBwVSR/3TsKno5mFfGXR4B1lST9qBUeHKVPxPLcc5qfgJuDKe9yMvfOnjuKXR9SDkvwTb73j4SZ7881H80PJYeMSbDb+6LYrOjjzpuNSBMQO0xHyEuD2Jc3VfWqRhim71HmYNLcSkXLRyA4s8GZiB5nsCxqg+0VK2d3yNY8+iquB1tc5C7dPSeSo7w3FE+zVKvq1Z7xbJmN5ZMtTy1NyrfJU0HEnQ6pV5qx9ihVjo3lOhlfrR4P9njzK1VtGFbO3VfFfusORFZ7rcMYyVE1lvcfYWpp6O6PNcT6K2ljuPEGq3KbNEhOxrzZd5dkuQLkUniWVD02FfSQfiNDV6zqM3frHbdo8FCQm5ExLq2jkxPQkbx07A6nRY8d6rZiV1gbkjGMgdKLNciAXufkb44IfT7OSh2p9lNeUktJiussJLsz5rG29YLMaii3o8ng8Yvy5PC+7kT7BerfdLGnDspf6qEFFVuuJGqrc6ew97Kj6SezmKx+82e4WG9P2q5sdVIaPEA6pWk8lJPzkkcQe2l6s8/H7/Ks9za6uTGXuqA4pUOYUk9qSNCD3Gq5/IjPw5qy3OKZL8RQ8gm7+i2GyfOaV66O0DsNWwi4SVSjjGWa7dq9VzzveuUlOLhVwlHJ9mx+j5brTTmEyTgpxe7RWLkyzobfJfJ66AddVBtQ4lBGo3DwHMVjtKVpp0oU76itfEzTqSnbWd7ClKVYQFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAnuTZjtuZgOynlxWFKW0ypRKG1K03iB2E6DWr9hVrt8u9PXS9EfJFpa8tloJAL2h0Q0B2la9E+zWsapp21VVp68HCLtcspz1ZqclexXXm7Tb9kEu8XBYVJlOFxenJPckeAGgHgKyS5n5A2T220DzZl8d+VJXeGEaoYSfad9fwrEoojKnMpmqcTGLiQ8WxqoI1G9oO06a6VdsuviMizGbc2EKailQaisnh1TCAEtp07PNA95NUzpXnTpxXVjj3WsvXkXQqWhObfWeHfm/TmXPZuhDGZOX19OrFlhvXJWvLeQjRsf01JrE1dbIcVvEqddPE9pUo//AGay63fvXsYvM7k9d5zNubPe00Otc+0oFWbFIXylnllgEa9fOYQR4dYNfs1quErSq1nksOSV/NvuJyg9WlSW3HvdvJIvG05QG0+fEQRuQm2ISR3dWyhOnx1r5fOGyDEB3yLgf/cRVoyub8pZ5ergDqH576wfDfOn2aVd77/2R4cP97PP/uoqEYakNHi9j/skTnLXnXktq/uQxn90bN81hcyiNFmgfm3wCfguqXAri3a9pVokPn9zrkCM/ryLboLatfcr7Kq9n46+df7Z/rlimNgd6kpDg/5KxAKUNFoOiuaT3HmKmqaqSrUn+K3jG3oQdRwjRqLZ6O/qVl3trlov8+0PghcSQ5HV9VRT+oVk2Y/v1jdhzFPnOyWfk6eR/rLAACj+U3uH3GoNo4TJyqNf2ho1eYEe4cPXKNxz9NB+NSsanQ5GIZDjVylNR232RPhuPK0SmSzyT7VoKk+J0qGvKdKlpFsVnzwl3PHkS1VGpUobHlyxXesOZPwC6RDKnYheXg3aL+2mOtxXKNIB1YfHduq4H6KjWL3CBLtd2k22eyWpUZ1TLzZ+apJ0I9lU3ZVZdLrPvV0XcbnIMiUtKUqdUACoJSEjXTmdAOPM1qjScKrnHJ59q293kjPKqpUlF5rLsezv8y4XfJHb3jlpt86I2uXbUqYRcN49Y4xwKGlDkdw66HnodKsdKVbCnGmtWKsiuc3N3lixSlKmQFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBW6GzjoWYhm+yPG8vl5rf4r92t7MxxhllgobUtIJSklOug8a0vHOt8c42p3LZn+x1YCzYJa4t6vtqi2+NIbOi2G+p3nXEnsUE6JB7CsHsrj9LVK6+HDR5WcnY1aNGD1nNYJHmOb7EejLs/vDtnv+3G+KubJ3XoUGG1LcaPcvq2yEnwJBrD/uW6KX/exnv/A0/wByvDSSVEkkkkkknUknmSe018rTDQ6iVpVpN8vYrdWN8Io2CsuBdFO9X6NakbZsuhLkLDaHp9pQwylR4AKWW9E6nhqdB3mvdU9APB1JBTtAyQg8iGY/92tCNARoRqDwIrq90acik5R0V8Muc15T0lEIw3VqOpUWFqZ1J7SQgVyOmZaTocI1KVV2btjb2NWiqnVbjKKPGT0AsIHPP8k/9GP/AHa8o2hbEOjfsyyf7ncm2wZR8qpQFuxIVvbkqYBGqes3EaJJHEAnXTjpoRXQ6W+3FguynTo20hTivYBqf1VxkyS/TcozG65JcXlOy7nLdmOrUdSStRV8ACAPACqOhq2labOXxKrUVutt5EtKhTpJascWev8A3LdFH/vYz3/gaf7lXSx7POife7iiF+3jk1uW4d1K7lbEx29fFam90e0kVrxTXTlXfeiTeVWXh7GP4q/KjfSP0C8BlRWpUXaLkL7DqQtt1puMpK0niCCE6EEdorR/JbW1Y81vNkYdW61AnyIiHHAApaW3VIBOnDUhOtbd9Bnancjfp2ya7TFvQTHVcLSlxWvUKQoda0nuSQoLA5ApVpzrVLaB/wBrmV/+dTf7QusfR0tJjpFSjpE9ayVuZbXVNwjKCtcx2lKV2jIT3Jst23swHJLq4rClLaZUrVDalabxA7CdBr7KrcbvSsdyyBfERkyVw3OtS0tRSCdCBxHcTr7qtdKhKnGUXBrB+pONSUZKSeKPqlFaypR1JJJPiavVyvTE3CrDZW2XUu24yS6tWm6vrXAobvbwA461ZKUlTjJxb2Yrut5MRqSipJbcPG/oXnFb4nHMqYuzkZUlttDra2UqCStK21II1P5WvuqygbqQNeQ0r7SipxUnPa7Luv7hzbio7F629iumXadPtdvt8lxK2Le2tqOAgApSpe+QTzPEnnyqhpSpRioq0URlJyxYpSlengpSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUArOM32oXrOcIwzFp8ONFg4rAMGKGFKUXtQkFxevJWiEjQcOdYPSoSpxlJSaxWR6pNJpbRSlKmeCunvQ4/ig45+fmf2lyuYVdPehx/FBxz8/M/tLlfP/AGk/lV+peTNug/xH2HsmT/5l3f8AmT/9WquLbX4Bv8gfqrtJk/8AmVd/5k//AFaq4ttfgG/yB+qsv2X+Wry9SzpDOJHSlK+qOcZXs2z267Mdp9rzezMMyJdvUshh9RSh1K0KQpKiOIBCuzuFWK93R2+ZNcr2+0hp2fLdlrbQSUoU4srIGvHQFWlUJIA1JAA5k1lWPbM9omWMB/GsGyG6snk9FgOKbP1yAn7apkqdOXxZWTta5Ja0lqoxWleiytgW2uHHL8jZbk4QBqS3DLhHuQSfsrA59uuFquCoF1gS4EpPpR5bKmXB9VQBqVOtTqfJJPsYlGUc0U1KUqwiKVU263TrveIlptkVyVOmPIjx47Q1U64shKUp8SSBXov+Dptz/wC67If/AEkf3qqqV6dPCcku12JKEpZI8xpXp3+Dptz/AO63If8A0kf3qwG+WO741kMuxX+3v2+5RF9XIivgBbStAdDoT2EH30p16VR2hJPsdw4Sjmi30pV9x3Csxy5zcxbFL1euzegQ3Hkj2qA3R8anKSirydkeJN5FipXpjnR424tR+vVstyMp010SwlSv6IVr9lYBdrNd7Dc122+WqdbJiPSjTWFMOD6qgD76hCvTqO0JJ9jR64SjmiipSlWkRSo2mnH5CGGG1uvL4IabSVKV7Ejiaza17F9rl6YS/bNmeUvtK5OfJzjaT71gVCdWFP52l2nqi3kjBqV6U70e9uDLe+vZZkpH0IwWfgFE1ht9xLKsXXuZLjN4s55fvhCcYHxUkD7ahDSKU3aEk+xo9cJLNFnpSlXERSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAV096HH8UHHPz8z+0uVzCrp70OP4oOOfn5n9pcr5/7Sfyq/UvJm3Qf4j7D2TJ/wDMq7/zJ/8Aq1Vxba/AN/kD9VdpMn/zKu/8yf8A6tVcW2vwDf5A/VWX7L/LV5epZ0hnEjrKtnuzrK9qGbsYtiNv8qluDfddWd1mM3roXXV/NSPiTwAJrHIUKXcblHt0CO5JlyXUMMMNjVTjilBKUjxJIFdXNg2xy17HNlsaytNtPXmUlL92nJHF9/T0QfURrupHtPMmur0r0ktCp4YyeXuZ9GofFljkYdsu6LOy/ZTZRfcjYi5DeozReful1QPJ426NVFppWqUJA47ytVcNdRyrWjbf0u8uy6+yLFs1uknHsXYUW25UT71KnAcN8r5tIPzUp0OnEnjoPdOnBtHexnZDCwe2yC3MyR1SZJQdCIjWhWPrqUhPiN4Vzwrm9D6I9JvpeldZvK+Xd5F+k1fh/dU8DPMa21bV8SvSLpZdoF/S8lQUpuVMXKac8FtuFSVD3e+t69ke0jZ90ptnkmx55i1pkX6A2PLbc+3vgpJ0D8dR89KSeB0OqDw1OoJ5sVmuyTaBM2YbY7HmUVxYZiPhExtJ/DRl+a6g9/m8R4pSeyuj0j0ZCvTcqatNZNYciihXcJWk7pnu237of3HB4EvMdmypV2sDILsq2O/fJUJA4laCOLrY7fnJHHzhqRqoDqARxB7RXbCO8xLhNSGHEusupC0LSdQpJGoI9oNc5Ol7sQj7Oc7ZzPGYYYxu+uqC47adEQpfFSkJHIIWNVJHYQsctK53QvTEqsv9PXeOx7+DL9L0VRWvDI1viypMGczNhSHY8lhxLrTzKyhba0nUKSocQQRqCK6YdEnatedqGxmQjKJflt7ssvyJ+UoALkNlAW04vTmrQqST27mvMmuZVbq/sfb7nlufxt773uQHNPpavjX4Vs+0FCM9Ec2sY2t32KtCm1UtvN3ylO6eArlJ0k2nHul5nDLDS3HF3JCENoSVKUostAAAcSSeAArq4fQPsrRi5Wy04v0otsO3jJ4aJUDEZjbdqiuejLubrDQaT9TUHwKwr5tfPdBVvg1Jztd2wW9tqyNumQ14pcTDLTs/2YbAMbhZNtvg/dNm0xoSbfhDKwW4qT6K5R5a/lapB1ASsgkZhhnTwfi39mBk+z22wcd1DaBY3FdbFRrwPVq0S4AOwbp7u6tSMjyK85blc/JMhnOTbnPeL8h9Z9JR7AOxIGgA5AACrXX1Eui4V430rrSfbZdn07nPWkOD+7wR2gxzIbFluLwsjxy4sXG1zWw7HlMHVK0/rBB1BB4ggg8atOf7N8O2l4s7YcwsrFwjqB6t0jdejq9dpzmhQ7x7wRwrnj0ZukI/seypyz5C7Ifw65L3pLTYK1QnuQfQntBHBaRzABGpGh35kbcdkEfFPuic2kY0bfudYFonIWsjuDYO+VfR3dfCvj9N6Or6FWtC7Wxr6zOnSrwqxxOX21nZ5M2WbX7zhEyR5UITiVR5OmnXsLSFNrI7CUnQjvBrLej7sIum23NXmFyHbfjtu3VXKe2kFZ3vRZa14dYoAnU8EjiddQDYtuO0Vjart2vWYwo7keA+puNCbdGi+oaTuIUodilcVEdm9p2Vv10P8eiWPonY9JYQA/dlP3GQrTipS3VJT8EIQPdX1HSGnVtF0KM5fxHZdjtic+jSjUrNLJHoeB7J9n2zO0oh4djMK3qCdFy9zfkvHtK3laqUT7dO4CtNukr0qMql57cMH2bXp6z2i2OqjSrnDVo/MeSdFhDnNDaTqnzdCognXTQVvBm91dsWzLIr4wdHYFskykH6SGlKH2gVxnC1uDrHVFbi/OWoniSeJPxrk9A6LHSak69brWtnjizTplR04qEMD0XFtu+13EL83dbXn17fUlW8uPcZS5bDw7QttwkEHw0PcRXSXY/tKsm2/Y3HyLyFhKnNYlytroDqWX0gb6CFekkghSSRxSodutcla3K6AF7kIyrNMcKyY7sWNPSnuWlamyR7QpPwFdHp7QKboOvBWlHduuU6HWkp6jeDM32/9EDHL7YZuU7LLW3aL8wlTy7TGG7GngcSlCOTTndu6JJ4EDXUc/yFJUUqSUqB0KVDQg9oI7DXbRQ4Vyi6TGOxcX6VmZW2E2lqO7LROQhI0CevbS6oAd28pVZ/s9p9Sq5aPUd7K69ienUYxtOJ5PSlK+pOcKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAK6e9Dj+KDjn5+Z/aXK5hV096HH8UHHPz8z+0uV8/9pP5VfqXkzboP8R9h7Jk/wDmVd/5k/8A1aq4ttfgG/yB+qu0mT/5lXf+ZP8A9WquLbX4Bv8AIH6qy/Zf5avL1LOkM4mw/Qyw5nKek5FuUtpLkewQ3LnoocOt1DTXvBWVDxSK6Y8hpWh37H8ln7uc3UdOuECIE9+71rmv26Vvir0TXM+0M3LTGnsSNGhK1K5zU6a9/du/SkkWsr1Zs9tjREJHIKWC8r+sT8K1158q2F24YRf896budW22eTMNRltSZtxnO9TFgRkxmtXnnD6KR8SeABNYi5ftj2BqMXGMYG0S7N8F3vIwti3BQ7WISCFLT3KeVx9WvqdCqKno9OnBXeqsuzbsRzq0XKcpN2VzyyOw/MfDMNh2S6fxbCC4r4JBNZHE2bbRLgkGHs/yuShXa1Z5KgR7dysnl9IPa07HMS05SnG4XzYmNwmLY2kdw6pAV8VGsXm7R9olyWVXDP8AKpRPPrrvIVr+nWtOu9iXNv0RX1OJ1J2CyL690bcOTk1unW+6x7ciJIjTmFsvJLRLYKkqAI1CAffVN0hMNZzvo35XZVM78luEubEO7qUvsjrEEeJ3Sn2KNcrzlOTk6nJr2T3m4PH/AOVQqybJVJKVZHeVJI0IM94gj+lXAX2emq3xo1LO98uN95s/1sXHVcS1BQUkKHIjUVuj+x+f5Zz78zA/5n60vrdD9j8/yzn35mB/zP10um/5Kpy80UaJ/FRvLpqnStEOm/cI2PosuC21xSTdrhJye5D+UcISw1r7AFj6ore8cq5ldM27LuXSzusVS95FugRIiOPLVvrT9rtfL9AUtfS1fYm/rvOhpsrUzX+lKV98cYV80G9vbo3u/TjX2lAK3R6LnSixDE9nMbZ1tFmqtKLcpYt10U2pbK2lKK+rc3QShSSo6K00II4gjjpdV5xnEsozK9C04nYLjeZx4lmEyXCkd6iOCR4qIFYtP0SlpVLUrOyzvuLaNSVOV4m7fSK6WGCS9lV0wzZzdxfbleI6ob82O2pLERlY0cO8oDfWU6pATwGupPDQ6F8OwaCtlMc6EO2K8MpfvkmwY62RqUS5RkOpHiloFP6VJGxHo8YZPUxtA6Qzc+S0dHYGOwgtWo5p309bofaBXP0KroWhxdKhJyebsm2+7Avqxq1XrTVjW1CFuOobbQpa1qCUISNSonkABxJ8BXQrob7G7zs7sNzyrMIxt96vrTaItteIS8zFbOu8tPMKUpY1T80BOuhOg8Zj7dNgeyZor2JbLHrpfUp3UX/JSd5B9ZIJK/cnq6zXog7Qcu2mdJHL8kzK7uXCaqyNobGgQ2wjygHcbQOCE+HMniSTVPStXSK+jTajqQW/N47thLRowhUWN2btH0TXL7phfxw8m/MQv7K3XUE+ia5fdML+OHk35iF/ZW65X2b/AJqX6X5o06f/AA12nhdKUr7g5ApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUArp70OP4oOOfn5n9pcrmFXT/AKHSFI6IGNFSSN52Yoa9o8qcr577Sfy0f1LyZt0H+I+w9iyf/Mq7/wAyf/q1Vxba/AN/kD9VdpckQpzD7q2gaqVDeAHeS2quLbYIZQD6o/VWb7L/AC1eXqWdIZxNkOhPlrGO9JcWeU4lDV/t7sFBUdB1yCHWx7SELA8SK6T8CK4rWm63CxX+De7TJVGnwX0Soz6ebbiFBST8RXWnY3tUs21zZZBym2LbbklIZuEMK1VEkgDfQR3fOSe1JBrP9pNEcai0hZPB9pPQaicdRmqXTgW1jFxjWe0BTKsulG73hwcDI8laaYjtEjmhPnr09ZWvZWm9dAunbgkm9bLrNnMBkuKsEhTUvdGpEd/dG+fBLiUf0jXP2u10FOM9DjbNXv2/4sZdMTVV3FOHM8qVlmzLBZ20nazY8LgoXrcJKUvuJH4Jgec64fAICvfoO2urUqRpxc5ZIzJNuyNl9nvQgiZjsssGV3TO7hbJV1gtTVw0W9tYZDid5Kd4rBPAjsq2bXeiHjWynY9eM3k7RrhLchoSmPEXAbbEh5aglCNQvUak6nTsBrf2FGjW+2sQYrSWY7DaWWmwOCUpACQPcBXPfpmbaY2bZqxs7xyYl+y2J4uTH2laokzdCndB7UtAqTr6yldwr4/o7T9N0zSVFT6t7vBZd3I6lejSpU7tYmrR51uh+x+f5Zz78zA/5n60vrdL9j8Qr5Uz9zTzeqgJ18dX67vTn8lU5eaMeifxUbx/MNcpulA8p/pdZwpR9Ga22PYmO0K6sn0D7K5RdJpKkdLfOgoaa3BJ9xYar5/7NL/7Ev0+qNun/wANdp5PSlK+2OSKUpQHoexTZVcNsO1yHicV5cWGlBlXGYkamPHSQFEa8N5RISnXtVqeANdTsIwLFNnmIsY5iVnYtsFocQ2NVuq7VuL5rWe1RrUb9j8hRCvPrgpKTKT5CwknmGz1qj9oHwrd35hr4X7QaXOppDo36sdnidfQqajDW2s0X6ae268oyg7Isbnuw4TDCHby6wrdXIW4N5EcqHEICSFKHzioA8BodMhwTugADuHAV6b0iHn3+lXnq5Gu+Lu4ga+qlKUp/RArzKvq+jNHhQ0aEYLNJvtZztIm5zbYrbXoCf8AbHlf/krf9eK1KrbToCEftx5X/wCSt/2gVX0x/JVOz1RLRf4sToCfRNcvumF/HDyb8xC/srddQTyrmB0xEkdMLJSRoFR4RHiPJkD/AKV8z9m/5qX6X5o36f8Aw12nhNKUr7k5ApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUBXWay3fIb5Gs1htkq5XGSsNsRYrZWtxR5AAch3k8BzNdctkWGq2e7D8Zw11aFyLdBQ3IUg6pLx1W5oe0b6lca5U4BtGy/Zhk7uQ4Vcm4FwdjqiLdcjofBbUpKiN1YI5oTx8K9L/ww+kF/tlE/4TG/uVwumNA0nTdWFOyiscW737jZotanSu3mdP17qkFKhqDwIPaK5FbY9md92W7V7tYbpb32oKpLjttllB6qTHUolCkK5EgEAjmCDrWbf4YfSC/2yif8Jjf3KxDaFt12nbUrDGs2b35i4Qo0gSmm24TLBS5ulOuqEgngo8Ko6J6N0rQqjcrOLzxfsS0nSKdWOF7o85rO9lG1rLNj+bpyDGX0rbcAbm294nqJjYPorA5EandWOKSe0Eg4JSvoalONWLhNXTMUZOLujqfs626bKduuLPWLymOzPmx1MTccuqkpdWlSdFJT2OoOp4o494BrTHbl0WMy2aX2TdMWt07IMSWorZfjNl6RCSfxb6EjU6cg4AQRz0Na/pUpC0rSopUk7yVA6FJ7wew+Nel450httWKxkRrRtGvPk7Y0QzNWmYlI7h1qVED31xaHRdXQ6jnos+q84v3RrlpEasbVFjvRiOPYRmOWXpFpxrF7vc5i1boajxVnd/KUQEpHeVEAV0I6PmxCydH3BpuY57dbbHyCYyBMmPPJQxb2fS6hDitASSAVK+cQAOAGuokzpa9ICbHLKs86gEaFUa3Rm1fEN15hk2Z5dmc0S8tya63t5PFKp8lToR+SkndT7gKs0vRNL0yPw5yUI7bXbfgiNOrTpPWSuzbLpBdMZu7W6VhuyKU8iO8ktS8i0LalJPApjA8RryLh0Pqj51aY0pW7Q9CpaJDUpLntZTVqyqO8j6lKlKCUpKlE6AAak+wV0j6GmzC74DsZmXjIYTsG55DJTK8leTuuNR0I3WgtJ4pUdVq0PEBQ141zos12n2DIoF8tbwZnQJDcqO4UBYQ4hQUk7p4HQgcDXtH+GH0gv9son/CY39ysfS+i6RpVNUqNknnf/Bbo1SFOWtI6ga8K549NjZferPthXtIh295+yXlhpMiS0gqTGktpDZS4R6IUlKCCeBIUOysN/wAMPpBf7ZxP+Exv7lWvJOlFtsy3E7jjV+ymLJtlxYVGksptsdsrbUNCN5KdR7RXL6O6I0zQ6yqpxayeLy7jRX0mnVjq4nj1T4cOXcblHt8CM5JlyXUsMMNDVbriiEpSkdpJIHvrIrXd8Ai2hhq7YNdLlPSCHpCL+qM24dToQ2lglPDQekeVeiY3k2E4dhLm0SHsyjxbo5JXbbEJN7lvqWvq9JMjhu7obQ4lKVJ0PWODQjdNfRVa8oLqwd9mXvcxRgntPNs2tNlsGSjH7NJVNdtzIjXGalzfakTAT1vU9zSCerB4724VfOFY3oazUZvjKAAzshw5KQNB1r9wdP2yat95yez3a0qiRdn+NWZ8qSoTLcqWHEgHiNHH1pIPI6j2V7SlNJRcX24e55JLNM9H6Me2WLse2tuSb51n3PXdpMS4KQkqMfdVq2+EjiQklQIHHdUSNSND07tF5tN+sse7WW4RrhAkIC2ZUVwONuJPaFDga4sVkeKZ/m+DSFvYdll2shWdVohSFIbWe9SOKVe8VyulOhFpc/i05Wl4M06Ppfw1qtYG3PSy6NeT5Bm7+03Z7bF3ZUxtAulsj6F8OISEh5pPzwUhIUkcQU6gHU6aeO4jljE4wn8VvrckHQsrtzwXr7N3WvVY3S56QMZgNDOkOgfOftsZavj1dUc/pU7fbi2UO7RZbCT/AKrEjsn4pb1FW6FS06hTVKerJLJ3fsRqyozlrK6KDGOjztSyFj5Qn2E4tZEAKfvOSq+T47KPW++aLV7EprbPonTtl9ly+97PtnKnb7IjQETbtljyOqE53rAhLTCDxDKAVEEniTrx51onkeYZZl8oScrya73t0HVKrhLW+E+wKOg9wq7bPNqObbLL1Mu2D3Vq3y5jAjPrcjNvhSAreA0WCBxHMV7pug19KoyhOSvsSwXN4t+Ao1oU5JpHYXWtDunLswvac6gbTrXbX5VrfhIhXB1hBX5M62pW4tenJKkq03uQKNDpqK8w/wAMPpBf7ZxP+Exv7lUty6WW3e72aZarhl0V2JMYXGfbFrjJ3kLSUqGoRqNQTxrk6B0PpmiVlVTi9+Ly7jRW0qlVjqu54pSvgASkJHIDQV9r605opSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUBkeEYPfc/ylFksTbIUE9bIlynA1HiNagFx1Z9FOpAA5qJCUgk1m+Z4Ng+I4PcGZAuTV9QWk256XcWOvnL3x1qzBa3/J44RvEKcc6wq3RpxUBLj4rkt/2FY/a8ItnyhDmSZE2/utPNICJTbhbYbkFak7iEM6LRvaJJeWocRwsiLTgeFI375KjZfeRxFptL5RbmFf8AiJSNC8foMaDvc7K58qjqTupZPJZ4PbjhfjhbjleopLLmWLFcKy3OLoq34jj0+8Po/CCK3qhrhrqtZ0SjgD6RFWZqNIfnIhx2XH5DjgabaZT1inFk6BKQnXeJPAAa69lezIyTNrjs4hW+3NuvXvLFPQrNY7MwGI9vtqDuPuMsI0SlbywprrVaqDbTpKvOJrGH7tbtmkF60YncI87K3kKZuGQw17zUBJGio0FY5qPEOSRz4pb0TqpU4aRNtqyvsXm291+HYRdOKSZjl/wTNMWQheQ4rdrc2v0XXoyi2SOY306p3hyKddR2gVNxnZ3nWYSEtY1id2npPEvpjqbYQO0reXohIHMkq4CqCx5XlGMlw43kd2tHWHVwQJjjAWe9QSQCfEivS7DcNoGb7IsiRbbtesmyKZNZgSmXp6nno9t6tTii2ha+CHHQhK1J5BsJOgVx9rVK1ON3btx8v3EYxk9pWXHZVh2FWWa3mkmQ++3EdV8qx7owyyuT1ZLTMKMkLdlgr3Qp1fVt7u8Rw0J8hsdhvuS3lqz4/Z5t1uLum7FgsqeWfHRI4DxOgrK28PxbEdZGeXZqTOHo45j8ht19R7pEpO81HHeE9Y59FPOvS8az21WrYxPujmRW/FI9xedt7OO4udJrcZIAcV5xKlPPb255TIUQ22FlCSpYSM/xqlKLcXrtvPJcl7YE9SMnjgeM27CMou2Vzcdt9qU/OgKWJpS631MQJOiluv73VoQCPTKtO4mpmXYe/iK7Vv3q03Zm5QzMYkWxxa290OraI1WlJPnNq0UBuqA1BIqLJM2nXmzJx+1Q49hxthW/HssAnqt8Dg4+s+dId+mvXuSEjhWdZ1K2ZxMs8ucugzBmJDjQLTZ7Y6tiI1HZaShBlSSAoqUrfWppoa6rOriTwq91asZR1lnsSv47PLiyCjFp2Z57iOFZVneQN2bE7LLuUpS0oWWWyptjU6b7q/RQkcyVEcBVftEvEC4ZYm02F0rsFiYFptiv5VpsnffP0nnS46fywOyswwfNsnybLZFuZlR4Xk9nuBsNityUwoaZqmFIbDbQISp3RaylSypZUB5xOlY2nZm/ZgHc9vtuxOOkfwV5Yl3BwDsbiNKKgfFwtp8aKr97erZWWCzePnyW891er1TBgCVBIGpJ0AHMnuHea9jxjZfYsbxBvMdsLvyO1KdKLdY5q3GJMptIBW+WWx1y06qCUoBbBOpU4hIG9i5z634ylTGzS0KsrgBSrIJ6kP3RwacShem5FB7mhvd7hrKLjjCrlsRwm+Z1kP3PMJkXRXWT0OPz7g04604hcdg6Kd3lFwdYpSUcOKuI1jpFSctVN6qb/wCWTy7uL7D2EY4vNruPMMklWOdl1xl43anbVZ3pCjChPPF5bLZ9FJWdST28zz01OmtTbxieS49bYM+/WWXbGZ28Ywlp6pboABKg2TvhPEaKKQD2E1kX3fQMbBY2a2IWZwcPl64FEq6OeKV6dXG9jSd4euawqXLlT57s6fKflynlbzsiQ4XHHD3qWokk+01ppubthZLfi/rvK5W34kmlKVcQFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgIShCvSQlXtANRUpQGUnaJlwwprFWbkiNb243kSlRo6Gn3o++pwMOPJG+toKWs7hO7x4g1i3ZSlQjTjG+qrXPW28xXwpSr0kpV7RrX2lTPAAAkJAAA5AcqUpQClKUB8IChooAjuNEpSkaJSlIPPQaV9pQHsWC45jONYHC2g5FeLKJUxThiCQpqYqAltZTvIhalUiWoglCXAllsaLWSSEjC9oueXDaBmHyrKMpEWMwmHBYlSDIdaZSSdXHD6bilKUtauAKlHQAAAYhoASQACeZ0519rNDR0qjqSd3s4LcTlUbWqhSlK0kBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgFKUoBSlKAUpSgP/9k=" alt="Tera events Logo" style="width:150px;height:auto;object-fit:contain;display:block;margin-bottom:0.3rem;filter:brightness(1.05)">
+        <span class="footer-logo-tag" style="margin-top:0.5rem">Event Planning · Abidjan, Côte d'Ivoire</span>
+        <p class="footer-desc">Agence d'Event Planning à Abidjan. Nous concevons et organisons vos événements corporate et privés — dans notre espace ou dans le lieu de votre choix.</p>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/tera.events.ci/" target="_blank" title="Instagram"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://www.facebook.com/tera.events.ci" target="_blank" title="Facebook"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="https://www.linkedin.com/company/tera-events-ci" target="_blank" title="LinkedIn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <span class="footer-col-title">Expertises</span>
+        <ul class="footer-links">
+          <li><a href="corporate.html">Événements corporate</a></li>
+          <li><a href="evenements-prives.html">Événements privés</a></li>
+          <li><a href="event-planning.html">Event planning</a></li>
+          <li><a href="traiteur.html">Traiteur</a></li>
+          <li><a href="nos-realisations.html">Nos réalisations</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Tera events</span>
+        <ul class="footer-links">
+          <li><a href="equipe.html">L'équipe</a></li>
+          <li><a href="contact.html">Demander un devis</a></li>
+          <li><a href="contact.html#faq">FAQ</a></li>
+          <li><a href="cgl.html">Conditions générales</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Contact</span>
+        <div class="footer-ci"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C4916E" stroke-width="1.5" style="flex-shrink:0;margin-top:3px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.7a16 16 0 0 0 6 6l.91-1.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 15z"/></svg><span class="footer-ci-text">+225 05 66 22 10 10<br>+225 07 06 83 99 57</span></div>
+        <div class="footer-ci"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C4916E" stroke-width="1.5" style="flex-shrink:0;margin-top:3px"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span class="footer-ci-text"><a href="/cdn-cgi/l/email-protection#f88a9d8b9d8a8e998c9197968bb88c9d8a99d69d8e9d968c8b"><span class="__cf_email__" data-cfemail="83f1e6f0e6f1f5e2f7eaecedf0c3f7e6f1e2ade6f5e6edf7f0"><span class="__cf_email__" data-cfemail="84d6e1f7e1f6f2e5f0edebeaf7c4f0e1f6e5aae1f2e1eaf0f7"><span class="__cf_email__" data-cfemail="a7f5c2d4c2d5d1c6d3cec8c9d4e7d3c2d5c689c2d1c2c9d3d4">[email&#160;protected]</span></span></span></a></span></div>
+        <div class="footer-ci"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#C4916E" stroke-width="1.5" style="flex-shrink:0;margin-top:3px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="footer-ci-text">CENTRE COMMERCIAL TERA, Cocody 2 Plateaux, 7ème tranche<br>Abidjan, Côte d'Ivoire</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 NATERALIA SARL — TERA EVENTS. Tous droits réservés.</p>
+      <p><a href="cgl.html">Conditions générales</a> &nbsp;·&nbsp; <a href="contact.html">Contact</a></p>
+    </div>
+  </div>
+</footer>
+<script>
+var _n=document.getElementById('nav');
+if(_n) window.addEventListener('scroll',function(){_n.classList.toggle('scrolled',window.scrollY>60);});
 
-<!-- CTA SALLE -->
-<tr>
-  <td align="center" style="background-color:#EEF1F5; padding: 20px 32px 36px;">
-    <a href="https://tera.events/event-planning.html"
-       style="font-family:'Montserrat',Arial,sans-serif; font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#ffffff; text-decoration:none; background-color:#3A4A5C; padding:14px 48px; display:inline-block;">
-      En savoir plus
-    </a>
-  </td>
-</tr>
+function hbgToggle(){
+  var btn=document.getElementById('hbg-btn');
+  var menu=document.getElementById('hbg-menu');
+  if(!btn||!menu) return;
+  var isOpen=!menu.classList.contains('open');
+  if(isOpen){menu.classList.add('open');btn.classList.add('open');document.body.style.overflow='hidden';}
+  else{menu.classList.remove('open');btn.classList.remove('open');document.body.style.overflow='';}
+}
+function hbgClose(){
+  var btn=document.getElementById('hbg-btn');
+  var menu=document.getElementById('hbg-menu');
+  if(btn)btn.classList.remove('open');
+  if(menu)menu.classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')hbgClose();});
 
+document.body.classList.add('js-ready');
+function activateReveals(){
+  var els=document.querySelectorAll('.reveal');
+  els.forEach(function(el){var r=el.getBoundingClientRect();if(r.top<window.innerHeight+120)el.classList.add('in');});
+  if(window.IntersectionObserver){
+    var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in');});},{threshold:0,rootMargin:'80px'});
+    els.forEach(function(el){ro.observe(el);});
+  }
+  setTimeout(function(){els.forEach(function(el){el.classList.add('in');});},800);
+}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',activateReveals);}else{activateReveals();}
+</script>
 
-<!-- ══════════════════════════════
-     SEPARATOR CORPORATE
-══════════════════════════════ -->
-<tr>
-  <td align="center" style="background-color:#3A4A5C; padding: 28px 40px;">
-    <p style="font-family:'Cormorant Garamond',Georgia,serif; font-size:19px; font-style:italic; color:#ffffff; line-height:1.5; margin:0;">
-      Vous organisez un événement d''entreprise ?<br>
-      TERA EVENTS crée des expériences <strong style="color:#C8D8E8; font-style:normal; font-weight:600;">corporate sur-mesure</strong>.
-    </p>
-  </td>
-</tr>
-
-
-<!-- ══════════════════════════════
-     02 · CORPORATE
-══════════════════════════════ -->
-<tr>
-  <td align="center" style="background-color:#EEF1F5; padding: 36px 40px 8px;">
-    <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:5px; text-transform:uppercase; color:#3A4A5C; font-weight:700; margin:0 0 8px;">02 &middot; Événements d''entreprise</p>
-    <p class="mob-font-title" style="font-family:'Cormorant Garamond',Georgia,serif; font-size:28px; font-weight:400; color:#1B2A6B; letter-spacing:1px; margin:0 0 10px;">Corporate</p>
-    <p style="font-family:'Montserrat',Arial,sans-serif; font-size:12px; font-weight:300; color:#4A4A4A; line-height:1.8; margin:0;">
-      Séminaires, lancements, afterworks, team buildings… Nous concevons des expériences professionnelles qui valorisent votre image.
-    </p>
-  </td>
-</tr>
-
-<!-- CARDS CORPORATE -->
-<tr>
-  <td style="background-color:#EEF1F5; padding: 16px 32px 0;">
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-      <tr>
-        <td class="mob-card" valign="top" width="48%" style="background:#ffffff; border-top:3px solid #3A4A5C; padding:22px 18px;">
-          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:#C9B8A0; font-weight:600; margin:0 0 8px;">Formule &middot; 01</p>
-          <p style="font-family:'Cormorant Garamond',Georgia,serif; font-size:16px; font-weight:600; color:#1B2A6B; text-transform:uppercase; letter-spacing:1.5px; line-height:1.3; margin:0 0 10px;">Business<br>Day</p>
-          <div style="width:28px; height:2px; background-color:#3A4A5C; margin-bottom:12px;"></div>
-          <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#3A4A5C; margin-right:4px;">—</span> Séminaires &amp; formations</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#3A4A5C; margin-right:4px;">—</span> Conférences &amp; panels</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#3A4A5C; margin-right:4px;">—</span> Cadre professionnel équipé</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#3A4A5C; margin-right:4px;">—</span> Sono, projection, Wi-Fi HD</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#3A4A5C; margin-right:4px;">—</span> Coffee break &amp; restauration</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#3A4A5C; margin-right:4px;">—</span> Coordination logistique</td></tr>
-          </table>
-        </td>
-        <td width="4%" style="font-size:0; line-height:0;">&nbsp;</td>
-        <td class="mob-card" valign="top" width="48%" style="background:#ffffff; border-top:3px solid #3A4A5C; padding:22px 18px;">
-          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:#C9B8A0; font-weight:600; margin:0 0 8px;">Formule &middot; 02</p>
-          <p style="font-family:'Cormorant Garamond',Georgia,serif; font-size:16px; font-weight:600; color:#1B2A6B; text-transform:uppercase; letter-spacing:1.5px; line-height:1.3; margin:0 0 10px;">The Launch<br>&amp; Afterwork</p>
-          <div style="width:28px; height:2px; background-color:#3A4A5C; margin-bottom:12px;"></div>
-          <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#3A4A5C; margin-right:4px;">—</span> Lancements de produits &amp; marques</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#3A4A5C; margin-right:4px;">—</span> Soirées réseau &amp; afterworks</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#3A4A5C; margin-right:4px;">—</span> Scénographie &amp; branding espace</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#3A4A5C; margin-right:4px;">—</span> Bar à cocktail ou open bar</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#3A4A5C; margin-right:4px;">—</span> Couverture photo &amp; vidéo</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#3A4A5C; margin-right:4px;">—</span> Coordination Jour J</td></tr>
-          </table>
-        </td>
-      </tr>
-    </table>
-  </td>
-</tr>
-
-<!-- CTA CORPORATE -->
-<tr>
-  <td align="center" style="background-color:#EEF1F5; padding: 20px 32px 36px;">
-    <a href="https://tera.events/corporate.html"
-       style="font-family:'Montserrat',Arial,sans-serif; font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#ffffff; text-decoration:none; background-color:#3A4A5C; padding:14px 48px; display:inline-block;">
-      En savoir plus
-    </a>
-  </td>
-</tr>
-
-
-<!-- ══════════════════════════════
-     SEPARATOR EVENT PLANNING
-══════════════════════════════ -->
-<tr>
-  <td align="center" style="background-color:#1B2A6B; padding: 28px 40px; border-bottom:3px solid #C4906A;">
-    <p style="font-family:'Cormorant Garamond',Georgia,serif; font-size:19px; font-style:italic; color:#ffffff; line-height:1.5; margin:0;">
-      Vous avez déjà une organisation en cours ?<br>
-      Confiez-nous la <strong style="color:#C4906A; font-style:normal; font-weight:600;">coordination</strong>, nous gérons le reste.
-    </p>
-  </td>
-</tr>
-
-
-<!-- ══════════════════════════════
-     03 · EVENT PLANNING
-══════════════════════════════ -->
-<tr>
-  <td align="center" style="background-color:#F0E8DC; padding: 36px 40px 8px;">
-    <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:5px; text-transform:uppercase; color:#C4906A; font-weight:700; margin:0 0 8px;">03 &middot; Accompagnement sur-mesure</p>
-    <p class="mob-font-title" style="font-family:'Cormorant Garamond',Georgia,serif; font-size:28px; font-weight:400; color:#1B2A6B; letter-spacing:1px; margin:0 0 10px;">Event Planning</p>
-    <p style="font-family:'Montserrat',Arial,sans-serif; font-size:12px; font-weight:300; color:#4A4A4A; line-height:1.8; margin:0;">
-      Que vous partiez de zéro ou que vous ayez déjà posé les bases, TERA EVENTS intervient au niveau qui vous convient.
-    </p>
-  </td>
-</tr>
-
-<!-- CARDS EVENT PLANNING -->
-<tr>
-  <td style="background-color:#F0E8DC; padding: 16px 32px 0;">
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-      <tr>
-        <td class="mob-card" valign="top" width="48%" style="background:#ffffff; border-left:3px solid #1B2A6B; padding:22px 18px;">
-          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:#C9B8A0; font-weight:600; margin:0 0 8px;">Formule &middot; 01</p>
-          <p style="font-family:'Cormorant Garamond',Georgia,serif; font-size:16px; font-weight:600; color:#1B2A6B; text-transform:uppercase; letter-spacing:1.5px; line-height:1.3; margin:0 0 10px;">Coordination<br>Complète</p>
-          <div style="width:28px; height:2px; background-color:#1B2A6B; margin-bottom:12px;"></div>
-          <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#1B2A6B; margin-right:4px;">—</span> Recherche &amp; sélection du lieu</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#1B2A6B; margin-right:4px;">—</span> Conception du concept &amp; scénographie</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#1B2A6B; margin-right:4px;">—</span> Coordination de tous les prestataires</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#1B2A6B; margin-right:4px;">—</span> Décoration &amp; traiteur inclus</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#1B2A6B; margin-right:4px;">—</span> Suivi budget &amp; planning complet</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#1B2A6B; margin-right:4px;">—</span> Gestion complète le Jour J</td></tr>
-          </table>
-        </td>
-        <td width="4%" style="font-size:0; line-height:0;">&nbsp;</td>
-        <td class="mob-card" valign="top" width="48%" style="background:#ffffff; border-left:3px solid #C4906A; padding:22px 18px;">
-          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:#C9B8A0; font-weight:600; margin:0 0 8px;">Formule &middot; 02</p>
-          <p style="font-family:'Cormorant Garamond',Georgia,serif; font-size:16px; font-weight:600; color:#1B2A6B; text-transform:uppercase; letter-spacing:1.5px; line-height:1.3; margin:0 0 10px;">Coordination<br>Partielle</p>
-          <div style="width:28px; height:2px; background-color:#C4906A; margin-bottom:12px;"></div>
-          <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#C4906A; margin-right:4px;">—</span> Audit de votre organisation existante</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#C4906A; margin-right:4px;">—</span> Conseil &amp; optimisation du concept</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#C4906A; margin-right:4px;">—</span> Coordination des prestataires choisis</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#C4906A; margin-right:4px;">—</span> Supervision de la mise en place</td></tr>
-            <tr><td style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:#4A4A4A; line-height:1.7; padding:2px 0 2px 14px;"><span style="color:#C4906A; margin-right:4px;">—</span> Présence &amp; gestion le Jour J</td></tr>
-          </table>
-        </td>
-      </tr>
-    </table>
-  </td>
-</tr>
-
-<!-- CTA EVENT PLANNING -->
-<tr>
-  <td align="center" style="background-color:#F0E8DC; padding: 20px 32px 36px;">
-    <a href="https://tera.events/event-planning.html"
-       style="font-family:'Montserrat',Arial,sans-serif; font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#ffffff; text-decoration:none; background-color:#1B2A6B; padding:14px 48px; display:inline-block;">
-      En savoir plus
-    </a>
-  </td>
-</tr>
-
-
-<!-- ══════════════════════════════
-     FEATURES STRIP
-══════════════════════════════ -->
-<tr>
-  <td style="background-color:#ffffff; padding: 28px 32px; border-top:1px solid #F0E8DC; border-bottom:1px solid #F0E8DC;">
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-      <tr>
-        <td align="center" width="25%" style="padding: 0 6px; border-right:1px solid #C9B8A0;">
-          <p style="font-size:18px; margin:0 0 6px;">&#10022;</p>
-          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:8px; letter-spacing:2px; text-transform:uppercase; color:#1B2A6B; font-weight:700; line-height:1.4; margin:0 0 3px;">Décoration<br>sur mesure</p>
-          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; color:#4A4A4A; font-weight:300; margin:0;">Scénographie unique</p>
-        </td>
-        <td align="center" width="25%" style="padding: 0 6px; border-right:1px solid #C9B8A0;">
-          <p style="font-size:18px; margin:0 0 6px;">&#9671;</p>
-          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:8px; letter-spacing:2px; text-transform:uppercase; color:#1B2A6B; font-weight:700; line-height:1.4; margin:0 0 3px;">Service<br>traiteur</p>
-          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; color:#4A4A4A; font-weight:300; margin:0;">Cocktails dînatoires, services à l'assiette, buffets</p>
-        </td>
-        <td align="center" width="25%" style="padding: 0 6px; border-right:1px solid #C9B8A0;">
-          <p style="font-size:18px; margin:0 0 6px;">&#9673;</p>
-          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:8px; letter-spacing:2px; text-transform:uppercase; color:#1B2A6B; font-weight:700; line-height:1.4; margin:0 0 3px;">Communication; événementielle<br>pro</p>
-          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; color:#4A4A4A; font-weight:300; margin:0;">Couverture photo et vidéo, supports de communication</p>
-        </td>
-        <td align="center" width="25%" style="padding: 0 6px;">
-          <p style="font-size:18px; margin:0 0 6px;">&#9672;</p>
-          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:8px; letter-spacing:2px; text-transform:uppercase; color:#1B2A6B; font-weight:700; line-height:1.4; margin:0 0 3px;">Suivi complet<br>Jour J</p>
-          <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; color:#4A4A4A; font-weight:300; margin:0;">Festif &amp; Corporate</p>
-        </td>
-      </tr>
-    </table>
-  </td>
-</tr>
-
-
-<!-- ══════════════════════════════
-     MAIN CTA
-══════════════════════════════ -->
-<tr>
-  <td align="center" style="background-color:#111C52; padding: 52px 40px;">
-    <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:5px; text-transform:uppercase; color:#C9B8A0; margin:0 0 14px;">&#10022; Commençons ensemble &#10022;</p>
-    <p style="font-family:'Cormorant Garamond',Georgia,serif; font-size:30px; font-weight:300; color:#ffffff; margin:0 0 10px;">Votre prochain événement<br>mérite le meilleur.</p>
-    <p style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; color:rgba(255,255,255,0.5); font-weight:300; margin:0 0 32px;">Devis personnalisé &middot; Réponse sous 24h &middot; Sans engagement</p>
-    <!-- 🔗 BOUTON PRINCIPAL -->
-    <a href="https://tera.events/contact.html" style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:#ffffff; text-decoration:none; background-color:#C4906A; padding:18px 48px; display:inline-block; margin-bottom:32px;">
-      Demander mon devis
-    </a>
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-      <!-- 🔗 Téléphone -->
-      <tr><td align="center" style="font-family:'Montserrat',Arial,sans-serif; font-size:12px; color:rgba(255,255,255,0.65); padding:4px 0;">
-        <strong style="color:#ffffff;">&#128222;</strong> &nbsp;
-        <a href="tel:+2250566221010" style="color:#E8C5A8; text-decoration:none;">+225 05 66 22 10 10</a>
-        &nbsp;&middot;&nbsp; WhatsApp disponible
-      </td></tr>
-      <!-- 🔗 Email -->
-      <tr><td align="center" style="font-family:'Montserrat',Arial,sans-serif; font-size:12px; color:rgba(255,255,255,0.65); padding:4px 0;">
-        <strong style="color:#ffffff;">&#9993;</strong> &nbsp;
-        <a href="/cdn-cgi/l/email-protection#e496819781969285908d8b8a97a490819685ca8192818a9097" style="color:#E8C5A8; text-decoration:none;"><span class="__cf_email__" data-cfemail="4331263026313522372a2c2d3003372631226d2635262d3730">[email&#160;protected]</span></a>
-      </td></tr>
-      <!-- 🔗 Site web -->
-      <tr><td align="center" style="font-family:'Montserrat',Arial,sans-serif; font-size:12px; color:rgba(255,255,255,0.65); padding:4px 0;">
-        <strong style="color:#ffffff;">&#127760;</strong> &nbsp;
-        <a href="https://tera.events" style="color:#E8C5A8; text-decoration:none;">www.tera.events</a>
-      </td></tr>
-    </table>
-  </td>
-</tr>
-
-
-<!-- ══════════════════════════════
-     FOOTER
-══════════════════════════════ -->
-<tr>
-  <td align="center" style="background-color:#0D1540; padding: 28px 40px;">
-    <p style="font-family:'Cormorant Garamond',Georgia,serif; font-size:16px; letter-spacing:5px; color:rgba(255,255,255,0.4); margin:0 0 10px;">TERA EVENTS</p>
-    <table role="presentation" cellpadding="0" cellspacing="0" align="center" style="margin-bottom:12px;">
-      <tr>
-        <!-- 🔗 Réseaux sociaux -->
-        <td style="padding:0 8px;"><a href="https://www.instagram.com/tera.events.ci" style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.35); text-decoration:none;">Instagram</a></td>
-        <td style="padding:0 8px;"><a href="https://www.facebook.com/tera.events.ci"  style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.35); text-decoration:none;">Facebook</a></td>
-        <td style="padding:0 8px;"><a href="https://tera.events"                    style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.35); text-decoration:none;">Site web</a></td>
-      </tr>
-    </table>
-    <p style="font-family:'Montserrat',Arial,sans-serif; font-size:9px; color:rgba(255,255,255,0.2); letter-spacing:0.5px; line-height:1.8; margin:0;">
-      Abidjan, Côte d''Ivoire &mdash; NATERALIA SARL<br>
-      &copy; 2026 TERA EVENTS &middot; Tous droits réservés<br><br>
-      Vous recevez cet email car vous faites partie de la communauté
+<script>
+function closePopup(){var o=document.getElementById('popup-overlay');if(o){o.classList.remove('visible');sessionStorage.setItem('popup_seen','1');}}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closePopup();});
+if(!sessionStorage.getItem('popup_seen')){setTimeout(function(){var o=document.getElementById('popup-overlay');if(o)o.classList.add('visible');},3000);}
+</script>
+</body>
+</html>
